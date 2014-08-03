@@ -1,3 +1,4 @@
+require 'tilt/erb'
 require 'lotus'
 
 module Todo
@@ -9,7 +10,6 @@ module Todo
         'controllers',
         'views'
       ]
-
       routes do
         get '/', to: 'home#index'
       end
