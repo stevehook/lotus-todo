@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'pry'
+gem 'pg'
 gem 'lotusrb'
 gem 'lotus-model'
 

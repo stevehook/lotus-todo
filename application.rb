@@ -7,8 +7,11 @@ module Todo
       # root File.dirname(__FILE__)
 
       load_paths << [
+        'config',
         'controllers',
-        'views'
+        'views',
+        'entities',
+        'repositories'
       ]
       routes do
         get '/', to: 'home#index'

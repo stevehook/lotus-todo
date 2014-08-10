@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'entities/task'
 require 'repositories/task_repository'
+require 'config/mapper'
 
 describe TaskRepository do
   let(:todo1) { Task.new(title: 'Thing 1', completed: true) }
@@ -9,7 +10,7 @@ describe TaskRepository do
   let(:todos) { [todo1, todo2, todo3] }
 
   before do
-    todos.each { |todo| binding.pry; TaskRepository.persist(todo) }
+    todos.each { |todo| TaskRepository.persist(todo) }
   end
 
   describe '#incomplete' do
