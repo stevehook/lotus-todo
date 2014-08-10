@@ -1,5 +1,9 @@
+require 'dotenv'
+Dotenv.load
+
 require 'tilt/erb'
 require 'lotus'
+require 'lotus-model'
 
 module Todo
   class Application < Lotus::Application
@@ -7,14 +11,14 @@ module Todo
       # root File.dirname(__FILE__)
 
       load_paths << [
-        'config',
-        'controllers',
-        'views',
         'entities',
-        'repositories'
+        'repositories',
+        'controllers',
+        'config',
+        'views'
       ]
       routes do
-        get '/', to: 'home#index'
+        get '/', to: 'tasks#index'
       end
     end
   end

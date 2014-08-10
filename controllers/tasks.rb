@@ -1,15 +1,16 @@
 module Todo
   module Controllers
-    class Home
+    class Tasks
       include Lotus::Controller
 
       action 'Index' do
-        expose :planet
+        expose :tasks
 
         def call(params)
-          @planet = 'World'
+          @tasks = TaskRepository.incomplete
         end
       end
     end
   end
 end
+
