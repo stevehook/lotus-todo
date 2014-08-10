@@ -17,7 +17,7 @@ mapper = Lotus::Model::Mapper.new do
   end
 end
 
-adapter = Lotus::Model::Adapters::SqlAdapter.new(mapper, 'postgres://localhost:5432/lotus_todo')
+adapter = Lotus::Model::Adapters::SqlAdapter.new(mapper, ENV.fetch('DATABASE_URL'))
 
 TaskRepository.adapter = adapter
 
