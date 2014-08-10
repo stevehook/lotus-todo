@@ -4,9 +4,9 @@ require 'repositories/task_repository'
 require 'config/mapper'
 
 describe TaskRepository do
-  let(:todo1) { Task.new(title: 'Thing 1', completed: false, archived: false, order: 1) }
-  let(:todo2) { Task.new(title: 'Thing 2', completed: false, archived: false, order: 2) }
-  let(:todo3) { Task.new(title: 'Thing 3', completed: true, archived: false, order: 3) }
+  let(:todo1) { Task.new(title: 'Thing 1', completed: false) }
+  let(:todo2) { Task.new(title: 'Thing 2', completed: false) }
+  let(:todo3) { Task.new(title: 'Thing 3', completed: true) }
   let(:todos) { [todo1, todo2, todo3] }
 
   before do
