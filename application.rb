@@ -19,6 +19,8 @@ module Todo
       ]
       routes do
         get '/', to: 'tasks#index'
+        get '/tasks/new', to: 'tasks#new'
+        post '/tasks', to: 'tasks#create'
       end
     end
   end

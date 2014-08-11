@@ -20,5 +20,20 @@ feature 'Home page' do
     expect(page.body).to match('Thing 2')
     expect(page.body).not_to match('Thing 3')
   end
+
+  it 'index page has a link to the new task page' do
+    visit '/'
+    expect(page).to have_link 'New Task'
+    click_link 'New Task'
+    expect(current_path).to eql '/tasks/new'
+  end
+
+  it 'creates a new task and redirects to index page' do
+    visit '/tasks/new'
+    fill_in :task_title, with: 'my test task'
+    expect { click_button 'Create Task' }.to change { TaskRepository.incomplete.count }.by 1
+    expect(current_path).to eql('/')
+    expect(page.body).to match('my test task')
+  end
 end
 
