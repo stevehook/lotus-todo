@@ -24,3 +24,5 @@ TaskRepository.adapter = adapter
 Mutex.new.synchronize do
   mapper.load!
 end
+
+MAPPER = mapper

@@ -15,7 +15,8 @@ module Todo
         'repositories',
         'controllers',
         'config',
-        'views'
+        'views',
+        'presenters'
       ]
       routes do
         get '/', to: 'tasks#index'

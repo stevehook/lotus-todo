@@ -25,6 +25,9 @@ feature 'API' do
     it 'gets the list of tasks' do
       get '/'
       expect(last_response).to be_ok
+      result = JSON.parse(last_response.body)
+      expect(result.count).to eql 2
+      expect(result.first['title']).to eql 'Thing 1'
     end
   end
 

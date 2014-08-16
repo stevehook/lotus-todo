@@ -11,4 +11,5 @@ class TaskRepository
       where(completed: false).asc(:order).limit(PAGE_SIZE)
     end
   end
+
 end
