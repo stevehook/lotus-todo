@@ -1,5 +1,7 @@
 module Presenters
   class TaskPresenter
+    attr_reader :task
+
     def initialize(task)
       @task = task
     end
@@ -15,6 +17,10 @@ module Presenters
         updated_at: @task.updated_at,
         complete_by: @task.complete_by
       }
+    end
+
+    def to_json
+      to_h.to_json
     end
   end
 end

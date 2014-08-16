@@ -18,7 +18,7 @@ describe Todo::Controllers::Tasks do
     let(:action) { described_class.new }
     it 'retrieves a collection of tasks' do
       action.call({})
-      expect(action.exposures[:tasks]).to eql tasks
+      expect(action.exposures[:presenter].tasks).to eql tasks
     end
   end
 
@@ -26,7 +26,7 @@ describe Todo::Controllers::Tasks do
     let(:action) { described_class.new }
     it 'create a new task object' do
       action.call({})
-      expect(action.exposures[:task]).to be_a Task
+      expect(action.exposures[:presenter].task).to be_a Task
     end
   end
 

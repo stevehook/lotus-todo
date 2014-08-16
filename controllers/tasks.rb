@@ -4,27 +4,28 @@ module Todo
       include Lotus::Controller
 
       action 'Index' do
-        expose :tasks
+        expose :presenter
 
         def call(params)
-          @tasks = TaskRepository.incomplete
+          @presenter = Presenters::TasksPresenter.new(TaskRepository.incomplete)
         end
       end
 
       action 'New' do
-        expose :task
+        expose :presenter
 
         def call(params)
-          @task = Task.new
+          @presenter = Presenters::TaskPresenter.new(Task.new)
         end
       end
 
       action 'Create' do
-        expose :task
+        expose :presenter
 
         def call(params)
-          @task = Task.new(params[:task])
-          TaskRepository.persist(@task)
+          task = Task.new(params[:task])
+          TaskRepository.persist(task)
+          @presenter = Presenters::TaskPresenter.new(task)
           redirect_to '/'
         end
       end

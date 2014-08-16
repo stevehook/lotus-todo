@@ -7,6 +7,23 @@ describe Presenters::TaskPresenter do
 
   subject { described_class.new(entity) }
 
+  it 'exposes the encapsulated task' do
+    expect(subject.task).to eql entity
+  end
+
+  describe '#to_json' do
+    let(:json) { subject.to_json }
+
+    it 'serialises the given task' do
+      expect(json).to be_a String
+      expect(json).to match /"id":123/
+    end
+
+    it 'generates valid JSON' do
+      JSON.parse(json)
+    end
+  end
+
   describe '#to_h' do
     it 'returns a hash of the given task' do
       expect(subject.to_h).to eql({
