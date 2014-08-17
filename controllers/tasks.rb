@@ -26,7 +26,7 @@ module Todo
           task = Task.new(params[:task])
           TaskRepository.persist(task)
           @presenter = Presenters::TaskPresenter.new(task)
-          redirect_to '/'
+          redirect_to '/' if accept?('text/html')
         end
       end
     end

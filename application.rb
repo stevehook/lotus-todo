@@ -30,3 +30,4 @@ end
 Lotus::View.configure do
   root 'templates'
 end
+

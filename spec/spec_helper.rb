@@ -20,6 +20,20 @@ module RSpec
       end
     end
   end
+
+  module ApiExampleGroup
+    include Rack::Test::Methods
+
+    def self.included(group)
+      group.metadata[:type] = :api
+    end
+
+    def app
+      app = Todo::Application.new
+      app.middleware.use Rack::Parser, :parsers => { 'application/json' => proc { |data| JSON.parse data } }
+      app
+    end
+  end
 end
 
 RSpec.configure do |c|
@@ -31,6 +45,10 @@ RSpec.configure do |c|
 
   c.include RSpec::FeatureExampleGroup, type: :feature, example_group: {
     file_path: c.escaped_path(%w[spec features])
+  }
+
+  c.include RSpec::ApiExampleGroup, type: :api, example_group: {
+    file_path: c.escaped_path(%w[spec api])
   }
 
   c.include Capybara::DSL, type: :feature
