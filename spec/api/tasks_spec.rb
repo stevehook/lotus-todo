@@ -27,9 +27,18 @@ feature 'API' do
   end
 
   describe 'POST /tasks' do
-    it 'creates a new task and redirects to index page' do
-      post '/tasks', { task: { title: 'New Thing' } }.to_json, { :format => :json, 'CONTENT_TYPE' => 'application/json' }
+    it 'returns 200 and creates a new task' do
+      post '/tasks', { task: { title: 'New Thing' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }
       expect(last_response).to be_ok
+      expect(TaskRepository.incomplete.count).to eql 3
+    end
+  end
+
+  describe 'DELETE /tasks/:id' do
+    it 'returns 200 and deletes the given task' do
+      delete "/tasks/#{todo1.id}", {}, { 'CONTENT_TYPE' => 'application/json' }
+      expect(last_response).to be_ok
+      expect(TaskRepository.incomplete.count).to eql 1
     end
   end
 end
