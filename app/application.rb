@@ -8,7 +8,7 @@ require 'lotus-model'
 module Todo
   class Application < Lotus::Application
     configure do
-      # root File.dirname(__FILE__)
+      root File.dirname(__FILE__)
 
       load_paths << [
         'entities',
@@ -29,6 +29,6 @@ module Todo
 end
 
 Lotus::View.configure do
-  root 'templates'
+  root 'app/templates'
 end
 

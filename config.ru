@@ -1,6 +1,6 @@
 # config.ru
 require 'lotus'
-require_relative 'application'
+require_relative 'app/application'
 require 'rack/parser'
 
 use Rack::Parser, :parsers => {

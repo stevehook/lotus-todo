@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'entities/task'
-require 'presenters/task_presenter'
-require 'presenters/tasks_presenter'
+require 'app/entities/task'
+require 'app/presenters/task_presenter'
+require 'app/presenters/tasks_presenter'
 
 describe Presenters::TasksPresenter do
   let(:entity1) { Task.new(id: 123, title: 'Thing 1', completed: true) }

@@ -1,7 +1,9 @@
 require 'spec_helper'
-require 'controllers/tasks'
-require 'entities/task'
-require 'repositories/task_repository'
+require 'app/controllers/tasks'
+require 'app/presenters/task_presenter'
+require 'app/presenters/tasks_presenter'
+require 'app/entities/task'
+require 'app/repositories/task_repository'
 
 describe Todo::Controllers::Tasks do
   let(:task1) { Task.new(title: 'Thing 1', completed: false) }

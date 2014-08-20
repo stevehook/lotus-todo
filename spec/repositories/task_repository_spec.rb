@@ -1,7 +1,7 @@
 require 'spec_helper'
-require 'entities/task'
-require 'repositories/task_repository'
-require 'config/mapper'
+require 'app/entities/task'
+require 'app/repositories/task_repository'
+require 'app/config/mapper'
 
 describe TaskRepository do
   let(:todo1) { Task.new(title: 'Thing 1', completed: false) }

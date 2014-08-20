@@ -8,7 +8,7 @@ require 'capybara/rspec'
 ENV['RACK_ENV'] = 'test'
 ENV['DATABASE_URL'] = 'postgres://localhost/lotus_todo_test'
 
-require 'application'
+require 'app/application'
 
 module RSpec
   module FeatureExampleGroup
