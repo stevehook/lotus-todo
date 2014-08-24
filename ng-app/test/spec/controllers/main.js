@@ -3,7 +3,7 @@
 describe('Controller: MainCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('ngAppApp'));
+  beforeEach(module('todoApp'));
 
   var MainCtrl,
     scope;
@@ -16,7 +16,7 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(scope.awesomeThings.length).toBe(3);
+  it('should attach a list of tasks to the scope', function () {
+    expect(scope.tasks.length).toBe(3);
   });
 });

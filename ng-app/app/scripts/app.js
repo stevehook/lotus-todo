@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name ngAppApp
+ * @name todoApp
  * @description
- * # ngAppApp
+ * # todoApp
  *
  * Main module of the application.
  */
 angular
-  .module('ngAppApp', [
+  .module('todoApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -23,7 +23,11 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
+      .when('/archive', {
+        templateUrl: 'views/archive.html',
+        controller: 'ArchiveCtrl'
+      })
+       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
