@@ -8,10 +8,10 @@
  * Controller of the todoApp
  */
 angular.module('todoApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.tasks = [
-      { title: 'Walk the dog' },
-      { title: 'Cook dinner' },
-      { title: 'Go to the pub' }
-    ];
+  .controller('MainCtrl', function ($scope, $http) {
+    $scope.tasks = [];
+
+    $http.get('/tasks').success(function(data) {
+      $scope.tasks = data;
+    });
   });
