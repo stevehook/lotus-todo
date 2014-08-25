@@ -19,7 +19,7 @@ module Todo
         'presenters'
       ]
       routes do
-        get '/', to: 'tasks#index'
+        redirect '/', to: 'index.html'
         get '/tasks/new', to: 'tasks#new'
         post '/tasks', to: 'tasks#create'
         delete '/tasks/:id', to: 'tasks#delete'
