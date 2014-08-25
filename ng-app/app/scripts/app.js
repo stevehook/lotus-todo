@@ -17,6 +17,9 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
+  .run(function($http) {
+    $http.defaults.headers.common.Accept = 'application/json';
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

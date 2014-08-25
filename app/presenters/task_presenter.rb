@@ -1,3 +1,5 @@
+require 'json'
+
 module Presenters
   class TaskPresenter
     attr_reader :task

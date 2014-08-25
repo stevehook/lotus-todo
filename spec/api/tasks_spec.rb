@@ -15,9 +15,9 @@ feature 'API' do
     TaskRepository.clear
   end
 
-  describe 'GET /' do
+  describe 'GET /tasks' do
     it 'gets the list of tasks' do
-      get '/'
+      get '/tasks'
       expect(last_response).to be_ok
       result = JSON.parse(last_response.body)
       expect(result.count).to eql 2

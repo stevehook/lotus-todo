@@ -20,6 +20,7 @@ module Todo
       ]
       routes do
         redirect '/', to: 'index.html'
+        get '/tasks', to: 'tasks#index'
         get '/tasks/new', to: 'tasks#new'
         post '/tasks', to: 'tasks#create'
         delete '/tasks/:id', to: 'tasks#delete'
