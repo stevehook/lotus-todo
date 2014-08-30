@@ -51,9 +51,11 @@ and in a separate shell start the front-end:
 
     $ cd ng-app && grunt serve
 
-Then point your browser at http://localhost:9000.
+Then point your browser at `http://localhost:9000`.
 
-To get this setup we use the [grunt-connect-proxy plugin](https://github.com/drewzboto/grunt-connect-proxy).
+To get this working we use the [grunt-connect-proxy plugin](https://github.com/drewzboto/grunt-connect-proxy).
+This configures the connect server to forward all requests to `/api` to
+the lotusrb server.
 
 ##Deploying to a production server
 
