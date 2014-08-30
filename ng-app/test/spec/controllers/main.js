@@ -19,7 +19,7 @@ describe('Controller: MainCtrl', function () {
 
     // Stub $http to return some tasks
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.when('GET', '/tasks').respond(200, tasks);
+    $httpBackend.when('GET', '/api/tasks').respond(200, tasks);
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', { $scope: scope });
     $httpBackend.flush();

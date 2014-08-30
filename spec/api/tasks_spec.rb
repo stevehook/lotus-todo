@@ -15,9 +15,9 @@ feature 'API' do
     TaskRepository.clear
   end
 
-  describe 'GET /tasks' do
+  describe 'GET /api/tasks' do
     it 'gets the list of tasks' do
-      get '/tasks'
+      get '/api/tasks'
       expect(last_response).to be_ok
       result = JSON.parse(last_response.body)
       expect(result.count).to eql 2
@@ -26,17 +26,17 @@ feature 'API' do
     end
   end
 
-  describe 'POST /tasks' do
+  describe 'POST /api/tasks' do
     it 'returns 200 and creates a new task' do
-      post '/tasks', { task: { title: 'New Thing' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }
+      post '/api/tasks', { task: { title: 'New Thing' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }
       expect(last_response).to be_ok
       expect(TaskRepository.incomplete.count).to eql 3
     end
   end
 
-  describe 'DELETE /tasks/:id' do
+  describe 'DELETE /api/tasks/:id' do
     it 'returns 200 and deletes the given task' do
-      delete "/tasks/#{todo1.id}", {}, { 'CONTENT_TYPE' => 'application/json' }
+      delete "/api/tasks/#{todo1.id}", {}, { 'CONTENT_TYPE' => 'application/json' }
       expect(last_response).to be_ok
       expect(TaskRepository.incomplete.count).to eql 1
     end

@@ -13,7 +13,7 @@ angular.module('todoApp')
   .controller('MainCtrl', function ($scope, $http) {
     $scope.tasks = [];
 
-    $http.get('/tasks').success(function(data) {
+    $http.get('/api/tasks').success(function(data) {
       $scope.tasks = data;
     });
   });

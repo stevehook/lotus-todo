@@ -1,5 +1,8 @@
 <div class="row marketing">
   <ul>
-    <li ng-repeat='task in tasks'>{{task.title}}</li>
+    <li ng-repeat='task in tasks'>
+      <span>{{task.title}}</span>
+      <span class='glyphicon glyphicon-ok' ng-click='completeTask(task)' ng-if='!task.completed'></span>
+    </li>
   </ul>
 </div>
