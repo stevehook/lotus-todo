@@ -2,20 +2,21 @@
 
 describe('Controller: MainCtrl', function () {
 
-  // load the controller's module
-  beforeEach(module('todoApp'));
-
   var MainCtrl,
     scope,
     $httpBackend;
   var tasks = [
-      { title: 'Walk the dog' },
-      { title: 'Cook dinner' },
-      { title: 'Go to the pub' }
+      { id: 123, title: 'Walk the dog', completed: false },
+      { id: 456, title: 'Cook dinner', completed: false },
+      { id: 789, title: 'Go to the pub', completed: true }
     ];
+
+  // load the controller's module
+  beforeEach(module('todoApp'));
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $injector) {
+    console.log('outer');
 
     // Stub $http to return some tasks
     $httpBackend = $injector.get('$httpBackend');
@@ -27,5 +28,25 @@ describe('Controller: MainCtrl', function () {
 
   it('should attach a list of tasks to the scope', function () {
     expect(scope.tasks.length).toBe(3);
+  });
+
+  describe('Controller: MainCtrl#completeTask', function () {
+
+    // Initialize the controller and a mock scope
+    beforeEach(inject(function ($injector) {
+      $httpBackend = $injector.get('$httpBackend');
+      $httpBackend.when('POST', '/api/tasks/123/complete' ).respond(200, tasks);
+    }));
+
+    // it('calls the complete API', function () {
+    //   scope.complete(tasks[0]);
+    //   $httpBackend.flush();
+    // });
+
+    it('resets the completed flag', function () {
+      scope.completeTask(tasks[0]);
+      $httpBackend.flush();
+      expect(tasks[0].completed).toBe(true);
+    });
   });
 });

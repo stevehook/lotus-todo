@@ -23,7 +23,7 @@ module Todo
         get '/api/tasks', to: 'tasks#index'
         get '/api/tasks/new', to: 'tasks#new'
         post '/api/tasks', to: 'tasks#create'
-        patch '/api/tasks/:id/complete', to: 'tasks#complete'
+        post '/api/tasks/:id/complete', to: 'tasks#complete'
         delete '/api/tasks/:id', to: 'tasks#delete'
       end
     end

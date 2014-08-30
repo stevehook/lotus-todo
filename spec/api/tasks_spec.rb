@@ -34,9 +34,9 @@ feature 'API' do
     end
   end
 
-  describe 'PATCH /api/tasks/:id/complete' do
+  describe 'POST /api/tasks/:id/complete' do
     it 'returns 200 and updates the given task' do
-      patch "/api/tasks/#{todo1.id}/complete", {}, { 'CONTENT_TYPE' => 'application/json' }
+      post "/api/tasks/#{todo1.id}/complete", {}, { 'CONTENT_TYPE' => 'application/json' }
       expect(last_response).to be_ok
       expect(TaskRepository.incomplete.count).to eql 1
     end
