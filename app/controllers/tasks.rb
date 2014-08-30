@@ -40,6 +40,17 @@ module Todo
           redirect_to '/' if accept?('text/html')
         end
       end
+
+      action 'Complete' do
+        expose :presenter
+
+        def call(params)
+          task = TaskRepository.find(params[:id])
+          TaskRepository.complete(task)
+          @presenter = Presenters::TaskPresenter.new(task)
+          redirect_to '/' if accept?('text/html')
+        end
+      end
     end
   end
 end

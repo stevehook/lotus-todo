@@ -12,4 +12,9 @@ class TaskRepository
     end
   end
 
+  def self.complete(task)
+    task.completed = true
+    self.update(task)
+  end
+
 end

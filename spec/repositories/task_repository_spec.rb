@@ -22,5 +22,12 @@ describe TaskRepository do
       expect(described_class.incomplete.collect(&:id)).to eql([todo1.id, todo2.id])
     end
   end
+
+  describe '#complete' do
+    it 'sets the completed flag and updates the record' do
+      expect{ described_class.complete(todo1) }.to change{ described_class.incomplete.count }.by(-1)
+      expect(todo1.completed).to eql true
+    end
+  end
 end
 
