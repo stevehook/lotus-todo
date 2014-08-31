@@ -74,4 +74,20 @@ describe('Controller: MainCtrl', function () {
       expect(tasks[0].completed).toBe(true);
     });
   });
+
+  describe('Controller: MainCtrl#deleteTask', function () {
+
+    it('calls the delete API', function () {
+      $httpBackend.expect('DELETE', '/api/tasks/123' ).respond(200, tasks);
+      scope.deleteTask(tasks[0]);
+      $httpBackend.flush();
+    });
+
+    it('removes the task from the task list', function () {
+      $httpBackend.when('DELETE', '/api/tasks/123' ).respond(200, tasks);
+      scope.deleteTask(tasks[0]);
+      $httpBackend.flush();
+      expect(scope.tasks.length).toBe(2);
+    });
+  });
 });

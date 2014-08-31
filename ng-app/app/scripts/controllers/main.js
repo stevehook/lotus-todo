@@ -28,6 +28,16 @@ angular.module('todoApp')
         });
     };
 
+    $scope.deleteTask = function(task) {
+      $http.delete('/api/tasks/' + task.id, task, {}).
+        success(function() {
+          $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+        }).
+        error(function() {
+          console.log('failed');
+        });
+    };
+
     $scope.createTask = function() {
       $http.post('/api/tasks', $scope.newTask, { headers: { 'X-Http-Method-Override': 'PATCH' } }).
         success(function(task) {
@@ -37,5 +47,5 @@ angular.module('todoApp')
         error(function() {
           console.log('failed');
         });
-    }
+    };
   });
