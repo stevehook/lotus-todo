@@ -15,6 +15,7 @@ angular.module('todoApp')
 
     $http.get('/api/tasks').success(function(data) {
       $scope.tasks = data;
+      $scope.newTask = {};
     });
 
     $scope.completeTask = function(task) {
@@ -26,4 +27,15 @@ angular.module('todoApp')
           console.log('failed');
         });
     };
+
+    $scope.createTask = function() {
+      $http.post('/api/tasks', $scope.newTask, { headers: { 'X-Http-Method-Override': 'PATCH' } }).
+        success(function(task) {
+          $scope.tasks.push(task);
+          $scope.newTask = {};
+        }).
+        error(function() {
+          console.log('failed');
+        });
+    }
   });

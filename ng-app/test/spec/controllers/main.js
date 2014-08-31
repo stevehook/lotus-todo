@@ -25,8 +25,38 @@ describe('Controller: MainCtrl', function () {
     $httpBackend.flush();
   }));
 
-  it('should attach a list of tasks to the scope', function () {
+  it('attaches a list of tasks to the scope', function () {
     expect(scope.tasks.length).toBe(3);
+  });
+
+  it('attaches a new task to the scope', function () {
+    expect(scope.newTask).toBeDefined();
+    expect(scope.newTask).toEqual({});
+  });
+
+  describe('Controller: MainCtrl#createTask', function () {
+
+    var newTask = { id: 321, title: 'Feed the fishes'};
+
+    it('calls the create API', function () {
+      $httpBackend.expect('POST', '/api/tasks').respond(200, newTask);
+      scope.createTask({ title: 'Feed the fishes', completedBy: '2014-09-01' });
+      $httpBackend.flush();
+    });
+
+    it('clears the new task', function () {
+      $httpBackend.when('POST', '/api/tasks').respond(200, newTask);
+      scope.createTask({ title: 'Feed the fishes', completedBy: '2014-09-01' });
+      $httpBackend.flush();
+      expect(scope.newTask).toEqual({});
+    });
+
+    it('adds the new task to the task list', function () {
+      $httpBackend.when('POST', '/api/tasks').respond(200, newTask);
+      scope.createTask({ title: 'Feed the fishes', completedBy: '2014-09-01' });
+      $httpBackend.flush();
+      expect(scope.tasks.length).toBe(4);
+    });
   });
 
   describe('Controller: MainCtrl#completeTask', function () {

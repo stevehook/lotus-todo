@@ -1,5 +1,14 @@
 <div class="row marketing">
+  <div id='new-task' class="task new-task">
+  </div>
   <ul>
+    <li>
+      <form ng-submit='createTask()'>
+        <input type='text' class='form-control task-title' placeholder='What needs to be done?' autofocus ng-model='newTask.title'/>
+        <input type='date' class='form-control task-complete-by' placeholder='by when?' ng-model='newTask.completeBy'/>
+        <span class='glyphicon glyphicon-plus' ng-click='createTask()'></span>
+      </form>
+    </li>
     <li ng-repeat='task in tasks'>
       <span>{{task.title}}</span>
       <span class='glyphicon glyphicon-ok' ng-click='completeTask(task)' ng-if='!task.completed'></span>
