@@ -12,6 +12,7 @@
     <li ng-repeat='task in tasks'>
       <span>{{task.title}}</span>
       <span class='glyphicon glyphicon-ok' ng-click='completeTask(task)' ng-if='!task.completed'></span>
+      <span class='glyphicon glyphicon-remove' ng-click='deleteTask(task)' ng-if='task.completed'></span>
     </li>
   </ul>
 </div>
