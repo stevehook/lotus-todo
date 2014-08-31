@@ -41,7 +41,6 @@ body {
 .footer {
   padding-top: 19px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
 }
 
 .container-narrow > hr {
@@ -88,5 +87,45 @@ body {
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
+  }
+}
+
+ul.task-list {
+  list-style-type: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+    padding: 10px 5px;
+    margin: 0;
+    font-size: 125%;
+    border-bottom: solid 1px #DDD;
+
+    input {
+      font-size: 100%;
+      border: none;
+    }
+
+    span.glyphicon-ok {
+      color: #BBB;
+      margin-right: 10px;
+    }
+
+    span.glyphicon-plus, span.glyphicon-remove {
+      color: #BBB;
+      position: absolute;
+      top: 14px;
+      right: 10px;
+    }
+  }
+
+  li.completed {
+    text-decoration: line-through;
+
+    span.glyphicon-ok {
+      color: #2A2;
+    }
   }
 }
