@@ -4,7 +4,8 @@ feature 'API' do
   let(:todo1) { Task.new(title: 'Thing 1', completed: false) }
   let(:todo2) { Task.new(title: 'Thing 2', completed: true) }
   let(:todo3) { Task.new(title: 'Thing 3', completed: false) }
-  let(:todos) { [todo1, todo2, todo3] }
+  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived: true) }
+  let(:todos) { [todo1, todo2, todo3, todo4] }
 
   before do
     todos.each { |todo| TaskRepository.persist(todo) }
@@ -16,11 +17,11 @@ feature 'API' do
   end
 
   describe 'GET /api/tasks' do
-    it 'gets the list of tasks' do
+    it 'gets the list of unarchived tasks' do
       get '/api/tasks'
       expect(last_response).to be_ok
       result = JSON.parse(last_response.body)
-      expect(result.count).to eql 2
+      expect(result.count).to eql 3
       expect(result.first['title']).to eql 'Thing 1'
       expect(result.last['title']).to eql 'Thing 3'
     end

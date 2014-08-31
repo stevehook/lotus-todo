@@ -7,7 +7,7 @@ module Todo
         expose :presenter
 
         def call(params)
-          @presenter = Presenters::TasksPresenter.new(TaskRepository.incomplete)
+          @presenter = Presenters::TasksPresenter.new(TaskRepository.unarchived)
         end
       end
 
