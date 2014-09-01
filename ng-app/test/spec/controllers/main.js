@@ -4,18 +4,19 @@ describe('Controller: MainCtrl', function () {
 
   var MainCtrl,
     scope,
-    $httpBackend;
-  var tasks = [
-      { id: 123, title: 'Walk the dog', completed: false },
-      { id: 456, title: 'Cook dinner', completed: false },
-      { id: 789, title: 'Go to the pub', completed: true }
-    ];
+    $httpBackend,
+    tasks;
 
   // load the controller's module
   beforeEach(module('todoApp'));
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, $injector) {
+    tasks = [
+        { id: 123, title: 'Walk the dog', completed: false },
+        { id: 456, title: 'Cook dinner', completed: false },
+        { id: 789, title: 'Go to the pub', completed: true }
+      ];
 
     // Stub $http to return some tasks
     $httpBackend = $injector.get('$httpBackend');
@@ -83,6 +84,13 @@ describe('Controller: MainCtrl', function () {
       scope.completeTask(tasks[0]);
       $httpBackend.flush();
       expect(tasks[0].completed).toBe(true);
+    });
+
+    it('validates that the task is not already complete', function () {
+      scope.completeTask(tasks[2]);
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
+      expect(scope.tasks.length).toBe(3);
     });
   });
 
