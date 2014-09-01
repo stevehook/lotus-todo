@@ -40,22 +40,33 @@ describe('Controller: MainCtrl', function () {
 
     it('calls the create API', function () {
       $httpBackend.expect('POST', '/api/tasks').respond(200, newTask);
-      scope.createTask({ title: 'Feed the fishes', completedBy: '2014-09-01' });
+      scope.newTask = { title: 'Feed the fishes', completedBy: '2014-09-01' };
+      scope.createTask();
       $httpBackend.flush();
     });
 
     it('clears the new task', function () {
       $httpBackend.when('POST', '/api/tasks').respond(200, newTask);
-      scope.createTask({ title: 'Feed the fishes', completedBy: '2014-09-01' });
+      scope.newTask = { title: 'Feed the fishes', completedBy: '2014-09-01' };
+      scope.createTask();
       $httpBackend.flush();
       expect(scope.newTask).toEqual({});
     });
 
     it('adds the new task to the task list', function () {
       $httpBackend.when('POST', '/api/tasks').respond(200, newTask);
-      scope.createTask({ title: 'Feed the fishes', completedBy: '2014-09-01' });
+      scope.newTask = { title: 'Feed the fishes', completedBy: '2014-09-01' };
+      scope.createTask();
       $httpBackend.flush();
       expect(scope.tasks.length).toBe(4);
+    });
+
+    it('validates that the title is set', function () {
+      scope.newTask = { title: '', completedBy: '2014-09-01' };
+      scope.createTask();
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
+      expect(scope.tasks.length).toBe(3);
     });
   });
 

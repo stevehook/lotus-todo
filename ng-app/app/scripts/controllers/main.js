@@ -39,13 +39,19 @@ angular.module('todoApp')
     };
 
     $scope.createTask = function() {
-      $http.post('/api/tasks', { task: $scope.newTask }, { headers: { 'X-Http-Method-Override': 'PATCH' } }).
-        success(function(task) {
-          $scope.tasks.push(task);
-          $scope.newTask = {};
-        }).
-        error(function() {
-          console.log('failed');
-        });
+      if ($scope.isValid($scope.newTask)) {
+        $http.post('/api/tasks', { task: $scope.newTask }, { headers: { 'X-Http-Method-Override': 'PATCH' } }).
+          success(function(task) {
+            $scope.tasks.push(task);
+            $scope.newTask = {};
+          }).
+          error(function() {
+            console.log('failed');
+          });
+      }
+    };
+
+    $scope.isValid = function(task) {
+      return (task.title && task.title !== '');
     };
   });
