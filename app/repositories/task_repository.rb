@@ -14,7 +14,7 @@ class TaskRepository
 
   def self.unarchived
     query do
-      where(archived_at: nil).asc(:order).limit(PAGE_SIZE)
+      where('archived_at IS NULL').asc(:order).limit(PAGE_SIZE)
     end
   end
 

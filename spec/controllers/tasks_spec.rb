@@ -10,19 +10,30 @@ describe Todo::Controllers::Tasks do
   let(:task2) { Task.new(title: 'Thing 2', completed: false) }
   let(:task3) { Task.new(title: 'Thing 3', completed: true) }
   let(:task4) { Task.new(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1)) }
+  let(:task5) { Task.new(title: 'Thing 5', completed: true, archived_at: DateTime.civil(2014, 2, 22)) }
   let(:unarchived_tasks) { [task1, task2, task3] }
+  let(:archived_tasks) { [task4, task5] }
   let(:tasks) { [task1, task2, task3, task4] }
 
   before do
     TaskRepository.stub(:unarchived).and_return(unarchived_tasks)
+    TaskRepository.stub(:archived).and_return(archived_tasks)
     TaskRepository.stub(:persist).and_return(true)
   end
 
   describe Todo::Controllers::Tasks::Index do
     let(:action) { described_class.new }
-    it 'retrieves a collection of archived tasks' do
+    it 'retrieves a collection of unarchived tasks' do
       action.call({})
       expect(action.exposures[:presenter].tasks).to eql unarchived_tasks
+    end
+  end
+
+  describe Todo::Controllers::Tasks::Archive do
+    let(:action) { described_class.new }
+    it 'retrieves a collection of archived tasks' do
+      action.call({})
+      expect(action.exposures[:presenter].tasks).to eql archived_tasks
     end
   end
 

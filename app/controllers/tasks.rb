@@ -11,6 +11,14 @@ module Todo
         end
       end
 
+      action 'Archive' do
+        expose :presenter
+
+        def call(params)
+          @presenter = Presenters::TasksPresenter.new(TaskRepository.archived)
+        end
+      end
+
       action 'New' do
         expose :presenter
 
