@@ -27,6 +27,16 @@ feature 'API' do
     end
   end
 
+  describe 'GET /api/tasks/archive' do
+    it 'gets the list of archived tasks' do
+      get '/api/tasks/archive'
+      expect(last_response).to be_ok
+      result = JSON.parse(last_response.body)
+      expect(result.count).to eql 1
+      expect(result.first['title']).to eql 'Thing 4'
+    end
+  end
+
   describe 'POST /api/tasks' do
     it 'returns 200 and creates a new task' do
       post '/api/tasks', { task: { title: 'New Thing' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }

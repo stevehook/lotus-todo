@@ -1,7 +1,7 @@
 module Todo
   module Views
     module Tasks
-      class Archive
+      class Index
         include Lotus::View
       end
     end

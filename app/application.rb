@@ -21,6 +21,7 @@ module Todo
       routes do
         redirect '/', to: 'index.html'
         get '/api/tasks', to: 'tasks#index'
+        get '/api/tasks/archive', to: 'tasks#archive'
         get '/api/tasks/new', to: 'tasks#new'
         post '/api/tasks', to: 'tasks#create'
         post '/api/tasks/:id/complete', to: 'tasks#complete'
