@@ -9,7 +9,7 @@ describe Todo::Controllers::Tasks do
   let(:task1) { Task.new(title: 'Thing 1', completed: false) }
   let(:task2) { Task.new(title: 'Thing 2', completed: false) }
   let(:task3) { Task.new(title: 'Thing 3', completed: true) }
-  let(:task4) { Task.new(title: 'Thing 4', completed: true, archived: true) }
+  let(:task4) { Task.new(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1)) }
   let(:unarchived_tasks) { [task1, task2, task3] }
   let(:tasks) { [task1, task2, task3, task4] }
 

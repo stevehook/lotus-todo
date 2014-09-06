@@ -14,13 +14,13 @@ class TaskRepository
 
   def self.unarchived
     query do
-      where(archived: false).asc(:order).limit(PAGE_SIZE)
+      where(archived_at: nil).asc(:order).limit(PAGE_SIZE)
     end
   end
 
   def self.archived
     query do
-      where(archived: true).asc(:order).limit(PAGE_SIZE)
+      where('archived_at IS NOT NULL').asc(:order).limit(PAGE_SIZE)
     end
   end
 
@@ -30,7 +30,7 @@ class TaskRepository
   end
 
   def self.archive(task)
-    task.archived = true
+    task.archived_at = DateTime.now
     self.update(task)
   end
 

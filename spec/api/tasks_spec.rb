@@ -4,7 +4,7 @@ feature 'API' do
   let(:todo1) { Task.new(title: 'Thing 1', completed: false) }
   let(:todo2) { Task.new(title: 'Thing 2', completed: true) }
   let(:todo3) { Task.new(title: 'Thing 3', completed: false) }
-  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived: true) }
+  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1)) }
   let(:todos) { [todo1, todo2, todo3, todo4] }
 
   before do

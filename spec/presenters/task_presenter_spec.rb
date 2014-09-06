@@ -30,11 +30,11 @@ describe Presenters::TaskPresenter do
         id: 123,
         title: 'Thing 1',
         completed: true,
-        archived: false,
         order: 0,
         created_at: nil,
         updated_at: nil,
-        complete_by: nil
+        complete_by: nil,
+        archived_at: nil
       })
     end
   end

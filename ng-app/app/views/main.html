@@ -9,7 +9,7 @@
       </form>
     </li>
     <li ng-repeat='task in tasks' ng-class="{'completed': task.completed, 'pending': !task.completed}">
-      <span class='glyphicon glyphicon-ok' ng-click='completeTask(task)' ng-if='!task.archived'></span>
+      <span class='glyphicon glyphicon-ok' ng-click='completeTask(task)' ng-if='!task.archived_at'></span>
       <span>{{task.title}}</span>
       <span class='glyphicon glyphicon-remove' ng-click='deleteTask(task)' ng-if='task.completed'></span>
     </li>

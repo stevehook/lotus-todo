@@ -13,11 +13,11 @@ module Presenters
         id: @task.id,
         title: @task.title,
         completed: @task.completed,
-        archived: @task.archived,
         order: @task.order,
         created_at: @task.created_at,
         updated_at: @task.updated_at,
-        complete_by: @task.complete_by
+        complete_by: @task.complete_by,
+        archived_at: @task.archived_at
       }
     end
 

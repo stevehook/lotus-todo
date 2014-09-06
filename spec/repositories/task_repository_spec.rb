@@ -7,7 +7,7 @@ describe TaskRepository do
   let(:todo1) { Task.new(title: 'Thing 1') }
   let(:todo2) { Task.new(title: 'Thing 2') }
   let(:todo3) { Task.new(title: 'Thing 3', completed: true) }
-  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived: true) }
+  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1)) }
   let(:todos) { [todo1, todo2, todo3, todo4] }
 
   before do
@@ -37,9 +37,11 @@ describe TaskRepository do
   end
 
   describe '#archive' do
+    let(:now) { DateTime.civil(2014, 1, 1) }
     it 'sets the archived flag and updates the record' do
+      DateTime.stub(:now) { now }
       expect{ described_class.archive(todo1) }.to change{ described_class.unarchived.count }.by(-1)
-      expect(todo1.archived).to eql true
+      expect(todo1.archived_at).to eql now
     end
   end
 

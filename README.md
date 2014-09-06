@@ -20,8 +20,12 @@ command:
 
 To run migrations:
 
-    $ sequel postgres://localhost/lotus_todo_development -m db/migrations
-    $ sequel postgres://localhost/lotus_todo_test -m db/migrations
+    $ sequel postgres://localhost/lotus_todo_development -m app/db/migrations
+    $ sequel postgres://localhost/lotus_todo_test -m app/db/migrations
+
+There is also some seed data:
+
+    $ bundle exec ruby app/db/seeds/tasks.rb
 
 ##Tests
 

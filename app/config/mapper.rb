@@ -9,11 +9,11 @@ mapper = Lotus::Model::Mapper.new do
     attribute :id,           Integer
     attribute :title,        String
     attribute :completed,    Boolean
-    attribute :archived,     Boolean
     attribute :order,        Integer
     attribute :created_at,   DateTime
     attribute :updated_at,   DateTime
     attribute :complete_by,  Date
+    attribute :archived_at,  DateTime
   end
 end
 
