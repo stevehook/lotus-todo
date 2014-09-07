@@ -63,6 +63,28 @@ the lotusrb server.
 
 ##Deploying to a production server
 
+The application can be easily deployed to Heroku using the Ruby
+buildpack that Heroku automatically picks up. However you need to build
+the static assets (HTML/CSS/JS) before deployment so that they can be
+picked up from the lotusrb server running on the production server.
+(The alternative would be to configure multiple buildpacks (Node.js as
+well as the Ruby one so that you could install and build using Grunt as
+part of the deployment).
 
+You can do this in a separate git *build* branch to keep master clean.
 
+    $ git co build
+    $ cd ng-app
+    $ grunt build --force
+    $ git add -A
+    $ git commit -m 'new build'
 
+Assuming you have logged in to your Heroku account you can create and
+deploy the app with:
+
+    $ heroku create
+    $ git push heroku build:master
+
+To setup the database or run migrations after a deploy:
+
+    $ heroku run sequel `heroku config:get DATABASE_URL` -m app/db/migrations
