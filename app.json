@@ -1,0 +1,28 @@
+{
+  "name": "Todo",
+  "description": "This is a very simple TODO app using lotusrb and Angular.js",
+  "keywords": [
+    "todo",
+    "lotus",
+    "angular"
+  ],
+  "website": "https://github.com/stevehook/lotus-todo",
+  "repository": "https://github.com/stevehook/lotus-todo",
+  "success_url": "/index.html",
+  "scripts": {
+    "postdeploy": "sequel $DATABASE_URL -m app/db/migrations"
+  },
+  "env": {
+    "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-ruby",
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "WEB_CONCURRENCY": {
+      "description": "The number of processes to run.",
+      "value": "5"
+    }
+  },
+  "addons": [
+  ]
+}
