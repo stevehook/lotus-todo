@@ -8,6 +8,7 @@ module Todo
 
         def call(params)
           @presenter = Presenters::TasksPresenter.new(TaskRepository.unarchived)
+          self.body = @presenter.to_json
         end
       end
 
@@ -16,6 +17,7 @@ module Todo
 
         def call(params)
           @presenter = Presenters::TasksPresenter.new(TaskRepository.archived)
+          self.body = @presenter.to_json
         end
       end
 
@@ -24,6 +26,7 @@ module Todo
 
         def call(params)
           @presenter = Presenters::TaskPresenter.new(Task.new)
+          self.body = @presenter.to_json
         end
       end
 
@@ -34,7 +37,7 @@ module Todo
           task = Task.new(params[:task])
           TaskRepository.persist(task)
           @presenter = Presenters::TaskPresenter.new(task)
-          redirect_to '/' if accept?('text/html')
+          self.body = @presenter.to_json
         end
       end
 
@@ -45,7 +48,7 @@ module Todo
           task = TaskRepository.find(params[:id])
           TaskRepository.delete(task)
           @presenter = Presenters::TaskPresenter.new(task)
-          redirect_to '/' if accept?('text/html')
+          self.body = @presenter.to_json
         end
       end
 
@@ -56,7 +59,7 @@ module Todo
           task = TaskRepository.find(params[:id])
           TaskRepository.complete(task)
           @presenter = Presenters::TaskPresenter.new(task)
-          redirect_to '/' if accept?('text/html')
+          self.body = @presenter.to_json
         end
       end
     end
