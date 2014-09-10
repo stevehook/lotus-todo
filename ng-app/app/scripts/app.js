@@ -37,4 +37,16 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .factory('errorHttpInterceptor', ['$q', function ($q) {
+    return {
+      responseError: function responseError(rejection) {
+        //TODO: Display an error message
+        console.log('something bad happened');
+        return $q.reject(rejection);
+      }
+    };
+  }])
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('errorHttpInterceptor');
+  }]);
