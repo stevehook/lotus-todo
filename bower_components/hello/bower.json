@@ -1,0 +1,19 @@
+{
+	"name": "hello",
+	"version": "1.0.1",
+	"homepage": "http://adodson.com/hello.js/",
+	"license" : "https://github.com/MrSwitch/hello.js/blob/master/LICENSE",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com:MrSwitch/hello.js.git"
+	},
+	"main" : ["dist/hello.all.min.js"],
+	"ignore" : [
+		"tests",
+		"demos",
+		"assets",
+		"ui",
+		"*.html",
+		"package.json"
+	]
+}
