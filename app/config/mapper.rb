@@ -16,11 +16,22 @@ mapper = Lotus::Model::Mapper.new do
     attribute :archived_at,  DateTime
     attribute :user_id,      Integer
   end
+
+  collection :users do
+    entity User
+
+    attribute :id,           Integer
+    attribute :name,         String
+    attribute :email,        String
+    attribute :created_at,   DateTime
+    attribute :updated_at,   DateTime
+  end
 end
 
 adapter = Lotus::Model::Adapters::SqlAdapter.new(mapper, ENV.fetch('DATABASE_URL'))
 
 TaskRepository.adapter = adapter
+UserRepository.adapter = adapter
 
 Mutex.new.synchronize do
   mapper.load!
