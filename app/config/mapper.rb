@@ -14,6 +14,7 @@ mapper = Lotus::Model::Mapper.new do
     attribute :updated_at,   DateTime
     attribute :complete_by,  Date
     attribute :archived_at,  DateTime
+    attribute :user_id,      Integer
   end
 end
 
