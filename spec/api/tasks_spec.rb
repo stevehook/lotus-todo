@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'API' do
+feature 'Tasks API' do
   let(:todo1) { Task.new(title: 'Thing 1', completed: false, user_id: 1) }
   let(:todo2) { Task.new(title: 'Thing 2', completed: true, user_id: 1) }
   let(:todo3) { Task.new(title: 'Thing 3', completed: false, user_id: 1) }

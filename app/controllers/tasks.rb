@@ -34,6 +34,7 @@ module Todo
         expose :presenter
 
         def call(params)
+          puts params.inspect
           task = Task.new(params[:task])
           task.user_id = 1 #session[:user_id]
           TaskRepository.persist(task)

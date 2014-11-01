@@ -20,7 +20,6 @@ describe('Controller: LoginCtrl', function () {
     authService = { login: function() {} };
     authEvents = {};
 
-    // TODO: Stub authService
     scope = $rootScope.$new();
     LoginCtrl = $controller('LoginCtrl', { $scope: scope, $rootScope: $rootScope, AUTH_EVENTS: {}, AuthService: authService });
   }));

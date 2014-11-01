@@ -9,13 +9,15 @@ module Todo
         include Lotus::Action::Session
 
         def call(params)
-          user = UserRepository.find_by_email(params[:email])
+          user_params = params[:user]
+          user = UserRepository.find_by_email(user_params[:email])
           if user
             session[:user_id] = user.id
-            self.body = {}
+            self.body = '{}'
+            self.status = 200
           else
             session[:user_id] = nil
-            self.body = {} #TODO: Add an error message
+            self.body = '{}' #TODO: error message
             self.status = 401
           end
         end
