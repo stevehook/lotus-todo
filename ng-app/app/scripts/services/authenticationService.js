@@ -1,34 +1,20 @@
 'use strict';
 
 angular.module('todoApp')
-  .factory('AuthenticationService', function ($http, Session) {
-    var authService = {};
-
-    authService.login = function (credentials) {
+  .service('AuthenticationService', function ($http) {
+    this.login = function (credentials) {
       return $http
         .post('/api/sessions', credentials)
         .then(function (res) {
-          Session.create(res.data.id, res.data.user.id,
-                         res.data.user.role);
-          return res.data.user;
+          return res.data;
         });
     };
 
-    authService.logout = function () {
-      //TODO:
+    this.logout = function () {
+      return $http
+        .delete('/api/sessions')
+        .then(function (res) {
+          return res.data;
+        });
     };
-
-    authService.isAuthenticated = function () {
-      return !!Session.userId;
-    };
-
-    authService.isAuthorized = function (authorizedRoles) {
-      if (!angular.isArray(authorizedRoles)) {
-        authorizedRoles = [authorizedRoles];
-      }
-      return (authService.isAuthenticated() &&
-        authorizedRoles.indexOf(Session.userRole) !== -1);
-    };
-
-    return authService;
   });
