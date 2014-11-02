@@ -6,12 +6,16 @@ angular.module('todoApp')
 
     authService.login = function (credentials) {
       return $http
-        .post('/login', credentials)
+        .post('/api/sessions', credentials)
         .then(function (res) {
           Session.create(res.data.id, res.data.user.id,
                          res.data.user.role);
           return res.data.user;
         });
+    };
+
+    authService.logout = function () {
+      //TODO:
     };
 
     authService.isAuthenticated = function () {
