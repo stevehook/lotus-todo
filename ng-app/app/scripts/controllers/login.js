@@ -21,7 +21,7 @@ angular.module('todoApp')
     $scope.logout = function () {
       AuthService.logout().then(function () {
         $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-        $scope.currentUser = null;
+        $scope.currentUser = undefined;
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
       });

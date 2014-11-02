@@ -29,6 +29,11 @@ describe('Controller: LoginCtrl', function () {
     LoginCtrl = $controller('LoginCtrl', { $scope: scope, $rootScope: rootScope, AUTH_EVENTS: authEvents, AuthService: authService });
   }));
 
+  beforeEach(function() {
+    sandbox.stub(rootScope, '$broadcast', function() {
+    });
+  });
+
   afterEach(function () {
     sandbox.restore();
   });
@@ -39,16 +44,14 @@ describe('Controller: LoginCtrl', function () {
   });
 
   describe('Controller: LoginCtrl#login', function() {
-    describe('with valid credentials', function() {
-      var credentials = { email: 'bob@example.com' };
+    var credentials = { email: 'bob@example.com' };
 
+    describe('with valid credentials', function() {
       beforeEach(function() {
         sandbox.stub(authService, 'login', function() {
           var defer = q.defer();
           defer.resolve(user);
           return defer.promise;
-        });
-        sandbox.stub(rootScope, '$broadcast', function() {
         });
       });
 
@@ -74,25 +77,52 @@ describe('Controller: LoginCtrl', function () {
       beforeEach(function() {
         sandbox.stub(authService, 'login', function() {
           var defer = q.defer();
-          defer.resolve();
+          defer.reject();
           return defer.promise;
         });
       });
 
+      it('does not set the current user', function() {
+        scope.login(credentials);
+        rootScope.$apply();
+        expect(scope.currentUser).not.toBeDefined();
+      });
+
       it('broadcasts the loginFailed event', function() {
+        scope.login(credentials);
+        rootScope.$apply();
+        expect(rootScope.$broadcast.calledWith('auth-login-failed')).toEqual(true);
       });
     });
   });
 
   describe('Controller: LoginCtrl#logout', function () {
-    it('calls the AuthService#logout method', function () {
+    beforeEach(function() {
+      scope.currentUser = { id: 123, name: 'Bob', email: 'bob@example.com' };
       sandbox.stub(authService, 'logout', function() {
         var defer = q.defer();
         defer.resolve();
         return defer.promise;
       });
+    });
+
+    it('calls the AuthService#logout method', function () {
       scope.logout();
+      rootScope.$apply();
       expect(authService.logout.calledWith()).toEqual(true);
+    });
+
+    it('resets the current user', function () {
+      expect(scope.currentUser).toBeDefined();
+      scope.logout();
+      rootScope.$apply();
+      expect(scope.currentUser).not.toBeDefined();
+    });
+
+    it('broadcasts the logout success event', function () {
+      scope.logout();
+      rootScope.$apply();
+      expect(rootScope.$broadcast.calledWith('auth-logout-success')).toEqual(true);
     });
   });
 });
