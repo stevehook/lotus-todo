@@ -14,22 +14,50 @@ describe('Service: AuthenticationService', function () {
     $httpBackend = $injector.get('$httpBackend');
   }));
 
-  it('login returns the matching user details', inject(function(AuthenticationService) {
-    var data;
-    $httpBackend.when('POST', '/api/sessions').respond(200, user);
-    AuthenticationService.login({ email: 'bob@example.com' })
-      .then(function(res) { data = res; });
-    $httpBackend.flush();
-    expect(data).toEqual(user);
-  }));
+  describe('isLoggedOut', function () {
+    it('the initial state is logged out', inject(function(AuthenticationService) {
+      expect(AuthenticationService.isLoggedIn()).toEqual(false);
+    }));
+  });
 
-  it('logout returns the matching user details', inject(function(AuthenticationService) {
+  describe('login', function () {
     var data;
-    $httpBackend.when('DELETE', '/api/sessions').respond(200, {});
-    AuthenticationService.logout()
-      .then(function(res) { data = res; });
-    $httpBackend.flush();
-    expect(data).toEqual({});
-  }));
+
+    beforeEach(inject(function(AuthenticationService) {
+      $httpBackend.when('POST', '/api/sessions').respond(200, user);
+      AuthenticationService.loggedIn = false;
+      AuthenticationService.login({ email: 'bob@example.com' })
+        .then(function(res) { data = res; });
+      $httpBackend.flush();
+    }));
+
+    it('returns the matching user details', function() {
+      expect(data).toEqual(user);
+    });
+
+    it('sets the state to logged in', inject(function(AuthenticationService) {
+      expect(AuthenticationService.isLoggedIn()).toEqual(true);
+    }));
+  });
+
+  describe('logout', function () {
+    var data;
+
+    beforeEach(inject(function(AuthenticationService) {
+      $httpBackend.when('DELETE', '/api/sessions').respond(200, {});
+      AuthenticationService.loggedIn = true;
+      AuthenticationService.logout()
+        .then(function(res) { data = res; });
+      $httpBackend.flush();
+    }));
+
+    it('returns nothing', function() {
+      expect(data).toEqual({});
+    });
+
+    it('sets the state to logged out', inject(function(AuthenticationService) {
+      expect(AuthenticationService.isLoggedIn()).toEqual(false);
+    }));
+  });
 });
 
