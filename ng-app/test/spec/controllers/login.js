@@ -21,7 +21,8 @@ describe('Controller: LoginCtrl', function () {
     q = $q;
     authService = {
       login: function() {},
-      logout: function() {}
+      logout: function() {},
+      isLoggedIn: function() {}
     };
     authEvents = AUTH_EVENTS;
 
@@ -30,8 +31,7 @@ describe('Controller: LoginCtrl', function () {
   }));
 
   beforeEach(function() {
-    sandbox.stub(rootScope, '$broadcast', function() {
-    });
+    sandbox.spy(rootScope, '$broadcast');
   });
 
   afterEach(function () {

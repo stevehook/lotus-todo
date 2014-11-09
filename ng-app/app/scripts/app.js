@@ -42,6 +42,16 @@ angular
         redirectTo: '/'
       });
   })
+  .run(function($rootScope, $location, AuthenticationService) {
+    $rootScope.$on('$routeChangeStart', function(event, next) {
+      if (!AuthenticationService.isLoggedIn()) {
+        if (next.templateUrl === 'views/login.html') {
+        } else {
+          $location.path('/login');
+        }
+      }
+    });
+  })
   .factory('errorHttpInterceptor', ['$q', function ($q) {
     return {
       responseError: function responseError(rejection) {
