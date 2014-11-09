@@ -23,6 +23,13 @@ To run migrations:
     $ sequel postgres://localhost/lotus_todo_development -m app/db/migrations
     $ sequel postgres://localhost/lotus_todo_test -m app/db/migrations
 
+You will also need to configure the database connection details for the
+dev environment. `dotenv` is used to keep this kind of configuration in
+a environment variables defined in a .env file. You'll have to create
+your own .env file but you can use the template provided:
+
+    $ cp .env.template .env
+
 There is also some seed data:
 
     $ bundle exec ruby app/db/seeds/tasks.rb
