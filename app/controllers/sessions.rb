@@ -29,6 +29,7 @@ module Todo
         def call(params)
           session[:user_id] = nil
           self.body = {}
+          self.status = 200
         end
       end
     end
