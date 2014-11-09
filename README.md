@@ -45,6 +45,22 @@ database) can be run with:
 
 ###Front-end
 
+For the front-end we use Node.js, npm, bower and grunt. First install
+Node.js, then use npm to install bower and grunt at a system level:
+
+    $ cd ng-app
+    $ npm install -g grunt-cli
+    $ npm install -g bower
+
+Then you can install other node modules at a project level
+
+    $ npm install
+
+You can then use bower to install the various front-end packages (e.g.
+Angular):
+
+    $ bower install
+
 Tests are written in Jasmine and can be run via grunt:
 
     $ cd ng-app && grunt test
