@@ -23,6 +23,13 @@ To run migrations:
     $ sequel postgres://localhost/lotus_todo_development -m app/db/migrations
     $ sequel postgres://localhost/lotus_todo_test -m app/db/migrations
 
+You will also need to configure the database connection details for the
+dev environment. `dotenv` is used to keep this kind of configuration in
+a environment variables defined in a .env file. You'll have to create
+your own .env file but you can use the template provided:
+
+    $ cp .env.template .env
+
 There is also some seed data:
 
     $ bundle exec ruby app/db/seeds/tasks.rb
@@ -37,6 +44,22 @@ database) can be run with:
     $ bundle exec rspec spec
 
 ###Front-end
+
+For the front-end we use Node.js, npm, bower and grunt. First install
+Node.js, then use npm to install bower and grunt at a system level:
+
+    $ cd ng-app
+    $ npm install -g grunt-cli
+    $ npm install -g bower
+
+Then you can install other node modules at a project level
+
+    $ npm install
+
+You can then use bower to install the various front-end packages (e.g.
+Angular):
+
+    $ bower install
 
 Tests are written in Jasmine and can be run via grunt:
 
