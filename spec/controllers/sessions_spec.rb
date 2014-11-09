@@ -15,14 +15,14 @@ describe Todo::Controllers::Sessions do
     let(:action) { described_class.new }
     context 'given a valid user' do
       it 'creates a new session' do
-        action.call({ user: { email: 'bob@example.com' }})
+        action.call({ credentials: { email: 'bob@example.com' }})
         expect(action.send(:session)[:user_id]).to eql(user.id)
       end
     end
 
     context 'given an invalid user' do
       it 'returns an error' do
-        code, _, _ = action.call({ user: { email: 'jim@example.com' }})
+        code, _, _ = action.call({ credentials: { email: 'jim@example.com' }})
         expect(code).to eql(401)
         expect(action.send(:session)[:user_id]).to be_nil
       end

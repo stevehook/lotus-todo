@@ -6,12 +6,12 @@ angular.module('todoApp')
     loginFailed: 'auth-login-failed',
     logoutSuccess: 'auth-logout-success'
   })
-  .controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthService) {
+  .controller('LoginCtrl', function ($scope, $rootScope, AUTH_EVENTS, AuthenticationService) {
     $scope.credentials = {
       email: ''
     };
     $scope.login = function (credentials) {
-      AuthService.login(credentials).then(function (user) {
+      AuthenticationService.login({ credentials: credentials }).then(function (user) {
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         $scope.currentUser = user;
       }, function () {
@@ -19,7 +19,7 @@ angular.module('todoApp')
       });
     };
     $scope.logout = function () {
-      AuthService.logout().then(function () {
+      AuthenticationService.logout().then(function () {
         $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
         $scope.currentUser = undefined;
       }, function () {

@@ -26,7 +26,7 @@ describe('Controller: LoginCtrl', function () {
     authEvents = AUTH_EVENTS;
 
     scope = $rootScope.$new();
-    LoginCtrl = $controller('LoginCtrl', { $scope: scope, $rootScope: rootScope, AUTH_EVENTS: authEvents, AuthService: authService });
+    LoginCtrl = $controller('LoginCtrl', { $scope: scope, $rootScope: rootScope, AUTH_EVENTS: authEvents, AuthenticationService: authService });
   }));
 
   beforeEach(function() {
@@ -55,9 +55,9 @@ describe('Controller: LoginCtrl', function () {
         });
       });
 
-      it('calls the AuthService#login method and passes credentials', function () {
+      it('calls the AuthenticationService#login method and passes credentials', function () {
         scope.login(credentials);
-        expect(authService.login.calledWith(credentials)).toEqual(true);
+        expect(authService.login.calledWith({ credentials: credentials })).toEqual(true);
       });
 
       it('sets the current user', function() {
@@ -106,7 +106,7 @@ describe('Controller: LoginCtrl', function () {
       });
     });
 
-    it('calls the AuthService#logout method', function () {
+    it('calls the AuthenticationService#logout method', function () {
       scope.logout();
       rootScope.$apply();
       expect(authService.logout.calledWith()).toEqual(true);

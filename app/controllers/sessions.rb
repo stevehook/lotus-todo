@@ -9,7 +9,7 @@ module Todo
         include Lotus::Action::Session
 
         def call(params)
-          user_params = params[:user]
+          user_params = params[:credentials]
           user = UserRepository.find_by_email(user_params[:email])
           if user
             session[:user_id] = user.id

@@ -14,12 +14,12 @@ feature 'Session API' do
 
   describe 'POST /api/sessions' do
     it 'returns 401 and does not create a new session when invalid credentials are given' do
-      post '/api/sessions', { user: { email: 'eric@example.com' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }
+      post '/api/sessions', { credentials: { email: 'eric@example.com' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }
       expect(last_response).not_to be_ok
     end
 
     it 'returns 200 and creates a new session when valid credentials are given' do
-      post '/api/sessions', { user: { email: 'bob@example.com' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }
+      post '/api/sessions', { credentials: { email: 'bob@example.com' } }.to_json, { 'CONTENT_TYPE' => 'application/json' }
       expect(last_response).to be_ok
     end
   end
