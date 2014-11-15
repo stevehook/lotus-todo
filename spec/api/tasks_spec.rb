@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-feature 'API' do
-  let(:todo1) { Task.new(title: 'Thing 1', completed: false) }
-  let(:todo2) { Task.new(title: 'Thing 2', completed: true) }
-  let(:todo3) { Task.new(title: 'Thing 3', completed: false) }
-  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1)) }
+feature 'Tasks API' do
+  let(:todo1) { Task.new(title: 'Thing 1', completed: false, user_id: 1) }
+  let(:todo2) { Task.new(title: 'Thing 2', completed: true, user_id: 1) }
+  let(:todo3) { Task.new(title: 'Thing 3', completed: false, user_id: 1) }
+  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1), user_id: 1) }
   let(:todos) { [todo1, todo2, todo3, todo4] }
 
   before do

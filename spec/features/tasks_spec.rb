@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 feature 'Home page' do
-  let(:todo1) { Task.new(title: 'Thing 1', completed: false) }
-  let(:todo2) { Task.new(title: 'Thing 2', completed: false) }
-  let(:todo3) { Task.new(title: 'Thing 3', completed: true) }
+  let(:todo1) { Task.new(title: 'Thing 1', completed: false, user_id: 1) }
+  let(:todo2) { Task.new(title: 'Thing 2', completed: false, user_id: 1) }
+  let(:todo3) { Task.new(title: 'Thing 3', completed: true, user_id: 1) }
   let(:todos) { [todo1, todo2, todo3] }
 
   before do
