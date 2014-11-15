@@ -22,12 +22,4 @@ angular.module('todoApp')
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       });
     };
-    $scope.logout = function () {
-      AuthenticationService.logout().then(function () {
-        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
-        $scope.currentUser = undefined;
-      }, function () {
-        $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
-      });
-    };
   });

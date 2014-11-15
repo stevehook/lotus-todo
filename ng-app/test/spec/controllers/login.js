@@ -95,34 +95,4 @@ describe('Controller: LoginCtrl', function () {
       });
     });
   });
-
-  describe('Controller: LoginCtrl#logout', function () {
-    beforeEach(function() {
-      scope.currentUser = { id: 123, name: 'Bob', email: 'bob@example.com' };
-      sandbox.stub(authService, 'logout', function() {
-        var defer = q.defer();
-        defer.resolve();
-        return defer.promise;
-      });
-    });
-
-    it('calls the AuthenticationService#logout method', function () {
-      scope.logout();
-      rootScope.$apply();
-      expect(authService.logout.calledWith()).toEqual(true);
-    });
-
-    it('resets the current user', function () {
-      expect(scope.currentUser).toBeDefined();
-      scope.logout();
-      rootScope.$apply();
-      expect(scope.currentUser).not.toBeDefined();
-    });
-
-    it('broadcasts the logout success event', function () {
-      scope.logout();
-      rootScope.$apply();
-      expect(rootScope.$broadcast.calledWith('auth-logout-success')).toEqual(true);
-    });
-  });
 });
