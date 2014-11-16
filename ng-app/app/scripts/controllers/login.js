@@ -18,6 +18,7 @@ angular.module('todoApp')
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
         $scope.currentUser = user;
         $location.path('/');
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       }, function () {
         $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       });
