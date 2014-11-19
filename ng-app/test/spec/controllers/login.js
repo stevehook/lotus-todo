@@ -69,7 +69,7 @@ describe('Controller: LoginCtrl', function () {
       it('broadcasts the loginSuccess event', function() {
         scope.login(credentials);
         rootScope.$apply();
-        expect(rootScope.$broadcast.calledWith('auth-login-success')).toEqual(true);
+        expect(rootScope.$broadcast.calledWith('auth', 'login-success')).toEqual(true);
       });
     });
 
@@ -91,7 +91,7 @@ describe('Controller: LoginCtrl', function () {
       it('broadcasts the loginFailed event', function() {
         scope.login(credentials);
         rootScope.$apply();
-        expect(rootScope.$broadcast.calledWith('auth-login-failed')).toEqual(true);
+        expect(rootScope.$broadcast.calledWith('auth', 'login-failed')).toEqual(true);
       });
     });
   });

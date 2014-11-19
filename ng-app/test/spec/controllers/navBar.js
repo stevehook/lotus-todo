@@ -55,7 +55,7 @@ describe('Controller: NavBarCtrl', function () {
     it('broadcasts the logout success event', function () {
       scope.logout();
       rootScope.$apply();
-      expect(rootScope.$broadcast.calledWith('auth-logout-success')).toEqual(true);
+      expect(rootScope.$broadcast.calledWith('auth', 'logout-success')).toEqual(true);
     });
 
     it('navigates to the login route', inject(function ($location) {

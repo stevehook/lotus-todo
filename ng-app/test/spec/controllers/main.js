@@ -3,9 +3,11 @@
 describe('Controller: MainCtrl', function () {
 
   var MainCtrl,
+    rootScope,
     scope,
     $httpBackend,
-    tasks;
+    tasks,
+    sandbox;
 
   // load the controller's module
   beforeEach(module('todoApp'));
@@ -21,10 +23,20 @@ describe('Controller: MainCtrl', function () {
     // Stub $http to return some tasks
     $httpBackend = $injector.get('$httpBackend');
     $httpBackend.when('GET', '/api/tasks').respond(200, tasks);
+    rootScope = $rootScope;
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', { $scope: scope });
     $httpBackend.flush();
+    sandbox = sinon.sandbox.create();
   }));
+
+  beforeEach(function() {
+    sandbox.spy(rootScope, '$broadcast');
+  });
+
+  afterEach(function () {
+    sandbox.restore();
+  });
 
   it('attaches a list of tasks to the scope', function () {
     expect(scope.tasks.length).toBe(3);
@@ -68,6 +80,14 @@ describe('Controller: MainCtrl', function () {
       $httpBackend.verifyNoOutstandingExpectation();
       $httpBackend.verifyNoOutstandingRequest();
       expect(scope.tasks.length).toBe(3);
+    });
+
+    it('broadcasts the create succeeded event', function() {
+      $httpBackend.when('POST', '/api/tasks').respond(200, newTask);
+      scope.newTask = { title: 'Feed the fishes', completedBy: '2014-09-01' };
+      scope.createTask();
+      $httpBackend.flush();
+      expect(rootScope.$broadcast.calledWith('task', 'create-success')).toEqual(true);
     });
   });
 
