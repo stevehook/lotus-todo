@@ -10,10 +10,10 @@ describe('Controller: NotificationCtrl', function () {
   beforeEach(module('todoApp'));
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, NOTIFICATION_TYPES, AUTH_MESSAGES) {
+  beforeEach(inject(function ($controller, $rootScope, AUTH_MESSAGES) {
     rootScope = $rootScope;
     scope = $rootScope.$new();
-    NotificationCtrl = $controller('NotificationCtrl', { $scope: scope, $rootScope: rootScope, NOTIFICATION_TYPES: NOTIFICATION_TYPES, AUTH_MESSAGES: AUTH_MESSAGES });
+    NotificationCtrl = $controller('NotificationCtrl', { $scope: scope, $rootScope: rootScope, AUTH_MESSAGES: AUTH_MESSAGES });
   }));
 
   beforeEach(function() {
