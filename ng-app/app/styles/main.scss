@@ -26,14 +26,16 @@ body {
 
 /* Custom page header */
 .header {
-  border-bottom: 1px solid #e5e5e5;
-
   /* Make the masthead heading the same height as the navigation */
   h3 {
     margin-top: 0;
     margin-bottom: 0;
     line-height: 40px;
     padding-bottom: 19px;
+  }
+
+  .alert {
+    margin-bottom: 0;
   }
 }
 
@@ -82,12 +84,16 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    margin-bottom: 0px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+div.notification-bar {
+  min-height: 72px;
 }
 
 ul.task-list {
@@ -106,6 +112,7 @@ ul.task-list {
     input {
       font-size: 100%;
       border: none;
+      box-shadow: none;
     }
 
     span.glyphicon-ok {
@@ -118,6 +125,10 @@ ul.task-list {
       position: absolute;
       top: 14px;
       right: 10px;
+    }
+
+    span.glyphicon-plus {
+      top: 17px;
     }
   }
 
