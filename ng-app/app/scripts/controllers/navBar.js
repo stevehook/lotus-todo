@@ -10,10 +10,10 @@ angular.module('todoApp')
     };
     $scope.logout = function () {
       AuthenticationService.logout().then(function () {
-        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+        $rootScope.$broadcast('auth', AUTH_EVENTS.logoutSuccess);
         $location.path('/login');
       }, function () {
-        $rootScope.$broadcast(AUTH_EVENTS.logoutFailed);
+        $rootScope.$broadcast('auth', AUTH_EVENTS.logoutFailed);
       });
     };
   });
