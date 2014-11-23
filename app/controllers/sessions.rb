@@ -23,6 +23,15 @@ module Todo
         end
       end
 
+      action 'Status' do
+        include Lotus::Action::Session
+
+        def call(params)
+          self.body = { user_id: session[:user_id] }.to_json
+          self.status = 200
+        end
+      end
+
       action 'Delete' do
         include Lotus::Action::Session
 
