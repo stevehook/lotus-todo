@@ -20,12 +20,12 @@ describe Todo::Controllers::Tasks do
   let(:session) { { user_id: user.id } }
 
   before do
-    UserRepository.stub(:find).and_return(user)
-    TaskRepository.stub(:unarchived).and_return(unarchived_tasks)
-    TaskRepository.stub(:archived).and_return(archived_tasks)
-    TaskRepository.stub(:persist).and_return(true)
-    subject.stub(:authenticate!) {}
-    subject.stub(:current_user) { user }
+    allow(UserRepository).to receive(:find).and_return(user)
+    allow(TaskRepository).to receive(:unarchived).and_return(unarchived_tasks)
+    allow(TaskRepository).to receive(:archived).and_return(archived_tasks)
+    allow(TaskRepository).to receive(:persist).and_return(true)
+    allow(subject).to receive(:authenticate!) {}
+    allow(subject).to receive(:current_user) { user }
   end
 
   describe Todo::Controllers::Tasks::Index do

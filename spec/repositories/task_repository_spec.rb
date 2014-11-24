@@ -42,7 +42,7 @@ describe TaskRepository do
   describe '#archive' do
     let(:now) { DateTime.civil(2014, 1, 1) }
     it 'sets the archived flag and updates the record' do
-      DateTime.stub(:now) { now }
+      allow(DateTime).to receive(:now) { now }
       expect{ described_class.archive(todo1) }.to change{ described_class.unarchived(1).count }.by(-1)
       expect(todo1.archived_at).to eql now
     end
