@@ -23,6 +23,18 @@ module Todo
         end
       end
 
+      action 'Status' do
+        include Lotus::Action::Session
+
+        def call(params)
+          user = UserRepository.find_or_nil(session[:user_id])
+          result = { logged_in: !user.nil? }
+          result.merge!(user_id: user.id, user_name: user.name) if user
+          self.body = result.to_json
+          self.status = 200
+        end
+      end
+
       action 'Delete' do
         include Lotus::Action::Session
 
