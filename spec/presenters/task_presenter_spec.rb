@@ -34,7 +34,8 @@ describe Presenters::TaskPresenter do
         created_at: nil,
         updated_at: nil,
         complete_by: nil,
-        archived_at: nil
+        archived_at: nil,
+        user_id: nil
       })
     end
   end

@@ -53,7 +53,8 @@ module Todo
         expose :presenter
 
         def call(params)
-          task = TaskRepository.find(params[:id])
+          task = TaskRepository.find_by_user(current_user.id, params[:id])
+          halt 404 if task.nil?
           TaskRepository.delete(task)
           @presenter = Presenters::TaskPresenter.new(task)
           self.body = @presenter.to_json
@@ -65,7 +66,8 @@ module Todo
         expose :presenter
 
         def call(params)
-          task = TaskRepository.find(params[:id])
+          task = TaskRepository.find_by_user(current_user.id, params[:id])
+          halt 404 if task.nil?
           TaskRepository.complete(task)
           @presenter = Presenters::TaskPresenter.new(task)
           self.body = @presenter.to_json

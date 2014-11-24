@@ -6,6 +6,12 @@ class TaskRepository
 
   PAGE_SIZE = 20
 
+  def self.find_by_user(user_id, id)
+    query do
+      where(user_id: user_id, id: id)
+    end.first
+  end
+
   def self.incomplete(user_id)
     query do
       where(completed: false, user_id: user_id).asc(:order).limit(PAGE_SIZE)

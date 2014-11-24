@@ -23,11 +23,30 @@ feature 'Tasks API' do
   end
 
   context 'when not logged in' do
+    let(:rack_env) { { 'CONTENT_TYPE' => 'application/json' } }
+
     it 'cannot get the list of unarchived tasks - returns 401' do
-      get '/api/tasks'
+      get '/api/tasks', {}, rack_env
       expect(last_response).not_to be_ok
-      pending
-      expect(last_response.code).to_eql 401
+      expect(last_response.status).to eql 401
+    end
+
+    it 'cannot get the list of archived tasks - returns 401' do
+      get '/api/tasks/archive', {}, rack_env
+      expect(last_response).not_to be_ok
+      expect(last_response.status).to eql 401
+    end
+
+    it 'cannot complete a task - returns 401' do
+      post "/api/tasks/#{todo1.id}/complete", {}, rack_env
+      expect(last_response).not_to be_ok
+      expect(last_response.status).to eql 401
+    end
+
+    it 'cannot delete a task - returns 401' do
+      delete "/api/tasks/#{another_users_todo1.id}", {}, rack_env
+      expect(last_response).not_to be_ok
+      expect(last_response.status).to eql 401
     end
   end
 
@@ -63,7 +82,12 @@ feature 'Tasks API' do
         expect(TaskRepository.incomplete(user.id).count).to eql 3
       end
 
-      it 'creates a task for the current user only'
+      it 'creates a task for the current user only' do
+        post '/api/tasks', { task: { title: 'New Thing' } }.to_json, rack_env
+        result = JSON.parse(last_response.body)
+        expect(result['user_id']).to eql user.id
+        expect(TaskRepository.find(result['id']).user_id).to eql user.id
+      end
     end
 
     describe 'POST /api/tasks/:id/complete' do
@@ -73,7 +97,12 @@ feature 'Tasks API' do
         expect(TaskRepository.incomplete(user.id).count).to eql 1
       end
 
-      it 'returns 401 if I attempt to complete a task for a different user'
+      it 'returns 404 if I attempt to complete a task for a different user' do
+        post "/api/tasks/#{another_users_todo1.id}/complete", {}, rack_env
+        expect(last_response).not_to be_ok
+        expect(last_response.status).to eql 404
+        expect(TaskRepository.incomplete(another_user.id).count).to eql 1
+      end
     end
 
     describe 'DELETE /api/tasks/:id' do
@@ -83,7 +112,12 @@ feature 'Tasks API' do
         expect(TaskRepository.incomplete(user.id).count).to eql 1
       end
 
-      it 'returns 401 if I attempt to delete a task for a different user'
+      it 'returns 404 if I attempt to delete a task for a different user' do
+        delete "/api/tasks/#{another_users_todo1.id}", {}, rack_env
+        expect(last_response).not_to be_ok
+        expect(last_response.status).to eql 404
+        expect(TaskRepository.incomplete(another_user.id).count).to eql 1
+      end
     end
   end
 end
