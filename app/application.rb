@@ -28,6 +28,7 @@ module Todo
         delete '/api/tasks/:id', to: 'tasks#delete'
         post '/api/sessions', to: 'sessions#create'
         delete '/api/sessions', to: 'sessions#delete'
+        get '/api/sessions', to: 'sessions#status'
       end
     end
   end

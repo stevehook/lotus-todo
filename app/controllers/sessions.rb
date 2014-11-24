@@ -27,7 +27,10 @@ module Todo
         include Lotus::Action::Session
 
         def call(params)
-          self.body = { user_id: session[:user_id] }.to_json
+          user = UserRepository.find_or_nil(session[:user_id])
+          result = { logged_in: !user.nil? }
+          result.merge!(user_id: user.id, user_name: user.name) if user
+          self.body = result.to_json
           self.status = 200
         end
       end
