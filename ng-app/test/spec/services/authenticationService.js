@@ -14,10 +14,36 @@ describe('Service: AuthenticationService', function () {
     $httpBackend = $injector.get('$httpBackend');
   }));
 
-  describe('isLoggedOut', function () {
-    it('the initial state is logged out', inject(function(AuthenticationService) {
-      expect(AuthenticationService.isLoggedIn()).toEqual(false);
-    }));
+  describe('verifyLoggedIn', function() {
+    var resolved;
+
+    describe('when the user has NOT logged in previously', function() {
+      beforeEach(inject(function(AuthenticationService) {
+        var response = { loggedIn: false };
+        $httpBackend.when('GET', '/api/sessions').respond(200, response);
+        var promise = AuthenticationService.verifyLoggedIn();
+        promise.then(function(value) { resolved = value; });
+        $httpBackend.flush();
+      }));
+      it('the initial state is logged out', inject(function(AuthenticationService) {
+        expect(resolved).toBeUndefined();
+        expect(AuthenticationService.loggedIn).toEqual(false);
+      }));
+    });
+
+    describe('when the user has logged in previously (but the AuthenticationService has been reset)', function() {
+      beforeEach(inject(function(AuthenticationService) {
+        var response = { loggedIn: true, user: { id: 123, name: 'Bob', email: 'bob@example.com' } };
+        $httpBackend.when('GET', '/api/sessions').respond(200, response);
+        var promise = AuthenticationService.verifyLoggedIn();
+        promise.then(function(value) { resolved = value; });
+        $httpBackend.flush();
+      }));
+      it('the initial state is logged in', inject(function(AuthenticationService) {
+        expect(resolved).toBeDefined();
+        expect(AuthenticationService.loggedIn).toEqual(true);
+      }));
+    });
   });
 
   describe('login', function () {
