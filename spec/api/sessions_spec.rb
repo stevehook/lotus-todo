@@ -42,9 +42,11 @@ feature 'Session API' do
         get '/api/sessions', {}.to_json, rack_env
         expect(last_response).to be_ok
         result = JSON.parse(last_response.body)
-        expect(result['logged_in']).to eql true
-        expect(result['user_id']).to eql user.id
-        expect(result['user_name']).to eql user.name
+        expect(result['loggedIn']).to eql true
+        expect(result['user']).not_to be_nil
+        expect(result['user']['id']).to eql user.id
+        expect(result['user']['name']).to eql user.name
+        expect(result['user']['email']).to eql user.email
       end
     end
 
@@ -55,9 +57,8 @@ feature 'Session API' do
         get '/api/sessions', {}.to_json, rack_env
         expect(last_response).to be_ok
         result = JSON.parse(last_response.body)
-        expect(result['logged_in']).to eql false
-        expect(result['user_id']).to be_nil
-        expect(result['user_name']).to be_nil
+        expect(result['loggedIn']).to eql false
+        expect(result['user']).to be_nil
       end
     end
   end

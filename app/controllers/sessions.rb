@@ -28,8 +28,8 @@ module Todo
 
         def call(params)
           user = UserRepository.find_or_nil(session[:user_id])
-          result = { logged_in: !user.nil? }
-          result.merge!(user_id: user.id, user_name: user.name) if user
+          result = { loggedIn: !user.nil? }
+          result.merge!(user: { id: user.id, name: user.name, email: user.email }) if user
           self.body = result.to_json
           self.status = 200
         end
