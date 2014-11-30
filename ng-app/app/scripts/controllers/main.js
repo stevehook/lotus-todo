@@ -18,7 +18,7 @@ angular.module('todoApp')
     taskDeleteSuccess: 'delete-success',
     taskDeleteFailed: 'delete-failed'
   })
-  .controller('MainCtrl', function ($rootScope, $scope, $http, TASK_EVENTS) {
+  .controller('MainCtrl', function($rootScope, $scope, $http, TASK_EVENTS) {
     $scope.tasks = [];
 
     $http.get('/api/tasks').success(function(data) {
@@ -34,7 +34,6 @@ angular.module('todoApp')
             $rootScope.$broadcast('task', TASK_EVENTS.taskCompleteSuccess);
           }).
           error(function() {
-            console.log('failed');
             $rootScope.$broadcast('task', TASK_EVENTS.taskCompleteFailed);
           });
       }
@@ -47,7 +46,6 @@ angular.module('todoApp')
           $rootScope.$broadcast('task', TASK_EVENTS.taskDeleteSuccess);
         }).
         error(function() {
-          console.log('failed');
           $rootScope.$broadcast('task', TASK_EVENTS.taskDeleteFailed);
         });
     };

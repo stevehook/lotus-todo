@@ -28,39 +28,35 @@ angular
       })
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }
       })
       .when('/archive', {
         templateUrl: 'views/archive.html',
-        controller: 'ArchiveCtrl'
+        controller: 'ArchiveCtrl',
+        resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }
       })
       .when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        controller: 'AboutCtrl',
+        resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }
       })
       .otherwise({
         redirectTo: '/'
       });
   })
-  .run(function($rootScope, $location, AuthenticationService) {
-    $rootScope.$on('$routeChangeStart', function(event, next) {
-      if (!AuthenticationService.isLoggedIn()) {
-        if (next.templateUrl === 'views/login.html') {
-        } else {
-          $location.path('/login');
-        }
-      }
-    });
-  })
-  .factory('errorHttpInterceptor', ['$q', function ($q) {
+  .factory('errorHttpInterceptor', function ($q, $location) {
     return {
       responseError: function responseError(rejection) {
-        //TODO: Display an error message
-        console.log('something bad happened');
-        return $q.reject(rejection);
+        if (rejection.status === 401) {
+          $location.path('/login');
+          return $q.reject(rejection);
+        } else {
+          return $q.reject(rejection);
+        }
       }
     };
-  }])
+  })
   .config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('errorHttpInterceptor');
   }]);
