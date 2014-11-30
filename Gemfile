@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'unicorn'
 gem 'pry'
 gem 'dotenv'
 gem 'pg'
