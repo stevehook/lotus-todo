@@ -1,0 +1,1 @@
+<div class="form-container"> <form ng-submit="login(credentials)" ng-if="!isLoggedIn()"> <input type="text" class="form-control user-email" placeholder="Enter your email address" autofocus ng-model="credentials.email"> <button type="submit" class="btn btn-default">Login</button> </form> <form ng-submit="logout()" ng-if="isLoggedIn()"> <p>Already logged in</p> </form> </div>
