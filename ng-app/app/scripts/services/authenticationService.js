@@ -35,13 +35,9 @@ angular.module('todoApp')
       } else {
         // If we don't know that the user is logged in then we must contact the server to find out
         $http({ url: '/api/sessions', method: 'GET' })
-        .then(function(response) {
-          self.loggedIn = response.data.loggedIn;
-          if (self.loggedIn) {
-            deferred.resolve(true);
-          } else {
-            deferred.reject();
-          }
+        .success(function(data) {
+          self.loggedIn = data.loggedIn;
+          deferred.resolve(true);
         });
       }
       return deferred.promise;

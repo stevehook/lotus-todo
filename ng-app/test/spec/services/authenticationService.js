@@ -20,7 +20,7 @@ describe('Service: AuthenticationService', function () {
     describe('when the user has NOT logged in previously', function() {
       beforeEach(inject(function(AuthenticationService) {
         var response = { loggedIn: false };
-        $httpBackend.when('GET', '/api/sessions').respond(200, response);
+        $httpBackend.when('GET', '/api/sessions').respond(401, response);
         var promise = AuthenticationService.verifyLoggedIn();
         promise.then(function(value) { resolved = value; });
         $httpBackend.flush();
