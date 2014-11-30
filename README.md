@@ -74,6 +74,10 @@ back-end. So assuming you've started PostgreSQL and set up the database
 
     $ bundle exec rackup config.ru
 
+or you can use the given Procfile and foreman/forego, e.g.
+
+    $ forego start -p 9292
+
 and in a separate shell start the front-end:
 
     $ cd ng-app && grunt serve
