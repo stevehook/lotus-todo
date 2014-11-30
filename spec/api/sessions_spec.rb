@@ -55,7 +55,8 @@ feature 'Session API' do
 
       it 'gets the status for the session' do
         get '/api/sessions', {}.to_json, rack_env
-        expect(last_response).to be_ok
+        expect(last_response).not_to be_ok
+        expect(last_response.status).to eql 401
         result = JSON.parse(last_response.body)
         expect(result['loggedIn']).to eql false
         expect(result['user']).to be_nil
