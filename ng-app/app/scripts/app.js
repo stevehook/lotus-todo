@@ -22,19 +22,41 @@ angular
   })
   .config(function ($routeProvider) {
     $routeProvider
+      .when('/login', {
+        templateUrl: 'views/login.html',
+        controller: 'LoginCtrl'
+      })
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }
       })
       .when('/archive', {
         templateUrl: 'views/archive.html',
-        controller: 'ArchiveCtrl'
+        controller: 'ArchiveCtrl',
+        resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }
       })
       .when('/about', {
         templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+        controller: 'AboutCtrl',
+        resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }
       })
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .factory('errorHttpInterceptor', function ($q, $location) {
+    return {
+      responseError: function responseError(rejection) {
+        if (rejection.status === 401) {
+          $location.path('/login');
+          return $q.reject(rejection);
+        } else {
+          return $q.reject(rejection);
+        }
+      }
+    };
+  })
+  .config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push('errorHttpInterceptor');
+  }]);

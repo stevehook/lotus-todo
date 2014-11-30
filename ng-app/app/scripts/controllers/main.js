@@ -10,7 +10,15 @@
 
 
 angular.module('todoApp')
-  .controller('MainCtrl', function ($scope, $http) {
+  .constant('TASK_EVENTS', {
+    taskCompleteSuccess: 'complete-success',
+    taskCompleteFailed: 'complete-failed',
+    taskCreateSuccess: 'create-success',
+    taskCreateFailed: 'create-failed',
+    taskDeleteSuccess: 'delete-success',
+    taskDeleteFailed: 'delete-failed'
+  })
+  .controller('MainCtrl', function($rootScope, $scope, $http, TASK_EVENTS) {
     $scope.tasks = [];
 
     $http.get('/api/tasks').success(function(data) {
@@ -23,9 +31,10 @@ angular.module('todoApp')
         $http.post('/api/tasks/' + task.id + '/complete', task, { headers: { 'X-Http-Method-Override': 'PATCH' } }).
           success(function() {
             task.completed = true;
+            $rootScope.$broadcast('task', TASK_EVENTS.taskCompleteSuccess);
           }).
           error(function() {
-            console.log('failed');
+            $rootScope.$broadcast('task', TASK_EVENTS.taskCompleteFailed);
           });
       }
     };
@@ -34,9 +43,10 @@ angular.module('todoApp')
       $http.delete('/api/tasks/' + task.id, task, {}).
         success(function() {
           $scope.tasks.splice($scope.tasks.indexOf(task), 1);
+          $rootScope.$broadcast('task', TASK_EVENTS.taskDeleteSuccess);
         }).
         error(function() {
-          console.log('failed');
+          $rootScope.$broadcast('task', TASK_EVENTS.taskDeleteFailed);
         });
     };
 
@@ -46,9 +56,10 @@ angular.module('todoApp')
           success(function(task) {
             $scope.tasks.push(task);
             $scope.newTask = {};
+            $rootScope.$broadcast('task', TASK_EVENTS.taskCreateSuccess);
           }).
           error(function() {
-            console.log('failed');
+            $rootScope.$broadcast('task', TASK_EVENTS.taskCreateFailed);
           });
       }
     };

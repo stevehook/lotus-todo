@@ -17,7 +17,8 @@ module Presenters
         created_at: @task.created_at,
         updated_at: @task.updated_at,
         complete_by: @task.complete_by,
-        archived_at: @task.archived_at
+        archived_at: @task.archived_at,
+        user_id: @task.user_id
       }
     end
 
