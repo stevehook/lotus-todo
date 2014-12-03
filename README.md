@@ -115,3 +115,7 @@ deploy the app with:
 To setup the database or run migrations after a deploy:
 
     $ heroku run sequel `heroku config:get DATABASE_URL` -m app/db/migrations
+
+Or you could just click the button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/stevehook/lotus-todo/tree/build)

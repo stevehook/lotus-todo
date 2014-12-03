@@ -8,9 +8,9 @@
   ],
   "website": "https://github.com/stevehook/lotus-todo",
   "repository": "https://github.com/stevehook/lotus-todo",
-  "success_url": "/index.html",
+  "success_url": "/",
   "scripts": {
-    "postdeploy": "sequel $DATABASE_URL -m app/db/migrations"
+    "postdeploy": "sequel $DATABASE_URL -m app/db/migrations && bundle exec ruby app/db/seeds/post_deploy.rb"
   },
   "env": {
     "BUILDPACK_URL": "https://github.com/heroku/heroku-buildpack-ruby",
