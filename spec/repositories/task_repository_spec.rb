@@ -1,5 +1,7 @@
 require 'spec_helper'
+require 'app/entities/user'
 require 'app/entities/task'
+require 'app/repositories/user_repository'
 require 'app/repositories/task_repository'
 require 'app/config/mapper'
 
@@ -23,6 +25,7 @@ describe TaskRepository do
 
   describe '#incomplete' do
     it 'only returns the incomplete tasks for the given user' do
+      binding.pry
       expect(described_class.incomplete(1).collect(&:id)).to eql([todo1.id, todo2.id])
     end
   end

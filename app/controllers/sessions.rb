@@ -5,7 +5,7 @@ module Todo
     class Sessions
       include Lotus::Controller
 
-      action 'Create' do
+      class Create
         include Lotus::Action::Session
 
         def call(params)
@@ -23,7 +23,7 @@ module Todo
         end
       end
 
-      action 'Status' do
+      class Status
         include Lotus::Action::Session
 
         def call(params)
@@ -39,7 +39,7 @@ module Todo
         end
       end
 
-      action 'Delete' do
+      class Delete
         include Lotus::Action::Session
 
         def call(params)

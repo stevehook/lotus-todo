@@ -42,6 +42,7 @@ module Todo
   module Authenticable
     def self.included(base)
       base.class_eval do
+        include Lotus::Action
         include Lotus::Action::Session
         before :authenticate!
 
