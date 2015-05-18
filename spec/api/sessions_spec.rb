@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 feature 'Session API' do
-  let(:user) { User.new(name: 'Bob Roberts', email: 'bob@example.com') }
+  let(:user) { UserRepository.persist(User.new(name: 'Bob Roberts', email: 'bob@example.com')) }
 
   before do
-    UserRepository.persist(user)
     header 'Accept', 'application/json'
   end
 
