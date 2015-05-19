@@ -42,7 +42,7 @@ module Todo
         def call(params)
           task = Task.new(params[:task])
           task.user_id = current_user.id
-          TaskRepository.persist(task)
+          task = TaskRepository.persist(task)
           @presenter = Presenters::TaskPresenter.new(task)
           self.body = @presenter.to_json
         end
