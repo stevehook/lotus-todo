@@ -6,7 +6,7 @@ gem 'dotenv'
 gem 'pg'
 gem 'rack-parser'
 gem 'rack-session-sequel'
-gem 'lotusrb', git: 'https://github.com/lotus/lotus.git', branch: :master
+gem 'lotusrb'
 gem 'lotus-model'
 
 group :test do

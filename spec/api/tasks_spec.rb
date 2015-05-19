@@ -1,20 +1,22 @@
 require 'spec_helper'
 
 feature 'Tasks API' do
-  let(:user) { User.new(name: 'Bob Roberts', email: 'bob@example.com') }
-  let(:another_user) { User.new(name: 'Archie Roberts', email: 'archie@example.com') }
-  let(:todo1) { Task.new(title: 'Thing 1', completed: false, user_id: user.id) }
-  let(:todo2) { Task.new(title: 'Thing 2', completed: true, user_id: user.id) }
-  let(:todo3) { Task.new(title: 'Thing 3', completed: false, user_id: user.id) }
-  let(:todo4) { Task.new(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1), user_id: user.id) }
-  let(:another_users_todo1) { Task.new(title: 'Thing 1', user_id: another_user.id) }
-  let(:another_users_todo2) { Task.new(title: 'Thing 1', completed: true, archived_at: DateTime.civil(2014, 1, 1), user_id: another_user.id) }
-  let(:users) { [user, another_user] }
-  let(:todos) { [todo1, todo2, todo3, todo4, another_users_todo1, another_users_todo2] }
+  let(:user) { UserRepository.persist(User.new(name: 'Bob Roberts', email: 'bob@example.com')) }
+  let(:another_user) { UserRepository.persist(User.new(name: 'Archie Roberts', email: 'archie@example.com')) }
+  let(:todo1) { create_task(title: 'Thing 1', completed: false, user_id: user.id) }
+  let(:todo2) { create_task(title: 'Thing 2', completed: true, user_id: user.id) }
+  let(:todo3) { create_task(title: 'Thing 3', completed: false, user_id: user.id) }
+  let(:todo4) { create_task(title: 'Thing 4', completed: true, archived_at: DateTime.civil(2014, 1, 1), user_id: user.id) }
+  let(:another_users_todo1) { create_task(title: 'Thing 1', user_id: another_user.id) }
+  let(:another_users_todo2) { create_task(title: 'Thing 1', completed: true, archived_at: DateTime.civil(2014, 1, 1), user_id: another_user.id) }
+  let!(:users) { [user, another_user] }
+  let!(:todos) { [todo1, todo2, todo3, todo4, another_users_todo1, another_users_todo2] }
+
+  def create_task(attributes)
+    TaskRepository.persist(Task.new(attributes))
+  end
 
   before do
-    users.each { |user| UserRepository.persist(user) }
-    todos.each { |todo| TaskRepository.persist(todo) }
     header 'Accept', 'application/json'
   end
 
@@ -23,7 +25,7 @@ feature 'Tasks API' do
   end
 
   context 'when not logged in' do
-    let(:rack_env) { { 'CONTENT_TYPE' => 'application/json' } }
+    let(:rack_env) { {} }
 
     it 'cannot get the list of unarchived tasks - returns 401' do
       get '/api/tasks', {}, rack_env
@@ -52,7 +54,7 @@ feature 'Tasks API' do
 
   context 'when logged in' do
     let(:session) { { user_id: user.id } }
-    let(:rack_env) { { 'rack.session' => session, 'CONTENT_TYPE' => 'application/json' } }
+    let(:rack_env) { { 'rack.session' => session } }
 
     describe 'GET /api/tasks' do
       it 'gets the list of unarchived tasks for the current user only' do
@@ -77,13 +79,13 @@ feature 'Tasks API' do
 
     describe 'POST /api/tasks' do
       it 'returns 200 and creates a new task' do
-        post '/api/tasks', { task: { title: 'New Thing' } }.to_json, rack_env
+        post '/api/tasks', { task: { title: 'New Thing' } }, rack_env
         expect(last_response).to be_ok
         expect(TaskRepository.incomplete(user.id).count).to eql 3
       end
 
       it 'creates a task for the current user only' do
-        post '/api/tasks', { task: { title: 'New Thing' } }.to_json, rack_env
+        post '/api/tasks', { task: { title: 'New Thing' } }, rack_env
         result = JSON.parse(last_response.body)
         expect(result['user_id']).to eql user.id
         expect(TaskRepository.find(result['id']).user_id).to eql user.id

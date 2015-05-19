@@ -1,16 +1,14 @@
 require 'spec_helper'
 require 'app/entities/user'
+require 'app/entities/task'
 require 'app/repositories/user_repository'
+require 'app/repositories/task_repository'
 require 'app/config/mapper'
 
 describe UserRepository do
-  let(:bob) { User.new(name: 'Bob Roberts', email: 'bob@example.com') }
-  let(:rob) { User.new(name: 'Rob Roberts', email: 'rob@example.com') }
-  let(:users) { [bob, rob] }
-
-  before do
-    users.each { |user| UserRepository.persist(user) }
-  end
+  let(:bob) { UserRepository.persist(User.new(name: 'Bob Roberts', email: 'bob@example.com')) }
+  let(:rob) { UserRepository.persist(User.new(name: 'Rob Roberts', email: 'rob@example.com')) }
+  let!(:users) { [bob, rob] }
 
   after do
     UserRepository.clear

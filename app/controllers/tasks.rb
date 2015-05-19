@@ -5,7 +5,7 @@ module Todo
     class Tasks
       include Lotus::Controller
 
-      action 'Index' do
+      class Index
         include Todo::Authenticable
         expose :presenter
 
@@ -15,7 +15,7 @@ module Todo
         end
       end
 
-      action 'Archive' do
+      class Archive
         include Todo::Authenticable
         expose :presenter
 
@@ -25,7 +25,7 @@ module Todo
         end
       end
 
-      action 'New' do
+      class New
         include Todo::Authenticable
         expose :presenter
 
@@ -35,20 +35,20 @@ module Todo
         end
       end
 
-      action 'Create' do
+      class Create
         include Todo::Authenticable
         expose :presenter
 
         def call(params)
           task = Task.new(params[:task])
           task.user_id = current_user.id
-          TaskRepository.persist(task)
+          task = TaskRepository.persist(task)
           @presenter = Presenters::TaskPresenter.new(task)
           self.body = @presenter.to_json
         end
       end
 
-      action 'Delete' do
+      class Delete
         include Todo::Authenticable
         expose :presenter
 
@@ -61,7 +61,7 @@ module Todo
         end
       end
 
-      action 'Complete' do
+      class Complete
         include Todo::Authenticable
         expose :presenter
 
