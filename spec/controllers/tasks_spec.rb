@@ -60,7 +60,6 @@ describe Todo::Controllers::Tasks do
     end
 
     it 'whitelists attributes' do
-      pending 'whitelisting params not implemented in lotus-controller 0.2.0'
       expect(TaskRepository).to receive(:persist).with(Task.new title: 'new task')
       subject.call(task: { title: 'new task', not_an_attribute: 'foo' })
     end
