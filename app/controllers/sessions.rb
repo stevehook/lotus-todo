@@ -4,14 +4,15 @@ module Todo
   module Controllers
     class Sessions
       include Lotus::Controller
-
       class Create
         include Lotus::Action
         include Lotus::Action::Session
+        accept :json
 
         def call(params)
           user_params = params[:credentials]
-          user = UserRepository.find_by_email(user_params[:email])
+          user = UserRepository.find_by_email(user_params['email'])
+          puts user.inspect
           if user
             session[:user_id] = user.id
             self.body = '{}'
