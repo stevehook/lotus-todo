@@ -54,7 +54,7 @@ describe Todo::Controllers::Tasks do
 
   describe Todo::Controllers::Tasks::Create do
     it 'persists a new tasks object' do
-      expect(TaskRepository).to receive(:persist).with(Task.new title: 'new task')
+      expect(TaskRepository).to receive(:persist).with(Task.new title: 'new task', user_id: user.id).and_return(Task.new id: 123, title: 'new task', user_id: user.id)
       response = subject.call(task: { title: 'new task' })
       expect(response[0]).to eql 200
     end
