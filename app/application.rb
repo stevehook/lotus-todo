@@ -24,7 +24,7 @@ module Todo
         get '/api/tasks/archive', to: 'tasks#archive'
         get '/api/tasks/new', to: 'tasks#new'
         post '/api/tasks', to: 'tasks#create'
-        post '/api/tasks/:id/complete', to: 'tasks#complete'
+        patch '/api/tasks/:id/complete', to: 'tasks#complete'
         delete '/api/tasks/:id', to: 'tasks#delete'
         post '/api/sessions', to: 'sessions#create'
         delete '/api/sessions', to: 'sessions#delete'
