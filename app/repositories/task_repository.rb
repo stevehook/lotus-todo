@@ -2,7 +2,6 @@ require 'lotus/model'
 
 class TaskRepository
   include Lotus::Repository
-  self.collection = :tasks
 
   PAGE_SIZE = 20
 

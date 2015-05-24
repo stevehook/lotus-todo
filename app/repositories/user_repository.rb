@@ -2,7 +2,6 @@ require 'lotus/model'
 
 class UserRepository
   include Lotus::Repository
-  self.collection = :users
 
   PAGE_SIZE = 20
 
