@@ -40,7 +40,7 @@ feature 'Tasks API' do
     end
 
     it 'cannot complete a task - returns 401' do
-      post "/api/tasks/#{todo1.id}/complete", {}, rack_env
+      patch "/api/tasks/#{todo1.id}/complete", {}, rack_env
       expect(last_response).not_to be_ok
       expect(last_response.status).to eql 401
     end
@@ -94,7 +94,7 @@ feature 'Tasks API' do
 
     describe 'POST /api/tasks/:id/complete' do
       it 'returns 200 and updates the given task' do
-        post "/api/tasks/#{todo1.id}/complete", {}, rack_env
+        patch "/api/tasks/#{todo1.id}/complete", {}, rack_env
         expect(last_response).to be_ok
         expect(TaskRepository.incomplete(user.id).count).to eql 1
       end
