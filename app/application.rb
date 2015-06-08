@@ -19,7 +19,7 @@ module Todo
         'presenters'
       ]
       routes do
-        redirect '/', to: 'index.html'
+        redirect '/', to: '/index.html'
         get '/api/tasks', to: 'tasks#index'
         get '/api/tasks/archive', to: 'tasks#archive'
         get '/api/tasks/new', to: 'tasks#new'
@@ -30,6 +30,10 @@ module Todo
         delete '/api/sessions', to: 'sessions#delete'
         get '/api/sessions', to: 'sessions#status'
       end
+
+      assets << ['public']
+
+      serve_assets true
     end
   end
 end
