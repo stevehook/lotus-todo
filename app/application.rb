@@ -31,9 +31,19 @@ module Todo
         get '/api/sessions', to: 'sessions#status'
       end
 
-      assets << ['public']
+      # assets << ['public']
 
       serve_assets true
+
+      configure :development do
+        handle_exceptions false
+        serve_assets true
+      end
+
+      configure :test do
+        host 'test.host'
+        serve_assets false
+      end
     end
   end
 end
