@@ -45,6 +45,11 @@ database) can be run with:
 
 ###Front-end
 
+There are two alternative front-ends, one based on Angular.js and
+another that uses React.js.
+
+####Angular.js
+
 For the front-end we use Node.js, npm, bower and grunt. First install
 Node.js, then use npm to install bower and grunt at a system level:
 
@@ -64,6 +69,28 @@ Angular):
 Tests are written in Jasmine and can be run via grunt:
 
     $ cd ng-app && grunt test
+
+####React.js
+
+Work in Progress.
+
+The infrastructure for this client application is deliberately
+lightweight. We are just using npm and Browserify to run the development
+environment.
+
+Browserify will pre-process all the JS into a `bundle.js` file. To kick
+off a watcher that re-generates this file when needed:
+
+    $ npm start
+
+To run a local server, based on `http-server`, that just serves the
+static assets that make up the front-end:
+
+    $ npm run-script serve
+
+Tests, (TBA):
+
+    $ npm test
 
 ##Running the development server
 
