@@ -22,7 +22,8 @@
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
-    "test": "jest"
+    "test": "jest",
+    "serve": "node_modules/.bin/http-server --cors"
   },
   "author": "Steve Hook",
   "browserify": {
