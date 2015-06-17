@@ -10,9 +10,8 @@ var TodoApp = React.createClass({
   },
 
   createTask: function(task) {
-    console.log(task.id);
     return (
-      <li id='task-{task.id}'>{task.title}</li>
+      <li key={'task-' + task.id}>{task.title}</li>
     );
   },
 
