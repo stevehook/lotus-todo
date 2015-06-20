@@ -1,4 +1,5 @@
 var React = require('react');
+var TodoTask = require('./TodoTask.react');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
@@ -11,7 +12,7 @@ var TodoApp = React.createClass({
 
   createTask: function(task) {
     return (
-      <li key={'task-' + task.id}>{task.title}</li>
+      <TodoTask task={task}/>
     );
   },
 
