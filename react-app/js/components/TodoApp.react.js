@@ -10,15 +10,13 @@ var TodoApp = React.createClass({
     ] };
   },
 
-  createTask: function(task) {
-    return (
-      <TodoTask task={task}/>
-    );
-  },
-
   render: function() {
   	return (
-      <div><ul>{this.state.tasks.map(this.createTask)}</ul></div>
+      <div><ul>{this.state.tasks.map(function(task) {
+        return (
+          <TodoTask task={task}/>
+        );
+      })}</ul></div>
   	);
   },
 
