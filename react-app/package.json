@@ -8,16 +8,17 @@
     "flux": "^2.0.1",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
-    "react": "^0.12.0"
+    "react": "^0.13.0"
   },
   "devDependencies": {
+    "babelify": "^6.1.2",
     "browserify": "^6.2.0",
     "envify": "^3.0.0",
+    "http-server": "",
     "jest-cli": "^0.4.3",
     "reactify": "^0.15.2",
     "uglify-js": "~2.4.15",
-    "watchify": "^2.1.1",
-    "http-server": ""
+    "watchify": "^2.1.1"
   },
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
@@ -28,7 +29,7 @@
   "author": "Steve Hook",
   "browserify": {
     "transform": [
-      "reactify",
+      "babelify",
       "envify"
     ]
   },
