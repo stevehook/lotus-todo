@@ -16,7 +16,7 @@
     "envify": "^3.0.0",
     "http-server": "",
     "react-tools": "*",
-    "jest-cli": "^0.4.3",
+    "jest-cli": "^0.5",
     "reactify": "^0.15.2",
     "uglify-js": "~2.4.15",
     "watchify": "^2.1.1"
@@ -35,6 +35,6 @@
     ]
   },
   "jest": {
-    "rootDir": "./js"
+    "rootDir": "."
   }
 }
