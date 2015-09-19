@@ -4,7 +4,7 @@ var ENTER_KEY = 13;
 var TodoTask = React.createClass({
   render: function() {
   	return (
-      <input type='text' value={this.props.task.title} onKeyDown={this.handleNewTodoKeyDown}></input>
+      <input type='text' ref='newField' value={this.props.task.title} onKeyDown={this.handleNewTodoKeyDown}></input>
   	);
   },
 
