@@ -1,5 +1,6 @@
 var React = require('react');
 var TodoTask = require('./TodoTask.react');
+var TodoNewTask = require('./TodoNewTask.react');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
