@@ -14,10 +14,15 @@ var TodoApp = React.createClass({
     };
   },
 
+  handleNewTaskInput: function(text) {
+    console.log('handleNewTaskInput');
+    // TODO: Add new task to state
+  },
+
   render: function() {
   	return (
       <div>
-        <TodoNewTask task={this.state.newTask}/>
+        <TodoNewTask task={this.state.newTask} onNewTaskInput={this.handleNewTaskInput} />
         <div><ul>{this.state.tasks.map(function(task) {
           return (
             <TodoTask task={task}/>
