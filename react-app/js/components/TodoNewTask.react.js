@@ -15,16 +15,12 @@ var TodoTask = React.createClass({
 
     event.preventDefault();
 
-    var val = React.findDOMNode(this.refs.newField).value.trim();
+    var input = React.findDOMNode(this.refs.newField);
+    var val = input.value.trim();
 
     if (val) {
-      // TODO: What goes here?
-      // Do we manipulate state directly?
-      // Or do we need to create a new model layer?
-      // Or do we need to raise an event that gets handled by the parent?
-      console.log('New task: ', val);
-
       this.props.onNewTaskInput(val);
+      input.value = '';
     }
   }
 });
