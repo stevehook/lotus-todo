@@ -14,9 +14,10 @@ var TodoApp = React.createClass({
     };
   },
 
-  handleNewTaskInput: function(text) {
-    console.log('handleNewTaskInput');
-    // TODO: Add new task to state
+  handleNewTaskInput: function(taskTitle) {
+    var tasks = this.state.tasks;
+    tasks.push({ id: 0, title: taskTitle, completed: false })
+    this.setState({ tasks: tasks });
   },
 
   render: function() {
