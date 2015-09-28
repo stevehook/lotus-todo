@@ -12,7 +12,9 @@ var TodoTask = React.createClass({
   },
 
   handleComplete: function() {
-    this.props.completeTask(this.props.task.id);
+    if (this.props.onCompleteTask) {
+      this.props.onCompleteTask(this.props.task.id);
+    }
   }
 });
 
