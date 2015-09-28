@@ -4,7 +4,9 @@ var ENTER_KEY = 13;
 var TodoTask = React.createClass({
   render: function() {
     return (
-      <input ref='newField' onKeyDown={this.handleNewTodoKeyDown}></input>
+      <div id='new-task' className='task new-task'>
+        <input className='form-control task-title' placeholder='What needs to be done?' autofocus ref='newField' onKeyDown={this.handleNewTodoKeyDown}></input>
+      </div>
     );
   },
 
