@@ -26,13 +26,12 @@ var TodoApp = React.createClass({
   },
 
   render: function() {
-    var self = this;
   	return (
       <div>
         <TodoNewTask task={this.state.newTask} onNewTaskInput={this.handleNewTaskInput} />
-        <div><ul className='task-list'>{this.state.tasks.map(function(task) {
+        <div><ul className='task-list'>{this.state.tasks.map((task) => {
           return (
-            <TodoTask task={task} onCompleteTask={self.handleCompleteTask}/>
+            <TodoTask task={task} onCompleteTask={this.handleCompleteTask}/>
           );
         })}</ul>
         </div>
