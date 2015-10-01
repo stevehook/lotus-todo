@@ -31,13 +31,25 @@ var TodoApp = React.createClass({
     }
   },
 
+  handleArchiveTask: function(taskId) {
+    // TODO: Refactor to remove duplication
+    var index = this.state.tasks.findIndex(t => t.id === taskId);
+    if (index !== -1) {
+      var tasks = this.state.tasks;
+      var task = tasks.splice(index, 1)[0];
+      task.archived = true;
+      tasks.splice(index, 0, task);
+      this.setState({ tasks: tasks });
+    }
+  },
+
   render: function() {
   	return (
       <div>
         <TodoNewTask task={this.state.newTask} onNewTaskInput={this.handleNewTaskInput} />
         <div><ul className='task-list'>{this.state.tasks.map((task) => {
           return (
-            <TodoTask task={task} onCompleteTask={this.handleCompleteTask}/>
+            <TodoTask task={task} onCompleteTask={this.handleCompleteTask} onArchiveTask={this.handleArchiveTask}/>
           );
         })}</ul>
         </div>
