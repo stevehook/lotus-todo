@@ -21,13 +21,13 @@ var TodoApp = React.createClass({
   },
 
   handleCompleteTask: function(taskId) {
-    this.updateTaskState(taskId, function(task) {
+    this.updateTaskState(taskId, (task) => {
       task.completed = true;
     });
   },
 
   handleArchiveTask: function(taskId) {
-    this.updateTaskState(taskId, function(task) {
+    this.updateTaskState(taskId, (task) => {
       task.archived = true;
     });
   },
