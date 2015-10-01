@@ -21,13 +21,13 @@ var TodoApp = React.createClass({
   },
 
   handleCompleteTask: function(taskId) {
-    updateTaskState(taskId, function(task) {
+    this.updateTaskState(taskId, function(task) {
       task.completed = true;
     });
   },
 
   handleArchiveTask: function(taskId) {
-    updateTaskState(taskId, function(task) {
+    this.updateTaskState(taskId, function(task) {
       task.archived = true;
     });
   },
@@ -43,11 +43,15 @@ var TodoApp = React.createClass({
     }
   },
 
+  unarchivedTasks: function() {
+    return this.state.tasks.filter((task) => !task.archived);
+  },
+
   render: function() {
   	return (
       <div>
         <TodoNewTask task={this.state.newTask} onNewTaskInput={this.handleNewTaskInput} />
-        <div><ul className='task-list'>{this.state.tasks.map((task) => {
+        <div><ul className='task-list'>{this.unarchivedTasks().map((task) => {
           return (
             <TodoTask task={task} onCompleteTask={this.handleCompleteTask} onArchiveTask={this.handleArchiveTask}/>
           );
