@@ -21,8 +21,14 @@ var TodoApp = React.createClass({
   },
 
   handleCompleteTask: function(taskId) {
-    // TODO:
-    console.log('handleCompleteTask');
+    var index = this.state.tasks.findIndex(t => t.id === taskId);
+    if (index !== -1) {
+      var tasks = this.state.tasks;
+      var task = tasks.splice(index, 1)[0];
+      task.completed = true;
+      tasks.splice(index, 0, task);
+      this.setState({ tasks: tasks });
+    }
   },
 
   render: function() {
