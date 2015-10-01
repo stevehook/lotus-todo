@@ -21,23 +21,23 @@ var TodoApp = React.createClass({
   },
 
   handleCompleteTask: function(taskId) {
-    var index = this.state.tasks.findIndex(t => t.id === taskId);
-    if (index !== -1) {
-      var tasks = this.state.tasks;
-      var task = tasks.splice(index, 1)[0];
+    updateTaskState(taskId, function(task) {
       task.completed = true;
-      tasks.splice(index, 0, task);
-      this.setState({ tasks: tasks });
-    }
+    });
   },
 
   handleArchiveTask: function(taskId) {
-    // TODO: Refactor to remove duplication
+    updateTaskState(taskId, function(task) {
+      task.archived = true;
+    });
+  },
+
+  updateTaskState: function(taskId, process) {
     var index = this.state.tasks.findIndex(t => t.id === taskId);
     if (index !== -1) {
       var tasks = this.state.tasks;
       var task = tasks.splice(index, 1)[0];
-      task.archived = true;
+      process(task)
       tasks.splice(index, 0, task);
       this.setState({ tasks: tasks });
     }
