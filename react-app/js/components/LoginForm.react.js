@@ -9,8 +9,8 @@ var LoginForm = React.createClass({
     return (
       <div class="form-container">
         <form onSubmit={this.handleSubmit}>
-          <input type='text' class='form-control user-email' placeholder='Enter your email address' autofocus/>
-          <button type='submit' class='btn btn-default'>Login</button>
+          <input type='text' className='form-control user-email' placeholder='Enter your email address' autofocus/>
+          <button type='submit' className='btn btn-default'>Login</button>
         </form>
       </div>
     );
