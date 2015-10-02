@@ -1,5 +1,6 @@
 var React = require('react');
 var TodoList = require('./TodoList.react');
+var LoginForm = require('./LoginForm.react');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
@@ -10,11 +11,19 @@ var TodoApp = React.createClass({
   },
 
   render: function() {
-  	return (
-      <div>
-        <TodoList/>
-      </div>
-  	);
+    if (this.state.loggedIn) {
+      return (
+        <div>
+          <TodoList/>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <LoginForm/>
+        </div>
+      );
+    }
   }
 
 });
