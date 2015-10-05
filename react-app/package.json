@@ -22,7 +22,8 @@
     "uglify-js": "~2.4.15",
     "watchify": "^2.1.1",
     "eslint": "^1.6.0",
-    "lodash": ""
+    "lodash": "",
+    "babel-jest": "*"
   },
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
@@ -39,7 +40,12 @@
     ]
   },
   "jest": {
-    "rootDir": "."
+    "rootDir": ".",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-tools"
+    ]
   },
   "eslintConfig": {
     "ecmaFeatures": {
