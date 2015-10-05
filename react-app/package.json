@@ -40,5 +40,12 @@
   },
   "jest": {
     "rootDir": "."
+  },
+  "eslintConfig": {
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "rules": {
+    }
   }
 }
