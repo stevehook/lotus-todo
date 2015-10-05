@@ -5,11 +5,11 @@
   "repository": "https://github.com/stevehook/lotus-todo",
   "main": "js/app.js",
   "dependencies": {
+    "bootstrap": "^3.2.0",
     "flux": "^2.0.1",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
-    "react": "^0.13.0",
-    "bootstrap": "^3.2.0"
+    "react": "^0.13.0"
   },
   "devDependencies": {
     "babelify": "^6.1.2",
@@ -21,12 +21,14 @@
     "reactify": "^0.15.2",
     "uglify-js": "~2.4.15",
     "watchify": "^2.1.1",
+    "eslint": "^1.6.0",
     "lodash": ""
   },
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest",
+    "lint": "eslint .",
     "serve": "node_modules/.bin/http-server --cors"
   },
   "author": "Steve Hook",
