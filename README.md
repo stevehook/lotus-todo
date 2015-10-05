@@ -92,6 +92,10 @@ Tests, (TBA):
 
     $ npm test
 
+Run eslint:
+
+    $ npm run lint
+
 ##Running the development server
 
 The most convenient way to run a development server is to use the
