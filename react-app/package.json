@@ -43,7 +43,8 @@
   },
   "eslintConfig": {
     "ecmaFeatures": {
-        "jsx": true
+        "jsx": true,
+        "arrowFunctions": true
     },
     "rules": {
     }
