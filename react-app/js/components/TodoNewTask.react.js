@@ -1,7 +1,7 @@
 var React = require('react');
 var ENTER_KEY = 13;
 
-var TodoTask = React.createClass({
+var TodoNewTask = React.createClass({
   render: function() {
     return (
       <div id='new-task' className='task new-task'>
@@ -27,4 +27,4 @@ var TodoTask = React.createClass({
   }
 });
 
-module.exports = TodoTask;
+module.exports = TodoNewTask;
