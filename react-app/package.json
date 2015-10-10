@@ -28,7 +28,7 @@
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
-    "test": "jest",
+    "test": "jest --verbose __tests__",
     "lint": "eslint .",
     "serve": "node_modules/.bin/http-server --cors"
   },
