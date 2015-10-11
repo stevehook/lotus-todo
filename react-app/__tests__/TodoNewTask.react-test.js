@@ -21,7 +21,7 @@ describe('TodoList.react', () => {
   });
 
   it('calls onNewTaskInput handler when user presses enter key', () => {
-    var input = TestUtils.findRenderedDOMComponentWithTag(todoNewTask, 'input');
+    var input = TestUtils.findRenderedDOMComponentWithTag(todoNewTask, 'input').getDOMNode();
     input.value = 'Walk the dog';
     TestUtils.Simulate.keyDown(input, { keyCode: 13 });
     expect(newTask).toBeDefined();
