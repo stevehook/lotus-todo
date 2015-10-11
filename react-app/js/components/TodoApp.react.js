@@ -10,6 +10,12 @@ var TodoApp = React.createClass({
     };
   },
 
+  handleAuthenticationFailed: function() {
+  },
+
+  handleAuthenticationSuceeded: function(user) {
+  },
+
   render: function() {
     if (this.state.loggedIn) {
       return (
@@ -20,12 +26,12 @@ var TodoApp = React.createClass({
     } else {
       return (
         <div>
-          <LoginForm/>
+          <LoginForm onAuthenticationSucceeded={this.handleAuthenticationSucceeded}
+                     onAuthenticationFailed={this.handleAuthenticationFailed}/>
         </div>
       );
     }
   }
-
 });
 
 module.exports = TodoApp;
