@@ -19,7 +19,6 @@ var LoginForm = React.createClass({
   handleSubmit: function() {
     // TODO: Call authentication service to handle the authentication
   }
-
 });
 
 module.exports = LoginForm;
