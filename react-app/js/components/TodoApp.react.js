@@ -6,14 +6,15 @@ var TodoApp = React.createClass({
   getInitialState: function() {
     return {
       loggedIn: false,
-      name: null
+      user: null
     };
   },
 
   handleAuthenticationFailed: function() {
   },
 
-  handleAuthenticationSuceeded: function(user) {
+  handleAuthenticationSucceeded: function(user) {
+    this.setState({ loggedIn: true, user: user });
   },
 
   render: function() {
