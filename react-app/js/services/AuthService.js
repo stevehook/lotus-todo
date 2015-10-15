@@ -1,4 +1,5 @@
-var $ = require('jQuery');
+// TODO: Drop the requirement for jquery - use superagent?
+var $ = require('jquery');
 
 class AuthService {
   login(email, password) {

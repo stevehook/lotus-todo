@@ -5,9 +5,13 @@ var React = require('react/addons');
 var TodoApp = require('../js/components/TodoApp.react.js');
 var TodoList = require('../js/components/TodoList.react.js');
 var LoginForm = require('../js/components/LoginForm.react.js');
+var AuthService = require('../js/services/AuthService.js');
 var TestUtils = React.addons.TestUtils;
 
 describe('TodoApp.react', () => {
+  var promise = { done: () => { return promise; }, fail: () => { return promise; } };
+  AuthService.prototype.checkLoggedIn.mockReturnValue(promise);
+
   var todoApp = TestUtils.renderIntoDocument(
     <TodoApp/>
   );
