@@ -25,12 +25,11 @@ var LoginForm = React.createClass({
     var password = React.findDOMNode(this.refs.loginPassword).value.trim();
 
     var authService = new AuthService();
-    var user = authService.login(email, password);
-    if (user) {
-      this.props.onAuthenticationSucceeded(user);
-    } else {
+    authService.login(email, password).done((data) => {
+      this.props.onAuthenticationSucceeded(data);
+    }).fail(() => {
       this.props.onAuthenticationFailed();
-    }
+    });
   }
 });
 
