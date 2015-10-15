@@ -1,16 +1,31 @@
 var React = require('react');
 var TodoList = require('./TodoList.react');
 var LoginForm = require('./LoginForm.react');
+var AuthService = require('../services/AuthService.react');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
     return {
-      loggedIn: false,
-      user: null
+      loggedIn: !!user,
+      user: user
     };
   },
 
+  componentDidMount: function() {
+    var authService = new AuthService();
+    authService.checkLoggedIn().done((user) => {
+      if (this.isMounted()) {
+        this.setState({ loggedIn: true, user: user });
+      }
+    }).fail(() => {
+      if (this.isMounted()) {
+        this.setState({ loggedIn: false, user: null });
+      }
+    });
+  },
+
   handleAuthenticationFailed: function() {
+    this.setState({ loggedIn: false, user: null });
   },
 
   handleAuthenticationSucceeded: function(user) {

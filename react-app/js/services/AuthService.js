@@ -9,6 +9,15 @@ class AuthService {
       email: email
     };
   }
+
+  logout() {
+    // TODO: Call the API to delete the current session
+  }
+
+  checkLoggedIn() {
+    // TODO: Call the API to find out whether we already have a valid session
+    return $.get('/api/sessions');
+  }
 };
 
 module.exports = AuthService;
