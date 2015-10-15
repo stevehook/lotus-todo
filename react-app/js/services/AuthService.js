@@ -1,4 +1,4 @@
-// AuthService.js
+var $ = require('jQuery');
 
 class AuthService {
   login(email, password) {
