@@ -31,7 +31,7 @@
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest --verbose __tests__",
     "lint": "eslint .",
-    "serve": "node_modules/.bin/http-server --cors"
+    "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/"
   },
   "author": "Steve Hook",
   "browserify": {
