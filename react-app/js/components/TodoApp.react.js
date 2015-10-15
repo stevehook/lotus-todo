@@ -1,13 +1,13 @@
 var React = require('react');
 var TodoList = require('./TodoList.react');
 var LoginForm = require('./LoginForm.react');
-var AuthService = require('../services/AuthService.react');
+var AuthService = require('../services/AuthService');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
     return {
-      loggedIn: !!user,
-      user: user
+      loggedIn: false,
+      user: null
     };
   },
 
