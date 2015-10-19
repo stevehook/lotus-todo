@@ -1,6 +1,7 @@
 var React = require('react');
 var TodoTask = require('./TodoTask.react');
 var TodoNewTask = require('./TodoNewTask.react');
+var TaskService = require('../services/TaskService');
 
 var TodoList = React.createClass({
   getInitialState: function() {
@@ -12,12 +13,12 @@ var TodoList = React.createClass({
 
   componentDidMount: function() {
     var taskService = new TaskService();
-    taskService.get().done((data) => {
+    taskService.getOutstanding().done((data) => {
       this.setState({ tasks: data });
     }).fail(() => {
       // TODO: Display a message
     });
-  }
+  },
 
   handleNewTaskInput: function(taskTitle) {
     var tasks = this.state.tasks;
