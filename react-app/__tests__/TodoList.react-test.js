@@ -25,6 +25,7 @@ describe('TodoList.react', () => {
       { id: 456, title: 'Clean the kitchen' },
       { id: 789, title: 'Read a good book' },
     ]);
+    tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
     expect(tasks.length).toEqual(3);
   });
 
