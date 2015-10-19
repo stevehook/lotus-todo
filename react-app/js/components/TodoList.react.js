@@ -11,11 +11,12 @@ var TodoList = React.createClass({
   },
 
   componentDidMount: function() {
-    this.setState({ tasks: [
-      { id: 123, title: 'Walk the dog', completed: false },
-      { id: 456, title: 'Cook dinner', completed: false },
-      { id: 789, title: 'Go to the pub', completed: true }
-    ]});
+    var taskService = new TaskService();
+    taskService.get().done((data) => {
+      this.setState({ tasks: data });
+    }).fail(() => {
+      // TODO: Display a message
+    });
   }
 
   handleNewTaskInput: function(taskTitle) {
