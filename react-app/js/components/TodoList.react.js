@@ -14,16 +14,23 @@ var TodoList = React.createClass({
   componentDidMount: function() {
     var taskService = new TaskService();
     taskService.getOutstanding().done((data) => {
-      this.setState({ tasks: data });
+      if (this.isMounted()) {
+        this.setState({ tasks: data });
+      }
     }).fail(() => {
       // TODO: Display a message
     });
   },
 
   handleNewTaskInput: function(taskTitle) {
-    var tasks = this.state.tasks;
-    tasks.push({ id: 0, title: taskTitle, completed: false })
-    this.setState({ tasks: tasks });
+    var taskService = new TaskService();
+    taskService.create(taskTitle).done((newTask) => {
+      var tasks = this.state.tasks;
+      tasks.push(newTask);
+      this.setState({ tasks: tasks });
+    }).fail(() => {
+      // TODO: Display a message
+    });
   },
 
   handleCompleteTask: function(taskId) {
