@@ -3,7 +3,7 @@ var $ = require('jquery');
 
 class TaskService {
   getOutstanding() {
-    return $.get('/api/tasks', 'json');
+    return $.get('/api/tasks', {}, null, 'json');
   }
 };
 
