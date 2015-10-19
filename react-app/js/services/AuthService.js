@@ -3,11 +3,6 @@ var $ = require('jquery');
 
 class AuthService {
   login(email, password) {
-    // return {
-    //   id: 123,
-    //   name: 'Bob',
-    //   email: email
-    // };
     return $.post('/api/sessions',
                   { credentials: { email: email, password: password } },
                   null,

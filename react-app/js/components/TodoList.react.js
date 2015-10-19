@@ -5,14 +5,18 @@ var TodoNewTask = require('./TodoNewTask.react');
 var TodoList = React.createClass({
   getInitialState: function() {
     return {
-      tasks: [
-        { id: 123, title: 'Walk the dog', completed: false },
-        { id: 456, title: 'Cook dinner', completed: false },
-        { id: 789, title: 'Go to the pub', completed: true }
-      ],
+      tasks: [],
       newTask: { id: 0, title: '', completed: false }
     };
   },
+
+  componentDidMount: function() {
+    this.setState({ tasks: [
+      { id: 123, title: 'Walk the dog', completed: false },
+      { id: 456, title: 'Cook dinner', completed: false },
+      { id: 789, title: 'Go to the pub', completed: true }
+    ]});
+  }
 
   handleNewTaskInput: function(taskTitle) {
     var tasks = this.state.tasks;
