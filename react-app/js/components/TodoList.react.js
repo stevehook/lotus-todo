@@ -34,8 +34,13 @@ var TodoList = React.createClass({
   },
 
   handleCompleteTask: function(taskId) {
-    this.updateTaskState(taskId, (task) => {
-      task.completed = true;
+    var taskService = new TaskService();
+    taskService.complete(taskId).done((updatedTask) => {
+      this.updateTaskState(taskId, (task) => {
+        task.completed = true;
+      });
+    }).fail(() => {
+      // TODO: Display a message
     });
   },
 
