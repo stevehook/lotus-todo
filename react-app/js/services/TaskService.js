@@ -9,6 +9,15 @@ class TaskService {
   create(title) {
     return $.post('/api/tasks', { task: { title: title } }, null, 'json');
   }
+
+  complete(taskId) {
+    return $.ajax({
+      url: `/api/tasks/${taskId}/complete`,
+      method: 'POST',
+      headers: { 'X-Http-Method-Override': 'PATCH' },
+      dataType: 'json'
+    });
+  }
 };
 
 module.exports = TaskService;
