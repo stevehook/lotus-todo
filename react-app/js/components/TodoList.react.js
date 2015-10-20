@@ -77,8 +77,7 @@ var TodoList = React.createClass({
         </div>
       </div>
   	);
-  },
-
+  }
 });
 
 module.exports = TodoList;
