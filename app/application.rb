@@ -21,10 +21,11 @@ module Todo
       routes do
         redirect '/', to: '/index.html'
         get '/api/tasks', to: 'tasks#index'
-        get '/api/tasks/archive', to: 'tasks#archive'
+        get '/api/tasks/archived', to: 'tasks#archived'
         get '/api/tasks/new', to: 'tasks#new'
         post '/api/tasks', to: 'tasks#create'
         patch '/api/tasks/:id/complete', to: 'tasks#complete'
+        patch '/api/tasks/:id/archive', to: 'tasks#archive'
         delete '/api/tasks/:id', to: 'tasks#delete'
         post '/api/sessions', to: 'sessions#create'
         delete '/api/sessions', to: 'sessions#delete'
