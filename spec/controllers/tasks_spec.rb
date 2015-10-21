@@ -36,7 +36,7 @@ describe Todo::Controllers::Tasks do
     end
   end
 
-  describe Todo::Controllers::Tasks::Archive do
+  describe Todo::Controllers::Tasks::Archived do
     it 'retrieves a collection of archived tasks' do
       response = subject.call({})
       expect(response[0]).to eql 200

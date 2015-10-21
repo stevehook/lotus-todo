@@ -34,7 +34,7 @@ feature 'Tasks API' do
     end
 
     it 'cannot get the list of archived tasks - returns 401' do
-      get '/api/tasks/archive', {}, rack_env
+      get '/api/tasks/archived', {}, rack_env
       expect(last_response).not_to be_ok
       expect(last_response.status).to eql 401
     end
@@ -67,9 +67,9 @@ feature 'Tasks API' do
       end
     end
 
-    describe 'GET /api/tasks/archive' do
+    describe 'GET /api/tasks/archived' do
       it 'gets the list of archived tasks for the current user only' do
-        get '/api/tasks/archive', {}, rack_env
+        get '/api/tasks/archived', {}, rack_env
         expect(last_response).to be_ok
         result = JSON.parse(last_response.body)
         expect(result.count).to eql 1
