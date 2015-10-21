@@ -19,7 +19,7 @@ class TaskService {
     });
   }
 
-  archiveTask(taskId) {
+  archive(taskId) {
     return $.ajax({
       url: `/api/tasks/${taskId}/archive`,
       method: 'POST',

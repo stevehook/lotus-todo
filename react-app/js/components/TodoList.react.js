@@ -45,8 +45,13 @@ var TodoList = React.createClass({
   },
 
   handleArchiveTask: function(taskId) {
-    this.updateTaskState(taskId, (task) => {
-      task.archived = true;
+    var taskService = new TaskService();
+    taskService.archive(taskId).done((updatedTask) => {
+      this.updateTaskState(taskId, (task) => {
+        task.archived = true;
+      });
+    }).fail(() => {
+      // TODO: Display a message
     });
   },
 
