@@ -18,6 +18,15 @@ class TaskService {
       dataType: 'json'
     });
   }
+
+  archiveTask(taskId) {
+    return $.ajax({
+      url: `/api/tasks/${taskId}/archive`,
+      method: 'POST',
+      headers: { 'X-Http-Method-Override': 'PATCH' },
+      dataType: 'json'
+    });
+  }
 };
 
 module.exports = TaskService;
