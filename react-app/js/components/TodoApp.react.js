@@ -13,11 +13,11 @@ var TodoApp = React.createClass({
 
   componentDidMount: function() {
     var authService = new AuthService();
-    authService.checkLoggedIn().done((user) => {
+    authService.checkLoggedIn().then((user) => {
       if (this.isMounted()) {
         this.setState({ loggedIn: true, user: user });
       }
-    }).fail(() => {
+    }).catch(() => {
       if (this.isMounted()) {
         this.setState({ loggedIn: false, user: null });
       }

@@ -20,15 +20,16 @@ var LoginForm = React.createClass({
 
   handleSubmit: function(event) {
     event.preventDefault();
+    var _this = this;
 
     var email = React.findDOMNode(this.refs.loginEmail).value.trim();
     var password = React.findDOMNode(this.refs.loginPassword).value.trim();
 
     var authService = new AuthService();
-    authService.login(email, password).done((data) => {
-      this.props.onAuthenticationSucceeded(data);
-    }).fail(() => {
-      this.props.onAuthenticationFailed();
+    authService.login(email, password).then((data) => {
+      _this.props.onAuthenticationSucceeded(data);
+    }).catch(() => {
+      _this.props.onAuthenticationFailed();
     });
   }
 });

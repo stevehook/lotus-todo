@@ -1,12 +1,18 @@
 // TODO: Drop the requirement for jquery - use superagent?
 var $ = require('jquery');
+var request = require('superagent');
 
 class AuthService {
   login(email, password) {
-    return $.post('/api/sessions',
-                  { credentials: { email: email, password: password } },
-                  null,
-                  'json');
+    return new Promise((resolve, reject) => {
+      request
+        .post('/api/sessions')
+        .send({ credentials: { email: email, password: password } })
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
+    });
   }
 
   logout() {
@@ -14,7 +20,14 @@ class AuthService {
   }
 
   checkLoggedIn() {
-    return $.get('/api/sessions');
+    return new Promise((resolve, reject) => {
+      request
+        .get('/api/sessions')
+        .set('Accept', 'application/json')
+        .end((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
+    });
   }
 };
 
