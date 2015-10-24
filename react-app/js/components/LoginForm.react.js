@@ -8,7 +8,7 @@ var LoginForm = React.createClass({
 
   render: function() {
     return (
-      <div class="form-container">
+      <div className="form-container">
         <form onSubmit={this.handleSubmit}>
           <input type='text' className='form-control user-email' ref='loginEmail' placeholder='Enter your email address' autofocus/>
           <input type='pasword' className='form-control user-password' ref='loginPassword'/>
