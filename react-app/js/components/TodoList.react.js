@@ -12,11 +12,10 @@ var TodoList = React.createClass({
   },
 
   componentDidMount: function() {
-    var _this = this;
     var taskService = new TaskService();
     taskService.getOutstanding().then((res) => {
-      if (_this.isMounted()) {
-        _this.setState({ tasks: res.body });
+      if (this.isMounted()) {
+        this.setState({ tasks: res.body });
       }
     }).catch(() => {
       // TODO: Display a message

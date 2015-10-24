@@ -4,14 +4,19 @@ var request = require('superagent');
 
 class AuthService {
   login(email, password) {
-    return new Promise((resolve, reject) => {
+    return this.promisify(
       request
         .post('/api/sessions')
         .send({ credentials: { email: email, password: password } })
         .set('Accept', 'application/json')
-        .end((err, res) => {
-          err ? reject(err) : resolve(res);
-        });
+    );
+  }
+
+  promisify(req) {
+    return new Promise((resolve, reject) => {
+      req.end((err, res) => {
+        err ? reject(err) : resolve(res);
+      });
     });
   }
 
