@@ -12,26 +12,23 @@ class AuthService {
     );
   }
 
-  promisify(req) {
-    return new Promise((resolve, reject) => {
-      req.end((err, res) => {
-        err ? reject(err) : resolve(res);
-      });
-    });
-  }
-
   logout() {
     // TODO: Call the API to delete the current session
   }
 
   checkLoggedIn() {
-    return new Promise((resolve, reject) => {
+    return this.promisify(
       request
         .get('/api/sessions')
         .set('Accept', 'application/json')
-        .end((err, res) => {
-          err ? reject(err) : resolve(res);
-        });
+    );
+  }
+
+  promisify(req) {
+    return new Promise((resolve, reject) => {
+      req.end((err, res) => {
+        err ? reject(err) : resolve(res);
+      });
     });
   }
 };

@@ -12,7 +12,7 @@ var TodoList = React.createClass({
   },
 
   componentDidMount: function() {
-    var taskService = new TaskService();
+    let taskService = new TaskService();
     taskService.getOutstanding().then((res) => {
       if (this.isMounted()) {
         this.setState({ tasks: res.body });
@@ -23,9 +23,9 @@ var TodoList = React.createClass({
   },
 
   handleNewTaskInput: function(taskTitle) {
-    var taskService = new TaskService();
+    let taskService = new TaskService();
     taskService.create(taskTitle).done((newTask) => {
-      var tasks = this.state.tasks;
+      let tasks = this.state.tasks;
       tasks.push(newTask);
       this.setState({ tasks: tasks });
     }).fail(() => {
@@ -34,7 +34,7 @@ var TodoList = React.createClass({
   },
 
   handleCompleteTask: function(taskId) {
-    var taskService = new TaskService();
+    let taskService = new TaskService();
     taskService.complete(taskId).done((updatedTask) => {
       this.updateTaskState(taskId, (task) => {
         task.completed = true;
@@ -45,7 +45,7 @@ var TodoList = React.createClass({
   },
 
   handleArchiveTask: function(taskId) {
-    var taskService = new TaskService();
+    let taskService = new TaskService();
     taskService.archive(taskId).done((updatedTask) => {
       this.updateTaskState(taskId, (task) => {
         task.archived = true;
@@ -56,10 +56,10 @@ var TodoList = React.createClass({
   },
 
   updateTaskState: function(taskId, process) {
-    var index = this.state.tasks.findIndex(t => t.id === taskId);
+    let index = this.state.tasks.findIndex(t => t.id === taskId);
     if (index !== -1) {
-      var tasks = this.state.tasks;
-      var task = tasks.splice(index, 1)[0];
+      let tasks = this.state.tasks;
+      let task = tasks.splice(index, 1)[0];
       process(task)
       tasks.splice(index, 0, task);
       this.setState({ tasks: tasks });
