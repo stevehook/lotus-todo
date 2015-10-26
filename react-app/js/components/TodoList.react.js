@@ -1,9 +1,9 @@
-var React = require('react');
-var TodoTask = require('./TodoTask.react');
-var TodoNewTask = require('./TodoNewTask.react');
-var TaskService = require('../services/TaskService');
+const React = require('react');
+const TodoTask = require('./TodoTask.react');
+const TodoNewTask = require('./TodoNewTask.react');
+const TaskService = require('../services/TaskService');
 
-var TodoList = React.createClass({
+const TodoList = React.createClass({
   getInitialState: function() {
     return {
       tasks: [],

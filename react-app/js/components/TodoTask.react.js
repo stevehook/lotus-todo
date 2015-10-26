@@ -1,6 +1,6 @@
-var React = require('react');
+const React = require('react');
 
-var TodoTask = React.createClass({
+const TodoTask = React.createClass({
   render: function() {
   	return (
       <li key={'task-' + this.props.task.id} className={this.props.task.completed ? 'completed' : 'pending'}>

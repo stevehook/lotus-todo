@@ -1,9 +1,9 @@
-var React = require('react');
-var TodoList = require('./TodoList.react');
-var LoginForm = require('./LoginForm.react');
-var AuthService = require('../services/AuthService');
+const React = require('react');
+const TodoList = require('./TodoList.react');
+const LoginForm = require('./LoginForm.react');
+const AuthService = require('../services/AuthService');
 
-var TodoApp = React.createClass({
+const TodoApp = React.createClass({
   getInitialState: function() {
     return {
       loggedIn: false,
@@ -12,7 +12,7 @@ var TodoApp = React.createClass({
   },
 
   componentDidMount: function() {
-    var authService = new AuthService();
+    let authService = new AuthService();
     authService.checkLoggedIn().then((user) => {
       if (this.isMounted()) {
         this.setState({ loggedIn: true, user: user });

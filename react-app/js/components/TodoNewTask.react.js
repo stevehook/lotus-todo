@@ -1,7 +1,7 @@
-var React = require('react');
-var ENTER_KEY = 13;
+const React = require('react');
+const ENTER_KEY = 13;
 
-var TodoNewTask = React.createClass({
+const TodoNewTask = React.createClass({
   render: function() {
     return (
       <div id='new-task' className='task new-task'>
@@ -17,8 +17,8 @@ var TodoNewTask = React.createClass({
 
     event.preventDefault();
 
-    var input = React.findDOMNode(this.refs.newField);
-    var val = input.value.trim();
+    let input = React.findDOMNode(this.refs.newField);
+    let val = input.value.trim();
 
     if (val) {
       this.props.onNewTaskInput(val);

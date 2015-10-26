@@ -1,5 +1,5 @@
-var request = require('superagent');
-var ApiService = require('./ApiService');
+const request = require('superagent');
+const ApiService = require('./ApiService');
 
 class AuthService extends ApiService {
   login(email, password) {
