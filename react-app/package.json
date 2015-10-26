@@ -1,0 +1,61 @@
+{
+  "name": "todo-react-app",
+  "version": "0.0.1",
+  "description": "React.js Todo app client using lotusrb as a backend. Originally based on flux-todoapp example, https://github.com/facebook/flux/tree/master/examples/flux-todomvc",
+  "repository": "https://github.com/stevehook/lotus-todo",
+  "main": "js/app.js",
+  "dependencies": {
+    "bootstrap": "^3.2.0",
+    "flux": "^2.0.1",
+    "keymirror": "~0.1.0",
+    "object-assign": "^1.0.0",
+    "react": "^0.13.0",
+    "superagent": "^1.4.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.2",
+    "browserify": "^6.2.0",
+    "envify": "^3.0.0",
+    "http-server": "",
+    "react-tools": "*",
+    "jest-cli": "^0.5",
+    "reactify": "^0.15.2",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1",
+    "eslint": "^1.6.0",
+    "lodash": "",
+    "babel-jest": "*"
+  },
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d js/app.js",
+    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest --verbose __tests__",
+    "lint": "eslint .",
+    "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/"
+  },
+  "author": "Steve Hook",
+  "browserify": {
+    "transform": [
+      "babelify",
+      "envify"
+    ]
+  },
+  "jest": {
+    "rootDir": ".",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-tools"
+    ]
+  },
+  "eslintConfig": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "classes": true,
+      "templateStrings": true
+    },
+    "rules": {}
+  }
+}

@@ -25,7 +25,7 @@
         <div ng-controller='NavBarCtrl'>
           <ul class='nav nav-pills pull-right' ng-if='isLoggedIn()'>
             <li ng-class="{active: routeIs('/')}"><a ng-href="#">Home</a></li>
-            <li ng-class="{active: routeIs('/archive')}"><a ng-href="#/archive">Archive</a></li>
+            <li ng-class="{active: routeIs('/archived')}"><a ng-href="#/archived">Archive</a></li>
             <li ng-class="{active: routeIs('/about')}"><a ng-href="#/about">About</a></li>
             <li><a href='#' ng-click='logout()'>Logout</a></li>
           </ul>
