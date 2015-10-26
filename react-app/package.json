@@ -51,7 +51,10 @@
   "eslintConfig": {
     "ecmaFeatures": {
       "jsx": true,
-      "arrowFunctions": true
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "classes": true,
+      "templateStrings": true
     },
     "rules": {}
   }
