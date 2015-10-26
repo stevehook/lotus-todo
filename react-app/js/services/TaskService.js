@@ -1,18 +1,15 @@
 // TODO: Drop the requirement for jquery - use superagent?
 var $ = require('jquery');
 var request = require('superagent');
+var ApiService = require('ApiService');
 
-class TaskService {
+class TaskService extends ApiService {
   getOutstanding() {
-    // return $.get('/api/tasks', {}, null, 'json');
-    return new Promise((resolve, reject) => {
+    return this.promisify(
       request
         .get('/api/tasks')
         .set('Accept', 'application/json')
-        .end((err, res) => {
-          err ? reject(err) : resolve(res);
-        });
-    });
+    );
   }
 
   create(title) {

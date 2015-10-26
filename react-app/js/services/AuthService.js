@@ -1,8 +1,7 @@
-// TODO: Drop the requirement for jquery - use superagent?
-var $ = require('jquery');
 var request = require('superagent');
+var ApiService = require('ApiService');
 
-class AuthService {
+class AuthService extends ApiService {
   login(email, password) {
     return this.promisify(
       request
@@ -22,14 +21,6 @@ class AuthService {
         .get('/api/sessions')
         .set('Accept', 'application/json')
     );
-  }
-
-  promisify(req) {
-    return new Promise((resolve, reject) => {
-      req.end((err, res) => {
-        err ? reject(err) : resolve(res);
-      });
-    });
   }
 };
 
