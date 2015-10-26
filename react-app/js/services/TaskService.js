@@ -1,5 +1,3 @@
-// TODO: Drop the requirement for jquery - use superagent?
-var $ = require('jquery');
 var request = require('superagent');
 var ApiService = require('ApiService');
 
@@ -13,25 +11,30 @@ class TaskService extends ApiService {
   }
 
   create(title) {
-    return $.post('/api/tasks', { task: { title: title } }, null, 'json');
+    return this.promisify(
+      request
+        .post('/api/tasks')
+        .send({ task: { title: title } })
+        .set('Accept', 'application/json')
+    );
   }
 
   complete(taskId) {
-    return $.ajax({
-      url: `/api/tasks/${taskId}/complete`,
-      method: 'POST',
-      headers: { 'X-Http-Method-Override': 'PATCH' },
-      dataType: 'json'
-    });
+    return this.promisify(
+      request
+        .post(`/api/tasks/${taskId}/complete`)
+        .headers({ 'X-Http-Method-Override': 'PATCH' })
+        .set('Accept', 'application/json')
+    );
   }
 
   archive(taskId) {
-    return $.ajax({
-      url: `/api/tasks/${taskId}/archive`,
-      method: 'POST',
-      headers: { 'X-Http-Method-Override': 'PATCH' },
-      dataType: 'json'
-    });
+    return this.promisify(
+      request
+        .post(`/api/tasks/${taskId}/archive`)
+        .headers({ 'X-Http-Method-Override': 'PATCH' })
+        .set('Accept', 'application/json')
+    );
   }
 };
 
