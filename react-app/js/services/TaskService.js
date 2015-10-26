@@ -1,5 +1,5 @@
 var request = require('superagent');
-var ApiService = require('ApiService');
+var ApiService = require('./ApiService');
 
 class TaskService extends ApiService {
   getOutstanding() {
@@ -23,8 +23,7 @@ class TaskService extends ApiService {
     return this.promisify(
       request
         .post(`/api/tasks/${taskId}/complete`)
-        .headers({ 'X-Http-Method-Override': 'PATCH' })
-        .set('Accept', 'application/json')
+        .set({ 'X-Http-Method-Override': 'PATCH', 'Accept': 'application/json' })
     );
   }
 
@@ -32,8 +31,7 @@ class TaskService extends ApiService {
     return this.promisify(
       request
         .post(`/api/tasks/${taskId}/archive`)
-        .headers({ 'X-Http-Method-Override': 'PATCH' })
-        .set('Accept', 'application/json')
+        .set({ 'X-Http-Method-Override': 'PATCH', 'Accept': 'application/json' })
     );
   }
 };

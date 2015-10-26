@@ -24,33 +24,33 @@ var TodoList = React.createClass({
 
   handleNewTaskInput: function(taskTitle) {
     let taskService = new TaskService();
-    taskService.create(taskTitle).done((newTask) => {
+    taskService.create(taskTitle).then((res) => {
       let tasks = this.state.tasks;
-      tasks.push(newTask);
+      tasks.push(res.body);
       this.setState({ tasks: tasks });
-    }).fail(() => {
+    }).catch(() => {
       // TODO: Display a message
     });
   },
 
   handleCompleteTask: function(taskId) {
     let taskService = new TaskService();
-    taskService.complete(taskId).done((updatedTask) => {
+    taskService.complete(taskId).then((res) => {
       this.updateTaskState(taskId, (task) => {
         task.completed = true;
       });
-    }).fail(() => {
+    }).catch(() => {
       // TODO: Display a message
     });
   },
 
   handleArchiveTask: function(taskId) {
     let taskService = new TaskService();
-    taskService.archive(taskId).done((updatedTask) => {
+    taskService.archive(taskId).then((res) => {
       this.updateTaskState(taskId, (task) => {
         task.archived = true;
       });
-    }).fail(() => {
+    }).catch(() => {
       // TODO: Display a message
     });
   },
