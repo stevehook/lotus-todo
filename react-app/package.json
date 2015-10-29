@@ -13,31 +13,36 @@
     "superagent": "^1.4.0"
   },
   "devDependencies": {
+    "babel-jest": "*",
     "babelify": "^6.1.2",
     "browserify": "^6.2.0",
+    "browserify-css": "^0.7.1",
     "envify": "^3.0.0",
+    "eslint": "^1.6.0",
     "http-server": "",
-    "react-tools": "*",
     "jest-cli": "^0.5",
+    "lodash": "",
+    "react-tools": "*",
     "reactify": "^0.15.2",
     "uglify-js": "~2.4.15",
-    "watchify": "^2.1.1",
-    "eslint": "^1.6.0",
-    "lodash": "",
-    "babel-jest": "*"
+    "watchify": "^2.1.1"
   },
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest --verbose __tests__",
     "lint": "eslint .",
-    "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/"
+    "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/",
+    "clean": "rm -rvf ../app/public/*;",
+    "predist": "npm run build && npm run clean",
+    "dist": "mkdir ../app/public/js && cp -r css index.html ../app/public/ && cp -r js/bundle.min.js ../app/public/js/bundle.js && cp node_modules/bootstrap/dist/css/bootstrap.min.css ../app/public/css/bootstrap.css && cp -r node_modules/bootstrap/dist/fonts ../app/public/fonts"
   },
   "author": "Steve Hook",
   "browserify": {
     "transform": [
       "babelify",
-      "envify"
+      "envify",
+      "browserify-css"
     ]
   },
   "jest": {
