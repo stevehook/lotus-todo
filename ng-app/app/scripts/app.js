@@ -31,7 +31,7 @@ angular
         controller: 'MainCtrl',
         resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }
       })
-      .when('/archive', {
+      .when('/archived', {
         templateUrl: 'views/archive.html',
         controller: 'ArchiveCtrl',
         resolve: { load: function(AuthenticationService) { return AuthenticationService.verifyLoggedIn(); } }

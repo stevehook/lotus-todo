@@ -15,7 +15,7 @@ module Todo
         end
       end
 
-      class Archive
+      class Archived
         include Todo::Authenticable
         expose :presenter
 
@@ -69,6 +69,19 @@ module Todo
           task = TaskRepository.find_by_user(current_user.id, params[:id])
           halt 404 if task.nil?
           TaskRepository.complete(task)
+          @presenter = Presenters::TaskPresenter.new(task)
+          self.body = @presenter.to_json
+        end
+      end
+
+      class Archive
+        include Todo::Authenticable
+        expose :presenter
+
+        def call(params)
+          task = TaskRepository.find_by_user(current_user.id, params[:id])
+          halt 404 if task.nil?
+          TaskRepository.archive(task)
           @presenter = Presenters::TaskPresenter.new(task)
           self.body = @presenter.to_json
         end

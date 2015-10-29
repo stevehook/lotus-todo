@@ -38,5 +38,4 @@ class TaskRepository
     task.archived_at = DateTime.now
     self.update(task)
   end
-
 end

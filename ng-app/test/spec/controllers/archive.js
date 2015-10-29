@@ -20,7 +20,7 @@ describe('Controller: ArchiveCtrl', function () {
 
     // Stub $http to return some tasks
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.when('GET', '/api/tasks/archive').respond(200, tasks);
+    $httpBackend.when('GET', '/api/tasks/archived').respond(200, tasks);
     scope = $rootScope.$new();
     ArchiveCtrl = $controller('ArchiveCtrl', { $scope: scope });
     $httpBackend.flush();

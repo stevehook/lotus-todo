@@ -1,0 +1,66 @@
+{
+  "name": "todo-react-app",
+  "version": "0.0.1",
+  "description": "React.js Todo app client using lotusrb as a backend. Originally based on flux-todoapp example, https://github.com/facebook/flux/tree/master/examples/flux-todomvc",
+  "repository": "https://github.com/stevehook/lotus-todo",
+  "main": "js/app.js",
+  "dependencies": {
+    "bootstrap": "^3.2.0",
+    "flux": "^2.0.1",
+    "keymirror": "~0.1.0",
+    "object-assign": "^1.0.0",
+    "react": "^0.13.0",
+    "superagent": "^1.4.0"
+  },
+  "devDependencies": {
+    "babel-jest": "*",
+    "babelify": "^6.1.2",
+    "browserify": "^6.2.0",
+    "browserify-css": "^0.7.1",
+    "envify": "^3.0.0",
+    "eslint": "^1.6.0",
+    "http-server": "",
+    "jest-cli": "^0.5",
+    "lodash": "",
+    "react-tools": "*",
+    "reactify": "^0.15.2",
+    "uglify-js": "~2.4.15",
+    "watchify": "^2.1.1"
+  },
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d js/app.js",
+    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest --verbose __tests__",
+    "lint": "eslint .",
+    "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/",
+    "clean": "rm -rvf ../app/public/*;",
+    "predist": "npm run build && npm run clean",
+    "dist": "mkdir ../app/public/js && cp -r css index.html ../app/public/ && cp -r js/bundle.min.js ../app/public/js/bundle.js && cp node_modules/bootstrap/dist/css/bootstrap.min.css ../app/public/css/bootstrap.css && cp -r node_modules/bootstrap/dist/fonts ../app/public/fonts"
+  },
+  "author": "Steve Hook",
+  "browserify": {
+    "transform": [
+      "babelify",
+      "envify",
+      "browserify-css"
+    ]
+  },
+  "jest": {
+    "rootDir": ".",
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-tools"
+    ]
+  },
+  "eslintConfig": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "arrowFunctions": true,
+      "blockBindings": true,
+      "classes": true,
+      "templateStrings": true
+    },
+    "rules": {}
+  }
+}

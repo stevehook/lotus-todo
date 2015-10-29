@@ -21,19 +21,30 @@ module Todo
       routes do
         redirect '/', to: '/index.html'
         get '/api/tasks', to: 'tasks#index'
-        get '/api/tasks/archive', to: 'tasks#archive'
+        get '/api/tasks/archived', to: 'tasks#archived'
         get '/api/tasks/new', to: 'tasks#new'
         post '/api/tasks', to: 'tasks#create'
         patch '/api/tasks/:id/complete', to: 'tasks#complete'
+        patch '/api/tasks/:id/archive', to: 'tasks#archive'
         delete '/api/tasks/:id', to: 'tasks#delete'
         post '/api/sessions', to: 'sessions#create'
         delete '/api/sessions', to: 'sessions#delete'
         get '/api/sessions', to: 'sessions#status'
       end
 
-      assets << ['public']
+      # assets << ['public']
 
       serve_assets true
+
+      configure :development do
+        handle_exceptions false
+        serve_assets true
+      end
+
+      configure :test do
+        host 'test.host'
+        serve_assets false
+      end
     end
   end
 end
