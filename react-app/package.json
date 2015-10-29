@@ -33,7 +33,9 @@
     "test": "jest --verbose __tests__",
     "lint": "eslint .",
     "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/",
-    "dist": "rm -rf ../app/public; mkdir ../app/public; mkdir ../app/public/js; cp -r css index.html ../app/public/; cp -r js/bundle.js ../app/public/js/; cp node_modules/bootstrap/dist/css/bootstrap.min.css ../app/public/css/"
+    "clean": "rm -rvf ../app/public/*;",
+    "predist": "npm run build && npm run clean",
+    "dist": "mkdir ../app/public/js && cp -r css index.html ../app/public/ && cp -r js/bundle.min.js ../app/public/js/bundle.js && cp node_modules/bootstrap/dist/css/bootstrap.min.css ../app/public/css/bootstrap.css && cp -r node_modules/bootstrap/dist/fonts ../app/public/fonts"
   },
   "author": "Steve Hook",
   "browserify": {
