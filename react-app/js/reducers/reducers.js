@@ -8,6 +8,12 @@ const initialState = {
 }
 
 function todoApp(state = initialState, action) {
-  // For now this is a no-op
-  return state;
+  switch (action.type) {
+    case ADD_TODO:
+      return Object.assign({}, state, {
+        tasks: state.tasks.concat([{ id: 0, title: action.title, completed: false }]);
+      })
+    default:
+      return state;
+  }
 }
