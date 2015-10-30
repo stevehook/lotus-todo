@@ -6,10 +6,11 @@
   "main": "js/app.js",
   "dependencies": {
     "bootstrap": "^3.2.0",
-    "flux": "^2.0.1",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
-    "react": "^0.13.0",
+    "react": "^0.14.0",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4",
     "superagent": "^1.4.0"
   },
   "devDependencies": {
@@ -24,6 +25,7 @@
     "lodash": "",
     "react-tools": "*",
     "reactify": "^0.15.2",
+    "redux-devtools": "^2.1.5",
     "uglify-js": "~2.4.15",
     "watchify": "^2.1.1"
   },
