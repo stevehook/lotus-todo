@@ -9,7 +9,7 @@ var AuthService = require('../js/services/AuthService.js');
 var TestUtils = React.addons.TestUtils;
 
 describe('TodoApp.react', () => {
-  var promise = { done: () => { return promise; }, fail: () => { return promise; } };
+  var promise = { then: () => { return promise; }, catch: () => { return promise; } };
   AuthService.prototype.checkLoggedIn.mockReturnValue(promise);
 
   var todoApp = TestUtils.renderIntoDocument(

@@ -10,7 +10,7 @@ var TestUtils = React.addons.TestUtils;
 
 describe('TodoList.react', () => {
   var handleDone;
-  var promise = { done: (callback) => { handleDone = callback; return promise; }, fail: () => { return promise; } };
+  var promise = { then: (callback) => { handleDone = callback; return promise; }, catch: () => { return promise; } };
   TaskService.prototype.getOutstanding.mockReturnValue(promise);
 
   var todoList = TestUtils.renderIntoDocument(
@@ -20,11 +20,13 @@ describe('TodoList.react', () => {
   it('renders a TodoTask component for each task', () => {
     var tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
     expect(tasks.length).toEqual(0);
-    handleDone([
-      { id: 123, title: 'Walk the dog' },
-      { id: 456, title: 'Clean the kitchen' },
-      { id: 789, title: 'Read a good book' },
-    ]);
+    handleDone({
+      body: [
+        { id: 123, title: 'Walk the dog' },
+        { id: 456, title: 'Clean the kitchen' },
+        { id: 789, title: 'Read a good book' },
+      ]
+    });
     tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
     expect(tasks.length).toEqual(3);
   });
