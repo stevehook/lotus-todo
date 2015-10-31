@@ -3,7 +3,7 @@ const React = require('react');
 const TodoTask = React.createClass({
   render: function() {
   	return (
-      <li key={'task-' + this.props.task.id} className={this.props.task.completed ? 'completed' : 'pending'}>
+      <li className={this.props.task.completed ? 'completed' : 'pending'}>
         <span className='glyphicon glyphicon-ok' onClick={this.handleComplete}></span>
         <span>{this.props.task.title}</span>
         <span className='glyphicon glyphicon-remove' onClick={this.handleArchive}></span>

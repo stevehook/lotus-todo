@@ -21,7 +21,7 @@ describe('TodoNewTask.react', () => {
   });
 
   it('calls onNewTaskInput handler when user presses enter key', () => {
-    input.getDOMNode().value = 'Walk the dog';
+    input.value = 'Walk the dog';
     TestUtils.Simulate.keyDown(input, { keyCode: 13 });
     expect(newTask).toBeDefined();
     expect(newTask).toEqual('Walk the dog');
