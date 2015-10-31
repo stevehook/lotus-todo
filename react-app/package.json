@@ -24,6 +24,7 @@
     "jest-cli": "^0.5",
     "lodash": "",
     "react-tools": "*",
+    "react-addons-test-utils": "*",
     "reactify": "^0.15.2",
     "redux-devtools": "^2.1.5",
     "uglify-js": "~2.4.15",
