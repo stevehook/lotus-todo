@@ -1,8 +1,8 @@
 // __tests__/TodoApp.react-test.js
-jest.dontMock('../../js/reducers/reducers')
+jest.dontMock('../../js/reducers/todoApp')
 
 const React = require('react');
-const todoApp = require('../../js/reducers/reducers')
+const todoApp = require('../../js/reducers/todoApp')
 
 describe('todoApp UNKNOWN ACTION', () => {
   it('returns the initial state', () => {
