@@ -1,25 +1,9 @@
-import { ADD_TODO } from '../actions/actionTypes';
 const authentication = require('./authentication');
-
-const INITIAL_TASK_STATE = {
-  tasks: [],
-  newTask: { id: 0, title: '', completed: false }
-};
+const todos = require('./todos');
 
 const INITIAL_STATE = {
   authentication: authentication.INITIAL_STATE,
-  data: INITIAL_TASK_STATE
-};
-
-function todos(state = INITIAL_TASK_STATE, action) {
-  switch (action.type) {
-    case ADD_TODO:
-      return Object.assign({}, state, {
-        tasks: state.tasks.concat([{ id: 0, title: action.title, completed: false }]),
-      });
-    default:
-      return state;
-  }
+  data: todos.INITIAL_STATE
 };
 
 function todoApp(state = INITIAL_STATE, action) {
