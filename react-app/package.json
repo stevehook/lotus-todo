@@ -63,7 +63,9 @@
       "arrowFunctions": true,
       "blockBindings": true,
       "classes": true,
-      "templateStrings": true
+      "templateStrings": true,
+      "defaultParams": true,
+      "modules": true
     },
     "rules": {}
   }
