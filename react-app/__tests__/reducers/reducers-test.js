@@ -1,6 +1,4 @@
 // __tests__/TodoApp.react-test.js
-require.requireActual('babel-polyfill');
-
 jest.dontMock('../../js/reducers/reducers.js');
 
 var React = require('react');
@@ -33,6 +31,20 @@ describe('todoApp ADD_TODO', () => {
       tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
       newTask: { id: 0, title: '', completed: false }
     });
+  });
+});
 
+describe('todoApp LOGIN_SUCCESS', () => {
+  it('sets the user and login state', () => {
+    let newState = todoApp(undefined, {
+      type: 'LOGIN_SUCCESS',
+      user: { id: 123, name: 'Bob' }
+    });
+    expect(newState).toEqual({
+      loggedIn: true,
+      user: { id: 123, name: 'Bob' },
+      tasks: [],
+      newTask: { id: 0, title: '', completed: false }
+    });
   });
 });
