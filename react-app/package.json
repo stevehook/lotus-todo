@@ -57,7 +57,8 @@
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-tools",
       "core-js/.*"
-    ]
+    ],
+    "setupEnvScriptFile": "<rootDir>/__tests__/jestSetup.js"
   },
   "eslintConfig": {
     "ecmaFeatures": {
