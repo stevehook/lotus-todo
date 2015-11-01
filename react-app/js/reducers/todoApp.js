@@ -33,25 +33,20 @@ function authentication(state = INITIAL_AUTH_STATE, action) {
 };
 
 function todos(state = INITIAL_TASK_STATE, action) {
-  return Object.assign({}, state, {
-    tasks: state.tasks.concat([{ id: 0, title: action.title, completed: false }]),
-  });
-};
-
-function todoApp(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ADD_TODO:
       return Object.assign({}, state, {
-        data: todos(state.data, action)
-      });
-    // TODO: Refactor the authentication actions into a separate reducer function
-    case LOGIN_SUCCESS:
-    case LOGIN_FAILURE:
-      return Object.assign({}, state, {
-        authentication: authentication(state.authentication, action)
+        tasks: state.tasks.concat([{ id: 0, title: action.title, completed: false }]),
       });
     default:
       return state;
+  }
+};
+
+function todoApp(state = INITIAL_STATE, action) {
+  return {
+    data: todos(state.data, action),
+    authentication: authentication(state.authentication, action)
   }
 };
 
