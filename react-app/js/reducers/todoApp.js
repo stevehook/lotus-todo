@@ -1,9 +1,5 @@
-import { ADD_TODO, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/actionTypes'
-
-const INITIAL_AUTH_STATE = {
-  loggedIn: false,
-  user: null,
-};
+import { ADD_TODO } from '../actions/actionTypes';
+const authentication = require('./authentication');
 
 const INITIAL_TASK_STATE = {
   tasks: [],
@@ -11,25 +7,8 @@ const INITIAL_TASK_STATE = {
 };
 
 const INITIAL_STATE = {
-  authentication: INITIAL_AUTH_STATE,
+  authentication: authentication.INITIAL_STATE,
   data: INITIAL_TASK_STATE
-};
-
-function authentication(state = INITIAL_AUTH_STATE, action) {
-  switch (action.type) {
-    case LOGIN_SUCCESS:
-      return Object.assign({}, state, {
-        loggedIn: true,
-        user: action.user
-      });
-    case LOGIN_FAILURE:
-      return Object.assign({}, state, {
-        loggedIn: false,
-        user: null
-      });
-    default:
-      return state;
-  }
 };
 
 function todos(state = INITIAL_TASK_STATE, action) {

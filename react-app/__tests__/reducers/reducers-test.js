@@ -1,5 +1,7 @@
 // __tests__/TodoApp.react-test.js
-jest.dontMock('../../js/reducers/todoApp')
+jest.dontMock('../../js/reducers/todoApp');
+jest.dontMock('../../js/reducers/authentication');
+jest.dontMock('../../js/reducers/todos');
 
 const React = require('react');
 const todoApp = require('../../js/reducers/todoApp')
