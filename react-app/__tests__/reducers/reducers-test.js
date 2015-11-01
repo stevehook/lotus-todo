@@ -1,6 +1,8 @@
 // __tests__/TodoApp.react-test.js
+require.requireActual('babel-polyfill');
 
 jest.dontMock('../../js/reducers/reducers.js');
+
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
 var todoApp = require('../../js/reducers/reducers');
@@ -28,7 +30,7 @@ describe('todoApp ADD_TODO', () => {
     expect(newState).toEqual({
       loggedIn: false,
       user: null,
-      tasks: [ { id: 1, title: 'Walk the dog', completed: false } ],
+      tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
       newTask: { id: 0, title: '', completed: false }
     });
 

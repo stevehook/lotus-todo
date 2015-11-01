@@ -5,6 +5,7 @@
   "repository": "https://github.com/stevehook/lotus-todo",
   "main": "js/app.js",
   "dependencies": {
+    "babel-polyfill": "^6.0.14",
     "bootstrap": "^3.2.0",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
@@ -54,7 +55,8 @@
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/react-tools"
+      "<rootDir>/node_modules/react-tools",
+      "core-js/.*"
     ]
   },
   "eslintConfig": {
