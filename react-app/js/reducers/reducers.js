@@ -12,12 +12,17 @@ function todoApp(state = initialState, action) {
     case ADD_TODO:
       return Object.assign({}, state, {
         tasks: state.tasks.concat([{ id: 0, title: action.title, completed: false }])
-      })
+      });
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         loggedIn: true,
         user: action.user
-      })
+      });
+    case LOGIN_FAILURE:
+      return Object.assign({}, state, {
+        loggedIn: false,
+        user: null
+      });
     default:
       return state;
   }

@@ -48,3 +48,24 @@ describe('todoApp LOGIN_SUCCESS', () => {
     });
   });
 });
+
+describe('todoApp LOGIN_FAILURE', () => {
+  it('sets the user and login state', () => {
+    let initialState = {
+      loggedIn: true,
+      user: { id: 456, name: 'Alice' },
+      tasks: [],
+      newTask: { id: 0, title: '', completed: false }
+    };
+    let newState = todoApp(initialState, {
+      type: 'LOGIN_FAILURE',
+      error: 'You are not getting in'
+    });
+    expect(newState).toEqual({
+      loggedIn: false,
+      user: null,
+      tasks: [],
+      newTask: { id: 0, title: '', completed: false }
+    });
+  });
+});
