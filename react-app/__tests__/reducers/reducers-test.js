@@ -1,9 +1,8 @@
 // __tests__/TodoApp.react-test.js
-jest.dontMock('../../js/reducers/reducers.js');
+jest.dontMock('../../js/reducers/reducers')
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
-var todoApp = require('../../js/reducers/reducers');
+const React = require('react');
+const todoApp = require('../../js/reducers/reducers')
 
 describe('todoApp UNKNOWN ACTION', () => {
   it('returns the initial state', () => {
@@ -51,13 +50,11 @@ describe('todoApp LOGIN_SUCCESS', () => {
 
 describe('todoApp LOGIN_FAILURE', () => {
   it('sets the user and login state', () => {
-    let initialState = {
+    let previousState = Object.assign({}, todoApp.INITIAL_STATE, {
       loggedIn: true,
-      user: { id: 456, name: 'Alice' },
-      tasks: [],
-      newTask: { id: 0, title: '', completed: false }
-    };
-    let newState = todoApp(initialState, {
+      user: { id: 456, name: 'Alice' }
+    });
+    let newState = todoApp(previousState, {
       type: 'LOGIN_FAILURE',
       error: 'You are not getting in'
     });
