@@ -1,9 +1,9 @@
 // __tests__/TodoNewTask.react-test.js
 
-jest.dontMock('../js/components/TodoNewTask.react.js');
+jest.dontMock('../../js/components/TodoNewTask.react.js');
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
-var TodoNewTask = require('../js/components/TodoNewTask.react.js');
+var TodoNewTask = require('../../js/components/TodoNewTask.react.js');
 
 describe('TodoNewTask.react', () => {
   var newTask;

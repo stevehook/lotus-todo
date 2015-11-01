@@ -1,12 +1,12 @@
 // __tests__/TodoApp.react-test.js
 
-jest.dontMock('../js/components/TodoList.react.js');
+jest.dontMock('../../js/components/TodoList.react.js');
 var React = require('react');
 var TestUtils = require('react-addons-test-utils');
-var TodoList = require('../js/components/TodoList.react.js');
-var TodoTask = require('../js/components/TodoTask.react.js');
-var TodoNewTask = require('../js/components/TodoNewTask.react.js');
-var TaskService = require('../js/services/TaskService');
+var TodoList = require('../../js/components/TodoList.react.js');
+var TodoTask = require('../../js/components/TodoTask.react.js');
+var TodoNewTask = require('../../js/components/TodoNewTask.react.js');
+var TaskService = require('../../js/services/TaskService');
 
 describe('TodoList.react', () => {
   var handleDone;
