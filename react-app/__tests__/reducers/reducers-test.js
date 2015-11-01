@@ -21,6 +21,16 @@ describe('todoApp UNKNOWN ACTION', () => {
 
 describe('todoApp ADD_TODO', () => {
   it('adds a new task', () => {
+    let newState = todoApp(undefined, {
+      type: 'ADD_TODO',
+      title: 'Walk the dog'
+    });
+    expect(newState).toEqual({
+      loggedIn: false,
+      user: null,
+      tasks: [ { id: 1, title: 'Walk the dog', completed: false } ],
+      newTask: { id: 0, title: '', completed: false }
+    });
 
   });
 });
