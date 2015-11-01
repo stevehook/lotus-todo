@@ -10,8 +10,10 @@ describe('todoApp UNKNOWN ACTION', () => {
       type: 'UNKNOWN'
     });
     expect(newState).toEqual({
-      loggedIn: false,
-      user: null,
+      authentication: {
+        loggedIn: false,
+        user: null,
+      },
       tasks: [],
       newTask: { id: 0, title: '', completed: false }
     });
@@ -25,8 +27,10 @@ describe('todoApp ADD_TODO', () => {
       title: 'Walk the dog'
     });
     expect(newState).toEqual({
-      loggedIn: false,
-      user: null,
+      authentication: {
+        loggedIn: false,
+        user: null
+      },
       tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
       newTask: { id: 0, title: '', completed: false }
     });
@@ -40,8 +44,10 @@ describe('todoApp LOGIN_SUCCESS', () => {
       user: { id: 123, name: 'Bob' }
     });
     expect(newState).toEqual({
-      loggedIn: true,
-      user: { id: 123, name: 'Bob' },
+      authentication: {
+        loggedIn: true,
+        user: { id: 123, name: 'Bob' },
+      },
       tasks: [],
       newTask: { id: 0, title: '', completed: false }
     });
@@ -51,16 +57,20 @@ describe('todoApp LOGIN_SUCCESS', () => {
 describe('todoApp LOGIN_FAILURE', () => {
   it('sets the user and login state', () => {
     let previousState = Object.assign({}, todoApp.INITIAL_STATE, {
-      loggedIn: true,
-      user: { id: 456, name: 'Alice' }
+      authentication: {
+        loggedIn: true,
+        user: { id: 456, name: 'Alice' }
+      }
     });
     let newState = todoApp(previousState, {
       type: 'LOGIN_FAILURE',
       error: 'You are not getting in'
     });
     expect(newState).toEqual({
-      loggedIn: false,
-      user: null,
+      authentication: {
+        loggedIn: false,
+        user: null,
+      },
       tasks: [],
       newTask: { id: 0, title: '', completed: false }
     });
