@@ -14,8 +14,10 @@ describe('todoApp UNKNOWN ACTION', () => {
         loggedIn: false,
         user: null,
       },
-      tasks: [],
-      newTask: { id: 0, title: '', completed: false }
+      data: {
+        tasks: [],
+        newTask: { id: 0, title: '', completed: false }
+      }
     });
   });
 });
@@ -31,8 +33,10 @@ describe('todoApp ADD_TODO', () => {
         loggedIn: false,
         user: null
       },
-      tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
-      newTask: { id: 0, title: '', completed: false }
+      data: {
+        tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
+        newTask: { id: 0, title: '', completed: false }
+      }
     });
   });
 });
@@ -48,8 +52,10 @@ describe('todoApp LOGIN_SUCCESS', () => {
         loggedIn: true,
         user: { id: 123, name: 'Bob' },
       },
-      tasks: [],
-      newTask: { id: 0, title: '', completed: false }
+      data: {
+        tasks: [],
+        newTask: { id: 0, title: '', completed: false }
+      }
     });
   });
 });
@@ -71,8 +77,10 @@ describe('todoApp LOGIN_FAILURE', () => {
         loggedIn: false,
         user: null,
       },
-      tasks: [],
-      newTask: { id: 0, title: '', completed: false }
+      data: {
+        tasks: [],
+        newTask: { id: 0, title: '', completed: false }
+      }
     });
   });
 });
