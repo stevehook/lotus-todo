@@ -65,7 +65,8 @@
       "classes": true,
       "templateStrings": true,
       "defaultParams": true,
-      "modules": true
+      "modules": true,
+      "objectLiteralShorthandProperties": true
     },
     "rules": {}
   }
