@@ -25,13 +25,28 @@ export function loginFailure(error) {
   return { type: LOGIN_FAILURE, error };
 };
 
+// Async action creator
+export function fetchTasks() {
+  return function (dispatch) {
+    dispatch(fetchTasksStart());
+    return fetch('/api/tasks', {
+      method: 'get',
+      headers: {
+        'Accept', 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(json => dispatch(fetchTasksSuccess(json)))
+      .catch(response => dispatch(fetchTasksFailure(response)));
+  }
+};
 
 export function fetchTasksStart() {
   return { type: FETCH_TASKS_START };
 };
 
-export function fetchTasksSuccess(user) {
-  return { type: FETCH_TASKS_SUCCESS, user };
+export function fetchTasksSuccess(tasks) {
+  return { type: FETCH_TASKS_SUCCESS, tasks };
 };
 
 export function fetchTasksFailure(error) {
