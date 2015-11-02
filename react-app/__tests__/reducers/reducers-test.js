@@ -43,6 +43,29 @@ describe('todoApp ADD_TODO', () => {
   });
 });
 
+describe('todos FETCH_TASKS_SUCCESS', () => {
+  let tasks = [
+    { id: 123, title: 'Walk the dog', completed: true },
+    { id: 456, title: 'Cook dinner', completed: false },
+    { id: 789, title: 'Eat dinner', completed: false }
+  ];
+
+  it('adds a new task', () => {
+    let newState = todoApp(undefined, {
+      type: 'FETCH_TASKS_SUCCESS',
+      response: { body: tasks }
+    });
+    expect(newState.data).toEqual({
+      tasks: [
+        { id: 123, title: 'Walk the dog', completed: true },
+        { id: 456, title: 'Cook dinner', completed: false },
+        { id: 789, title: 'Eat dinner', completed: false }
+      ],
+      newTask: { id: 0, title: '', completed: false }
+    });
+  });
+});
+
 describe('todoApp LOGIN_SUCCESS', () => {
   it('sets the user and login state', () => {
     let newState = todoApp(undefined, {
