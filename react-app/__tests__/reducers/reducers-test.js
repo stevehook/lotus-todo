@@ -56,11 +56,7 @@ describe('todos FETCH_TASKS_SUCCESS', () => {
       response: { body: tasks }
     });
     expect(newState.data).toEqual({
-      tasks: [
-        { id: 123, title: 'Walk the dog', completed: true },
-        { id: 456, title: 'Cook dinner', completed: false },
-        { id: 789, title: 'Eat dinner', completed: false }
-      ],
+      tasks: tasks,
       newTask: { id: 0, title: '', completed: false }
     });
   });
