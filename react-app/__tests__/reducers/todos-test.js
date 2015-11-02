@@ -10,16 +10,7 @@ describe('todoApp UNKNOWN ACTION', () => {
     let newState = todoApp(undefined, {
       type: 'UNKNOWN'
     });
-    expect(newState).toEqual({
-      authentication: {
-        loggedIn: false,
-        user: null,
-      },
-      data: {
-        tasks: [],
-        newTask: { id: 0, title: '', completed: false }
-      }
-    });
+    expect(newState).toEqual(todoApp.INITIAL_STATE);
   });
 });
 
@@ -29,15 +20,9 @@ describe('todoApp ADD_TODO', () => {
       type: 'ADD_TODO',
       title: 'Walk the dog'
     });
-    expect(newState).toEqual({
-      authentication: {
-        loggedIn: false,
-        user: null
-      },
-      data: {
-        tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
-        newTask: { id: 0, title: '', completed: false }
-      }
+    expect(newState.data).toEqual({
+      tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
+      newTask: { id: 0, title: '', completed: false }
     });
   });
 });

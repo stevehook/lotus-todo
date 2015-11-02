@@ -11,15 +11,9 @@ describe('todoApp LOGIN_SUCCESS', () => {
       type: 'LOGIN_SUCCESS',
       user: { id: 123, name: 'Bob' }
     });
-    expect(newState).toEqual({
-      authentication: {
-        loggedIn: true,
-        user: { id: 123, name: 'Bob' },
-      },
-      data: {
-        tasks: [],
-        newTask: { id: 0, title: '', completed: false }
-      }
+    expect(newState.authentication).toEqual({
+      loggedIn: true,
+      user: { id: 123, name: 'Bob' },
     });
   });
 });
@@ -36,15 +30,9 @@ describe('todoApp LOGIN_FAILURE', () => {
       type: 'LOGIN_FAILURE',
       error: 'You are not getting in'
     });
-    expect(newState).toEqual({
-      authentication: {
-        loggedIn: false,
-        user: null,
-      },
-      data: {
-        tasks: [],
-        newTask: { id: 0, title: '', completed: false }
-      }
+    expect(newState.authentication).toEqual({
+      loggedIn: false,
+      user: null,
     });
   });
 });
