@@ -76,7 +76,7 @@ const TodoList = React.createClass({
         <TodoNewTask task={this.state.newTask} onNewTaskInput={this.handleNewTaskInput} />
         <div><ul className='task-list'>{this.unarchivedTasks().map((task) => {
           return (
-            <TodoTask task={task} onCompleteTask={this.handleCompleteTask} onArchiveTask={this.handleArchiveTask}/>
+            <TodoTask key={'task-' + task.id} task={task} onCompleteTask={this.handleCompleteTask} onArchiveTask={this.handleArchiveTask}/>
           );
         })}</ul>
         </div>

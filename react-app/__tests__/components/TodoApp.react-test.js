@@ -1,15 +1,15 @@
 // __tests__/TodoApp.react-test.js
 
-jest.dontMock('../js/components/TodoApp.react.js');
-var React = require('react/addons');
-var TodoApp = require('../js/components/TodoApp.react.js');
-var TodoList = require('../js/components/TodoList.react.js');
-var LoginForm = require('../js/components/LoginForm.react.js');
-var AuthService = require('../js/services/AuthService.js');
-var TestUtils = React.addons.TestUtils;
+jest.dontMock('../../js/components/TodoApp.react.js');
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
+var TodoApp = require('../../js/components/TodoApp.react.js');
+var TodoList = require('../../js/components/TodoList.react.js');
+var LoginForm = require('../../js/components/LoginForm.react.js');
+var AuthService = require('../../js/services/AuthService.js');
 
 describe('TodoApp.react', () => {
-  var promise = { done: () => { return promise; }, fail: () => { return promise; } };
+  var promise = { then: () => { return promise; }, catch: () => { return promise; } };
   AuthService.prototype.checkLoggedIn.mockReturnValue(promise);
 
   var todoApp = TestUtils.renderIntoDocument(

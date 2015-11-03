@@ -1,4 +1,5 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 const ENTER_KEY = 13;
 
 const TodoNewTask = React.createClass({
@@ -17,7 +18,7 @@ const TodoNewTask = React.createClass({
 
     event.preventDefault();
 
-    let input = React.findDOMNode(this.refs.newField);
+    let input = ReactDOM.findDOMNode(this.refs.newField);
     let val = input.value.trim();
 
     if (val) {
