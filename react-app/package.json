@@ -22,6 +22,7 @@
     "babelify": "^6.1.2",
     "browserify": "^6.2.0",
     "browserify-css": "^0.7.1",
+    "chai": "^3.4.0",
     "envify": "^3.0.0",
     "eslint": "^1.6.0",
     "http-server": "",
@@ -38,6 +39,7 @@
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest --verbose __tests__",
     "test:mocha": "mocha --compilers js:babel-core/register --recursive",
     "test:watch": "npm test -- --watch",
     "lint": "eslint .",
@@ -52,6 +54,11 @@
       "babelify",
       "envify",
       "browserify-css"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015"
     ]
   },
   "jest": {
