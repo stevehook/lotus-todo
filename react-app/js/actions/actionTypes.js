@@ -32,10 +32,9 @@ export function fetchTasks() {
     return fetch('/api/tasks', {
       method: 'get',
       headers: {
-        'Accept', 'application/json'
+        'Accept': 'application/json'
       }
-    })
-      .then(response => response.json())
+    }).then(response => response.json())
       .then(json => dispatch(fetchTasksSuccess(json)))
       .catch(response => dispatch(fetchTasksFailure(response)));
   }
