@@ -16,6 +16,8 @@
     "superagent": "^1.4.0"
   },
   "devDependencies": {
+    "babel": "^6.0.15",
+    "babel-core": "^6.0.20",
     "babel-jest": "*",
     "babelify": "^6.1.2",
     "browserify": "^6.2.0",
