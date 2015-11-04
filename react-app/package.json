@@ -13,6 +13,7 @@
     "react-dom": "",
     "react-redux": "^4.0.0",
     "redux": "^3.0.4",
+    "redux-thunk": "^1.0.0",
     "superagent": "^1.4.0"
   },
   "devDependencies": {
@@ -41,7 +42,7 @@
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
     "test": "jest --verbose __tests__",
     "test:mocha": "mocha --compilers js:babel-core/register --recursive",
-    "test:watch": "npm test -- --watch",
+    "test:watch": "npm run test:mocha -- --watch",
     "lint": "eslint .",
     "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/",
     "clean": "rm -rvf ../app/public/*;",
