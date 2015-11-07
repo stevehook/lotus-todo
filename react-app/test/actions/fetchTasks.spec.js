@@ -49,16 +49,25 @@ describe('actions', () => {
   describe('fetchTasks', () => {
     afterEach(() => { nock.cleanAll(); });
 
-    it('create the correct action', () => {
+    it('create the correct action', (done) => {
       nock('http://lotus-todo.lvh.me:9292/')
         .get('/api/tasks')
         .reply(200, { todos: ['do something'] });
 
       const expectedActions = [
-        { type: types.FETCH_TODOS_REQUEST },
-        { type: types.FETCH_TODOS_SUCCESS, body: { todos: ['do something']  } }
+        { type: actions.FETCH_TASKS_START },
+        { type: actions.FETCH_TASKS_SUCCESS, body: { tasks: [{ id: 123, title: 'Walk the dog' }]  } }
       ];
-      const store = mockStore({ todos: [] }, expectedActions, done);
+      const initialState = {
+        data: {
+          tasks: []
+        },
+        authentication: {
+          loggedIn: false,
+          user: null
+        }
+      };
+      const store = mockStore(initialState, expectedActions, done);
       store.dispatch(actions.fetchTasks());
     });
   });

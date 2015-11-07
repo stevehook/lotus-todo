@@ -1,3 +1,5 @@
+const TaskService = require('../services/TaskService');
+
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -29,14 +31,11 @@ export function loginFailure(error) {
 export function fetchTasks() {
   return function (dispatch) {
     dispatch(fetchTasksStart());
-    return fetch('/api/tasks', {
-      method: 'get',
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => response.json())
+    let taskService = new TaskService();
+    return taskService.getOutstanding()
+      .then(res => res.json())
       .then(json => dispatch(fetchTasksSuccess(json)))
-      .catch(response => dispatch(fetchTasksFailure(response)));
+      .catch(response => dispatch(fetchTasksFailure(res)));
   }
 };
 
