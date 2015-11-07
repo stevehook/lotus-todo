@@ -53,8 +53,7 @@
   "browserify": {
     "transform": [
       "babelify",
-      "envify",
-      "browserify-css"
+      "envify"
     ]
   },
   "babel": {
