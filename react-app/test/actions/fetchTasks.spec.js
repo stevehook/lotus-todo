@@ -26,7 +26,6 @@ function mockStore(getState, expectedActions, done) {
         const expectedAction = expectedActions.shift();
 
         try {
-          console.log(action, expectedAction);
           expect(action).to.eql(expectedAction);
           if (done && !expectedActions.length) {
             done();
