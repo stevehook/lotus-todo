@@ -1,4 +1,4 @@
-import expect from 'chai';
+const expect = require('chai').expect;
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import * as actions from '../../js/actions/actionTypes';
@@ -26,7 +26,8 @@ function mockStore(getState, expectedActions, done) {
         const expectedAction = expectedActions.shift();
 
         try {
-          expect(action).toEqual(expectedAction);
+          console.log(action, expectedAction);
+          expect(action).to.eql(expectedAction);
           if (done && !expectedActions.length) {
             done();
           }
