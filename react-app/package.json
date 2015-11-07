@@ -30,6 +30,7 @@
     "jest-cli": "^0.5",
     "lodash": "",
     "mocha": "^2.3.3",
+    "nock": "^2.17.0",
     "react-addons-test-utils": "*",
     "react-tools": "*",
     "reactify": "^0.15.2",
