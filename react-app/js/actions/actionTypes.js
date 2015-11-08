@@ -33,8 +33,7 @@ export function fetchTasks() {
     dispatch(fetchTasksStart());
     let taskService = new TaskService();
     return taskService.getOutstanding()
-      .then(res => res.json())
-      .then(json => dispatch(fetchTasksSuccess(json)))
+      .then(res => dispatch(fetchTasksSuccess(res.body)))
       .catch(response => dispatch(fetchTasksFailure(res)));
   }
 };

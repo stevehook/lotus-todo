@@ -1,4 +1,5 @@
 const expect = require('chai').expect;
+const request = require('superagent');
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import * as actions from '../../js/actions/actionTypes';
@@ -17,9 +18,7 @@ function mockStore(getState, expectedActions, done) {
   function mockStoreWithoutMiddleware() {
     return {
       getState() {
-        return typeof getState === 'function' ?
-          getState() :
-          getState;
+        return typeof getState === 'function' ?  getState() : getState;
       },
 
       dispatch(action) {
@@ -50,13 +49,14 @@ describe('actions', () => {
     afterEach(() => { nock.cleanAll(); });
 
     it('create the correct action', (done) => {
-      nock('http://lotus-todo.lvh.me:9292/')
+      let responseBody = [{ id: 123, title: 'Walk the dog' }];
+      nock('http://localhost')
         .get('/api/tasks')
-        .reply(200, { todos: ['do something'] });
+        .reply(200, responseBody, {'Content-Type': 'application/json'});
 
       const expectedActions = [
         { type: actions.FETCH_TASKS_START },
-        { type: actions.FETCH_TASKS_SUCCESS, body: { tasks: [{ id: 123, title: 'Walk the dog' }]  } }
+        { type: actions.FETCH_TASKS_SUCCESS, tasks: responseBody }
       ];
       const initialState = {
         data: {
