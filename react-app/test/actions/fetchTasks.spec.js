@@ -47,28 +47,50 @@ function mockStore(getState, expectedActions, done) {
 describe('actions', () => {
   describe('fetchTasks', () => {
     afterEach(() => { nock.cleanAll(); });
+    const initialState = {
+      data: {
+        tasks: []
+      },
+      authentication: {
+        loggedIn: false,
+        user: null
+      }
+    };
 
-    it('create the correct action', (done) => {
+    describe('when /api/tasks succeeds', () => {
       let responseBody = [{ id: 123, title: 'Walk the dog' }];
-      nock('http://localhost')
-        .get('/api/tasks')
-        .reply(200, responseBody, {'Content-Type': 'application/json'});
 
-      const expectedActions = [
-        { type: actions.FETCH_TASKS_START },
-        { type: actions.FETCH_TASKS_SUCCESS, tasks: responseBody }
-      ];
-      const initialState = {
-        data: {
-          tasks: []
-        },
-        authentication: {
-          loggedIn: false,
-          user: null
-        }
-      };
-      const store = mockStore(initialState, expectedActions, done);
-      store.dispatch(actions.fetchTasks());
+      beforeEach(() => {
+        nock('http://localhost')
+          .get('/api/tasks')
+          .reply(200, responseBody, {'Content-Type': 'application/json'});
+      });
+
+      it('it dispatches the correct actions', (done) => {
+        const expectedActions = [
+          { type: actions.FETCH_TASKS_START },
+          { type: actions.FETCH_TASKS_SUCCESS, tasks: responseBody }
+        ];
+        const store = mockStore(initialState, expectedActions, done);
+        store.dispatch(actions.fetchTasks());
+      });
+    });
+
+    describe('when /api/tasks fails', () => {
+      beforeEach(() => {
+        nock('http://localhost')
+          .get('/api/tasks')
+          .reply(400, {}, {'Content-Type': 'application/json'});
+      });
+
+      it('it dispatches the correct actions', (done) => {
+        const expectedActions = [
+          { type: actions.FETCH_TASKS_START },
+          { type: actions.FETCH_TASKS_FAILURE, error: 'API Failed' }
+        ];
+        const store = mockStore(initialState, expectedActions, done);
+        store.dispatch(actions.fetchTasks());
+      });
     });
   });
 });

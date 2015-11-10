@@ -34,7 +34,7 @@ export function fetchTasks() {
     let taskService = new TaskService();
     return taskService.getOutstanding()
       .then(res => dispatch(fetchTasksSuccess(res.body)))
-      .catch(response => dispatch(fetchTasksFailure(res)));
+      .catch(err => dispatch(fetchTasksFailure('API Failed')));
   }
 };
 
