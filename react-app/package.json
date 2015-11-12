@@ -21,7 +21,7 @@
     "babel-core": "^6.0.20",
     "babel-jest": "*",
     "babelify": "^6.1.2",
-    "browserify": "^6.2.0",
+    "browserify": "^12.0.0",
     "browserify-css": "^0.7.1",
     "chai": "^3.4.0",
     "envify": "^3.0.0",
@@ -36,7 +36,7 @@
     "reactify": "^0.15.2",
     "redux-devtools": "^2.1.5",
     "uglify-js": "~2.4.15",
-    "watchify": "^2.1.1"
+    "watchify": "^3.6.0"
   },
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
@@ -59,7 +59,8 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015",
+      "react"
     ]
   },
   "jest": {
