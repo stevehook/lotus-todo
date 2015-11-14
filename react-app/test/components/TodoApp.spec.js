@@ -1,10 +1,10 @@
 const expect = require('chai').expect;
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
-var TodoApp = require('../../js/components/TodoApp.react.js');
-var TodoList = require('../../js/components/TodoList.react.js');
-var LoginForm = require('../../js/components/LoginForm.react.js');
-var AuthService = require('../../js/services/AuthService.js');
+const React = require('react');
+const TestUtils = require('react-addons-test-utils');
+const TodoApp = require('../../js/components/TodoApp.react.js');
+const TodoList = require('../../js/components/TodoList.react.js');
+const LoginForm = require('../../js/components/LoginForm.react.js');
+const AuthService = require('../../js/services/AuthService.js');
 
 
 // describe('TodoApp.react', () => {

@@ -1,7 +1,7 @@
-const expect = require('chai').expect;
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
-var TodoTask = require('../../js/components/TodoTask.react.js');
+const expect = require('expect');
+const React = require('react');
+const TestUtils = require('react-addons-test-utils');
+const TodoTask = require('../../js/components/TodoTask.react.js');
 
 function setup() {
   let props = {
