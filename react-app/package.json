@@ -33,7 +33,7 @@
     "lodash": "",
     "mocha": "^2.3.3",
     "nock": "^2.17.0",
-    "react-addons-test-utils": "*",
+    "react-addons-test-utils": "^0.14.2",
     "react-tools": "*",
     "reactify": "^0.15.2",
     "redux-devtools": "^2.1.5",
