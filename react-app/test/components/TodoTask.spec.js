@@ -45,4 +45,11 @@ describe('TodoApp.react', () => {
     okIcon.props.onClick();
     expect(props.onCompleteTask.calls.length).toBe(1);
   });
+
+  it('invokes callback when archive button is clicked', () => {
+    const { output, props } = setup();
+    let removeIcon = output.props.children[2];
+    removeIcon.props.onClick();
+    expect(props.onArchiveTask.calls.length).toBe(1);
+  });
 });
