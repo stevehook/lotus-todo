@@ -41,5 +41,8 @@ describe('TodoApp.react', () => {
 
   it('invokes callback when complete button is clicked', () => {
     const { output, props } = setup();
+    let okIcon = output.props.children[0];
+    okIcon.props.onClick();
+    expect(props.onCompleteTask.calls.length).toBe(1);
   });
 });
