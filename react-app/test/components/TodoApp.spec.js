@@ -6,21 +6,22 @@ var TodoList = require('../../js/components/TodoList.react.js');
 var LoginForm = require('../../js/components/LoginForm.react.js');
 var AuthService = require('../../js/services/AuthService.js');
 
-describe('TodoApp.react', () => {
-  var promise = { then: () => { return promise; }, catch: () => { return promise; } };
-  AuthService.prototype.checkLoggedIn = () => promise;
 
-  var todoApp = TestUtils.renderIntoDocument(
-    <TodoApp/>
-  );
+// describe('TodoApp.react', () => {
+//   var promise = { then: () => { return promise; }, catch: () => { return promise; } };
+//   AuthService.prototype.checkLoggedIn = () => promise;
 
-  it('renders a login box', () => {
-    var loginForm = TestUtils.findRenderedComponentWithType(todoApp, LoginForm);
-    expect(loginForm).toBeDefined();
-  });
+//   var todoApp = TestUtils.renderIntoDocument(
+//     <TodoApp/>
+//   );
 
-  it('does not render a list', () => {
-    var lists = TestUtils.scryRenderedComponentsWithType(todoApp, TodoList);
-    expect(lists.length).toEqual(0);
-  });
-});
+//   it('renders a login box', () => {
+//     var loginForm = TestUtils.findRenderedComponentWithType(todoApp, LoginForm);
+//     expect(loginForm).toBeDefined();
+//   });
+
+//   it('does not render a list', () => {
+//     var lists = TestUtils.scryRenderedComponentsWithType(todoApp, TodoList);
+//     expect(lists.length).toEqual(0);
+//   });
+// });
