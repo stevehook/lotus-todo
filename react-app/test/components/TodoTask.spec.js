@@ -27,6 +27,16 @@ function setup() {
 describe('TodoApp.react', () => {
   it('renders the correct markup', () => {
     const { output } = setup();
+    expect(output.type).toBe('li');
+
+    let [okIcon, title, removeIcon] = output.props.children;
+
+    expect(okIcon.type).toBe('span');
+
+    expect(title.type).toBe('span');
+    expect(title.props.children).toBe('Walk the dog');
+
+    expect(removeIcon.type).toBe('span');
   });
 
   it('invokes callback when complete button is clicked', () => {
