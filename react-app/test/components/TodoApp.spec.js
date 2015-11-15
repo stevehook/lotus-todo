@@ -2,6 +2,7 @@ const expect = require('expect');
 const React = require('react');
 const TestUtils = require('react-addons-test-utils');
 const TodoApp = require('../../js/components/TodoApp.react.js');
+const TodoList = require('../../js/components/TodoList.react.js');
 const LoginForm = require('../../js/components/LoginForm.react.js');
 const AuthService = require('../../js/services/AuthService.js');
 
@@ -33,6 +34,8 @@ describe('TodoApp.react', () => {
 
   describe('When logged in', () => {
     it('renders a list', () => {
+      const { output } = setup();
+      expect(output.props.children.type).toEqual(TodoList);
     });
   });
 });
