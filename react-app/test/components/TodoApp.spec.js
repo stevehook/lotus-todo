@@ -22,8 +22,12 @@ function setup() {
 }
 
 describe('TodoApp.react', () => {
-  var promise = { then: () => { return promise; }, catch: () => { return promise; } };
-  AuthService.prototype.checkLoggedIn = () => promise;
+  let promise;
+
+  beforeEach(() => {
+    promise = { then: () => { return promise; }, catch: () => { return promise; } };
+    AuthService.prototype.checkLoggedIn = () => promise;
+  });
 
   describe('When NOT logged in', () => {
     it('renders a login box', () => {
@@ -35,6 +39,7 @@ describe('TodoApp.react', () => {
   describe('When logged in', () => {
     it('renders a list', () => {
       const { output } = setup();
+      promise.then();
       expect(output.props.children.type).toEqual(TodoList);
     });
   });
