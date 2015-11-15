@@ -1,16 +1,12 @@
-jest.dontMock('../../js/reducers/todoApp');
-jest.dontMock('../../js/reducers/authentication');
-jest.dontMock('../../js/reducers/todos');
-
-const React = require('react');
-const todoApp = require('../../js/reducers/todoApp')
+const expect = require('chai').expect;
+const todoApp = require('../../js/reducers/todoApp');
 
 describe('todoApp UNKNOWN ACTION', () => {
   it('returns the initial state', () => {
     let newState = todoApp(undefined, {
       type: 'UNKNOWN'
     });
-    expect(newState).toEqual(todoApp.INITIAL_STATE);
+    expect(newState).to.eql(todoApp.INITIAL_STATE);
   });
 });
 
@@ -20,7 +16,7 @@ describe('todoApp ADD_TODO', () => {
       type: 'ADD_TODO',
       title: 'Walk the dog'
     });
-    expect(newState.data).toEqual({
+    expect(newState.data).to.eql({
       tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
       newTask: { id: 0, title: '', completed: false }
     });
@@ -39,7 +35,7 @@ describe('todos FETCH_TASKS_SUCCESS', () => {
       type: 'FETCH_TASKS_SUCCESS',
       response: { body: tasks }
     });
-    expect(newState.data).toEqual({
+    expect(newState.data).to.eql({
       tasks: tasks,
       newTask: { id: 0, title: '', completed: false }
     });

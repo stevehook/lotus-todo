@@ -1,3 +1,5 @@
+const TaskService = require('../services/TaskService');
+
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -25,13 +27,23 @@ export function loginFailure(error) {
   return { type: LOGIN_FAILURE, error };
 };
 
+// Async action creator
+export function fetchTasks() {
+  return function (dispatch) {
+    dispatch(fetchTasksStart());
+    let taskService = new TaskService();
+    return taskService.getOutstanding()
+      .then(res => dispatch(fetchTasksSuccess(res.body)))
+      .catch(err => dispatch(fetchTasksFailure('API Failed')));
+  }
+};
 
 export function fetchTasksStart() {
   return { type: FETCH_TASKS_START };
 };
 
-export function fetchTasksSuccess(user) {
-  return { type: FETCH_TASKS_SUCCESS, user };
+export function fetchTasksSuccess(tasks) {
+  return { type: FETCH_TASKS_SUCCESS, tasks };
 };
 
 export function fetchTasksFailure(error) {

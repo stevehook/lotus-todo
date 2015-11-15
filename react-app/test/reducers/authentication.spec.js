@@ -1,8 +1,4 @@
-jest.dontMock('../../js/reducers/todoApp');
-jest.dontMock('../../js/reducers/authentication');
-jest.dontMock('../../js/reducers/todos');
-
-const React = require('react');
+const expect = require('chai').expect;
 const todoApp = require('../../js/reducers/todoApp')
 
 describe('todoApp LOGIN_SUCCESS', () => {
@@ -11,7 +7,7 @@ describe('todoApp LOGIN_SUCCESS', () => {
       type: 'LOGIN_SUCCESS',
       user: { id: 123, name: 'Bob' }
     });
-    expect(newState.authentication).toEqual({
+    expect(newState.authentication).to.eql({
       loggedIn: true,
       user: { id: 123, name: 'Bob' },
     });
@@ -30,7 +26,7 @@ describe('todoApp LOGIN_FAILURE', () => {
       type: 'LOGIN_FAILURE',
       error: 'You are not getting in'
     });
-    expect(newState.authentication).toEqual({
+    expect(newState.authentication).to.eql({
       loggedIn: false,
       user: null,
     });
