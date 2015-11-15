@@ -22,10 +22,10 @@ function setup() {
 }
 
 describe('TodoApp.react', () => {
-  let promise;
+  let resolveAuth, rejectAuth;
 
   beforeEach(() => {
-    promise = { then: () => { return promise; }, catch: () => { return promise; } };
+    let promise = new Promise(function(resolve, reject) { resolveAuth = resolve; rejectAuth = reject; });
     AuthService.prototype.checkLoggedIn = () => promise;
   });
 
@@ -39,7 +39,7 @@ describe('TodoApp.react', () => {
   describe('When logged in', () => {
     it('renders a list', () => {
       const { output } = setup();
-      promise.then();
+      resolveAuth({ name: 'Bob', id: 345 });
       expect(output.props.children.type).toEqual(TodoList);
     });
   });
