@@ -21,7 +21,6 @@
   "devDependencies": {
     "babel": "^6.0.15",
     "babel-core": "^6.0.20",
-    "babel-jest": "*",
     "babelify": "^7.2.0",
     "browserify": "^12.0.0",
     "browserify-css": "^0.7.1",
@@ -29,7 +28,6 @@
     "eslint": "^1.6.0",
     "expect": "1.13.0",
     "http-server": "",
-    "jest-cli": "^0.5",
     "jsdom": "7.0.2",
     "lodash": "",
     "mocha": "^2.3.3",
@@ -44,8 +42,7 @@
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js",
     "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
-    "test": "jest --verbose __tests__",
-    "test:mocha": "mocha --compilers js:babel-core/register --recursive --require ./test/setup.js",
+    "test": "mocha --compilers js:babel-core/register --recursive --require ./test/setup.js",
     "test:watch": "npm run test:mocha -- --watch",
     "lint": "eslint .",
     "serve": "node_modules/.bin/http-server --cors --proxy http://localhost:9292/",
@@ -65,16 +62,6 @@
       "es2015",
       "react"
     ]
-  },
-  "jest": {
-    "rootDir": ".",
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/react-tools",
-      "core-js/.*"
-    ],
-    "setupEnvScriptFile": "<rootDir>/__tests__/jestSetup.js"
   },
   "eslintConfig": {
     "ecmaFeatures": {
