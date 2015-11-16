@@ -33,21 +33,21 @@ describe('actions', () => {
       });
     });
 
-    // describe('when /api/tasks fails', () => {
-    //   beforeEach(() => {
-    //     nock('http://localhost')
-    //       .get('/api/tasks')
-    //       .reply(400, {}, {'Content-Type': 'application/json'});
-    //   });
+    describe('when POST /api/sessions fails', () => {
+      beforeEach(() => {
+        nock('http://localhost')
+          .post('/api/sessions')
+          .reply(400, {}, {'Content-Type': 'application/json'});
+      });
 
-    //   it('it dispatches the correct actions', (done) => {
-    //     const expectedActions = [
-    //       { type: actions.FETCH_TASKS_START },
-    //       { type: actions.FETCH_TASKS_FAILURE, error: 'API Failed' }
-    //     ];
-    //     const store = mockStore(initialState, expectedActions, done);
-    //     store.dispatch(actions.fetchTasks());
-    //   });
-    // });
+      it('it dispatches the correct actions', (done) => {
+        const expectedActions = [
+          { type: actions.LOGIN_START },
+          { type: actions.LOGIN_FAILURE, error: 'Login Failed' }
+        ];
+        const store = mockStore(initialState, expectedActions, done);
+        store.dispatch(actions.login());
+      });
+    });
   });
 });
