@@ -15,6 +15,16 @@ export const COMPLETE_TODO = 'COMPLETE_TODO';
 export const ARCHIVE_TODO = 'ARCHIVE_TODO';
 
 
+export function login(email, password) {
+  return function (dispatch) {
+    dispatch(loginStart());
+    let authService = new AuthService();
+    return authService.login(email, password)
+      .then(res => dispatch(loginSuccess(res.body)))
+      .catch(err => dispatch(loginFailure('Login Failed')));
+  }
+};
+
 export function loginStart() {
   return { type: LOGIN_START };
 };
