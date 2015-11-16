@@ -15,7 +15,6 @@ export const ADD_TODO = 'ADD_TODO';
 export const COMPLETE_TODO = 'COMPLETE_TODO';
 export const ARCHIVE_TODO = 'ARCHIVE_TODO';
 
-
 export function login(email, password) {
   return function (dispatch) {
     dispatch(loginStart());
@@ -38,7 +37,6 @@ export function loginFailure(error) {
   return { type: LOGIN_FAILURE, error };
 };
 
-// Async action creator
 export function fetchTasks() {
   return function (dispatch) {
     dispatch(fetchTasksStart());
