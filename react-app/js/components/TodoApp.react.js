@@ -2,6 +2,7 @@ const React = require('react');
 const TodoList = require('./TodoList.react');
 const LoginForm = require('./LoginForm.react');
 const AuthService = require('../services/AuthService');
+import { connect } from 'react-redux';
 
 const TodoApp = React.createClass({
   getInitialState: function() {
@@ -50,4 +51,9 @@ const TodoApp = React.createClass({
   }
 });
 
-module.exports = TodoApp;
+// Select state to inject given global state - just take it all for now
+function select(state) {
+  return state;
+}
+
+module.exports = connect(select)(TodoApp);
