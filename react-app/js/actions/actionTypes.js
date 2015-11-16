@@ -1,4 +1,5 @@
 const TaskService = require('../services/TaskService');
+const AuthService = require('../services/AuthService');
 
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
