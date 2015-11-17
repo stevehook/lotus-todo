@@ -4,7 +4,7 @@ const LoginForm = require('./LoginForm.react');
 const AuthService = require('../services/AuthService');
 import { connect } from 'react-redux';
 
-const TodoApp = React.createClass({
+export const TodoApp = React.createClass({
   getInitialState: function() {
     return {
       loggedIn: false,
@@ -56,4 +56,4 @@ function select(state) {
   return state;
 }
 
-module.exports = connect(select)(TodoApp);
+export default connect(select)(TodoApp);

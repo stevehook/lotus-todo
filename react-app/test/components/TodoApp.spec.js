@@ -1,14 +1,15 @@
 const expect = require('expect');
 const React = require('react');
 const TestUtils = require('react-addons-test-utils');
-const TodoApp = require('../../js/components/TodoApp.react.js');
+import { TodoApp } from '../../js/components/TodoApp.react.js';
 const TodoList = require('../../js/components/TodoList.react.js');
 const LoginForm = require('../../js/components/LoginForm.react.js');
 const AuthService = require('../../js/services/AuthService.js');
 
+import { createStore } from 'redux';
+
 function setup() {
-  let props = {
-  };
+  let props = { store: createStore((state) => state) };
 
   let renderer = TestUtils.createRenderer();
   renderer.render(<TodoApp {...props} />);
