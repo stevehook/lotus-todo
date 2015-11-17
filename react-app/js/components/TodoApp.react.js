@@ -5,13 +5,6 @@ const AuthService = require('../services/AuthService');
 import { connect } from 'react-redux';
 
 export const TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
-      loggedIn: false,
-      user: null
-    };
-  },
-
   componentDidMount: function() {
     let authService = new AuthService();
     authService.checkLoggedIn().then((user) => {
