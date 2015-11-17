@@ -1,6 +1,10 @@
 const TaskService = require('../services/TaskService');
 const AuthService = require('../services/AuthService');
 
+export const CHECK_LOGGED_IN_START = 'CHECK_LOGGED_IN_START';
+export const CHECK_LOGGED_IN_SUCCESS = 'CHECK_LOGGED_IN_SUCCESS';
+export const CHECK_LOGGED_IN_FAILURE = 'CHECK_LOGGED_IN_FAILURE';
+
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -14,6 +18,28 @@ export const LOGOUT = 'LOGOUT';
 export const ADD_TODO = 'ADD_TODO';
 export const COMPLETE_TODO = 'COMPLETE_TODO';
 export const ARCHIVE_TODO = 'ARCHIVE_TODO';
+
+export function checkLoggedIn() {
+  return function (dispatch) {
+    dispatch(checkLoggedInStart());
+    let authService = new AuthService();
+    return authService.checkLoggedIn()
+      .then(res => dispatch(checkLoggedInSuccess(res.body)))
+      .catch(err => dispatch(checkLoggedInFailure('Login Failed')));
+  }
+};
+
+export function checkLoggedInStart() {
+  return { type: CHECK_LOGGED_IN_START };
+};
+
+export function checkLoggedInSuccess(user) {
+  return { type: CHECK_LOGGED_IN_SUCCESS, user };
+};
+
+export function checkLoggedInFailure(error) {
+  return { type: CHECK_LOGGED_IN_FAILURE, error };
+};
 
 export function login(email, password) {
   return function (dispatch) {

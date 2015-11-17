@@ -6,28 +6,30 @@ import { connect } from 'react-redux';
 
 export const TodoApp = React.createClass({
   componentDidMount: function() {
-    let authService = new AuthService();
-    authService.checkLoggedIn().then((user) => {
-      if (this.isMounted()) {
-        this.setState({ loggedIn: true, user: user });
-      }
-    }).catch(() => {
-      if (this.isMounted()) {
-        this.setState({ loggedIn: false, user: null });
-      }
-    });
+    // TODO: Dispatch the initial check logged in call to the server
+    dispatch();
+    // let authService = new AuthService();
+    // authService.checkLoggedIn().then((user) => {
+    //   if (this.isMounted()) {
+    //     this.setState({ loggedIn: true, user: user });
+    //   }
+    // }).catch(() => {
+    //   if (this.isMounted()) {
+    //     this.setState({ loggedIn: false, user: null });
+    //   }
+    // });
   },
 
-  handleAuthenticationFailed: function() {
-    this.setState({ loggedIn: false, user: null });
-  },
+  // handleAuthenticationFailed: function() {
+  //   this.setState({ loggedIn: false, user: null });
+  // },
 
-  handleAuthenticationSucceeded: function(user) {
-    this.setState({ loggedIn: true, user: user });
-  },
+  // handleAuthenticationSucceeded: function(user) {
+  //   this.setState({ loggedIn: true, user: user });
+  // },
 
   render: function() {
-    if (this.state.loggedIn) {
+    if (this.props.loggedIn) {
       return (
         <div>
           <TodoList/>
