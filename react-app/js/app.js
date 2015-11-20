@@ -2,12 +2,15 @@ require('babel-polyfill');
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 
-import { TodoApp } from './components/TodoApp.react';
+import TodoApp from './components/TodoApp.react';
 import todoApp from './reducers/todoApp';
 
-let store = createStore(todoApp, { loggedIn: false, user: null });
+import thunkMiddleware from 'redux-thunk';
+
+const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
+let store = createStoreWithMiddleware(todoApp, { loggedIn: false, user: null });
 
 ReactDOM.render(<Provider store={store}><TodoApp /></Provider>, document.getElementById('todoapp'));
