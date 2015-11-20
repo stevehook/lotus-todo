@@ -11,14 +11,6 @@ export const TodoApp = React.createClass({
     dispatch(checkLoggedIn());
   },
 
-  // handleAuthenticationFailed: function() {
-  //   this.setState({ loggedIn: false, user: null });
-  // },
-
-  // handleAuthenticationSucceeded: function(user) {
-  //   this.setState({ loggedIn: true, user: user });
-  // },
-
   handleLogin: function(email, password) {
     const { dispatch } = this.props;
     dispatch(login(email, password));
