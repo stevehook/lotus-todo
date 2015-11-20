@@ -1,4 +1,4 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/actionTypes'
+import { LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE, CHECK_LOGGED_IN_START } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   loggedIn: false,
