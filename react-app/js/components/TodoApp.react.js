@@ -25,7 +25,7 @@ export const TodoApp = React.createClass({
   },
 
   render: function() {
-    if (this.props.loggedIn) {
+    if (this.props.authentication.loggedIn) {
       return (
         <div>
           <TodoList/>
