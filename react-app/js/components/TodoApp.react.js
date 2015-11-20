@@ -1,13 +1,17 @@
-const React = require('react');
-const TodoList = require('./TodoList.react');
-const LoginForm = require('./LoginForm.react');
-const AuthService = require('../services/AuthService');
+import React from 'react';
+import TodoList from './TodoList.react';
+import LoginForm from './LoginForm.react';
+import AuthService from '../services/AuthService';
 import { connect } from 'react-redux';
+import { checkLoggedIn } from '../actions/actionTypes';
 
 export const TodoApp = React.createClass({
   componentDidMount: function() {
-    // TODO: Dispatch the initial check logged in call to the server
-    dispatch();
+    const { dispatch } = this.props;
+
+    // Dispatch the initial check logged in call to the server
+    dispatch(checkLoggedIn());
+
     // let authService = new AuthService();
     // authService.checkLoggedIn().then((user) => {
     //   if (this.isMounted()) {
