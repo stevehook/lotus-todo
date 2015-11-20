@@ -3,7 +3,7 @@ import TodoList from './TodoList.react';
 import LoginForm from './LoginForm.react';
 import AuthService from '../services/AuthService';
 import { connect } from 'react-redux';
-import { checkLoggedIn } from '../actions/actionTypes';
+import { checkLoggedIn, login } from '../actions/actionTypes';
 
 export const TodoApp = React.createClass({
   componentDidMount: function() {
@@ -19,6 +19,11 @@ export const TodoApp = React.createClass({
   //   this.setState({ loggedIn: true, user: user });
   // },
 
+  handleLogin: function(email, password) {
+    const { dispatch } = this.props;
+    dispatch(login(email, password));
+  },
+
   render: function() {
     if (this.props.loggedIn) {
       return (
@@ -29,8 +34,7 @@ export const TodoApp = React.createClass({
     } else {
       return (
         <div>
-          <LoginForm onAuthenticationSucceeded={this.handleAuthenticationSucceeded}
-                     onAuthenticationFailed={this.handleAuthenticationFailed}/>
+          <LoginForm onLogin={this.handleLogin}/>
         </div>
       );
     }
