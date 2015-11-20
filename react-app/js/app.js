@@ -1,7 +1,7 @@
 require('babel-polyfill');
 
-const React = require('react');
-const TodoApp = require('./components/TodoApp.react');
+import React from 'react';
+import { TodoApp } from './components/TodoApp.react';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
