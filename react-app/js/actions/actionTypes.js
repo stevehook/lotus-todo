@@ -24,21 +24,13 @@ export function checkLoggedIn() {
     dispatch(checkLoggedInStart());
     let authService = new AuthService();
     return authService.checkLoggedIn()
-      .then(res => dispatch(checkLoggedInSuccess(res.body)))
-      .catch(err => dispatch(checkLoggedInFailure('Login Failed')));
+      .then(res => dispatch(loginSuccess(res.body)))
+      .catch(err => dispatch(loginFailure('Login Failed')));
   }
 };
 
 export function checkLoggedInStart() {
   return { type: CHECK_LOGGED_IN_START };
-};
-
-export function checkLoggedInSuccess(user) {
-  return { type: CHECK_LOGGED_IN_SUCCESS, user };
-};
-
-export function checkLoggedInFailure(error) {
-  return { type: CHECK_LOGGED_IN_FAILURE, error };
 };
 
 export function login(email, password) {
