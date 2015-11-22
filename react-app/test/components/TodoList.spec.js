@@ -8,30 +8,39 @@ const TaskService = require('../../js/services/TaskService');
 
 describe('TodoList.react', () => {
   let todoList;
-  let handleDone;
-  let originalGetOutstanding;
-  let promise = { then: (callback) => { handleDone = callback; return promise; }, catch: () => { return promise; } };
+  // let handleDone;
+  // let originalGetOutstanding;
+  // let promise = { then: (callback) => { handleDone = callback; return promise; }, catch: () => { return promise; } };
 
-  beforeEach(() => {
-    originalGetOutstanding = TaskService.prototype.getOutstanding;
-    expect.spyOn(TaskService.prototype, 'getOutstanding').andReturn(promise);
-    todoList = TestUtils.renderIntoDocument(<TodoList/>);
-  });
-  afterEach(() => {
-    expect.restoreSpies();
-  });
-
-  it('renders a TodoTask component for each task', () => {
-    let tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
-    expect(tasks.length).toEqual(0);
-    handleDone({
-      body: [
+  let initialState = {
+    newTask: {},
+    tasks: [
         { id: 123, title: 'Walk the dog' },
         { id: 456, title: 'Clean the kitchen' },
         { id: 789, title: 'Read a good book' },
       ]
-    });
-    tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
+  };
+
+  beforeEach(() => {
+    // originalGetOutstanding = TaskService.prototype.getOutstanding;
+    // expect.spyOn(TaskService.prototype, 'getOutstanding').andReturn(promise);
+    todoList = TestUtils.renderIntoDocument(<TodoList data={initialState}/>);
+  });
+  // afterEach(() => {
+  //   expect.restoreSpies();
+  // });
+
+  it('renders a TodoTask component for each task', () => {
+    // let tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
+    // expect(tasks.length).toEqual(0);
+    // handleDone({
+    //   body: [
+    //     { id: 123, title: 'Walk the dog' },
+    //     { id: 456, title: 'Clean the kitchen' },
+    //     { id: 789, title: 'Read a good book' },
+    //   ]
+    // });
+    let tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
     expect(tasks.length).toEqual(3);
   });
 
