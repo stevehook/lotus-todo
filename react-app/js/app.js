@@ -13,4 +13,4 @@ import thunkMiddleware from 'redux-thunk';
 const createStoreWithMiddleware = applyMiddleware(thunkMiddleware)(createStore);
 let store = createStoreWithMiddleware(todoApp, { loggedIn: false, user: null });
 
-ReactDOM.render(<Provider store={store}><TodoApp /></Provider>, document.getElementById('todoapp'));
+ReactDOM.render(<Provider store={store}><TodoApp store={store}/></Provider>, document.getElementById('todoapp'));

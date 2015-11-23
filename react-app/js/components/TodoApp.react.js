@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import TodoList from './TodoList.react';
 import LoginForm from './LoginForm.react';
 import AuthService from '../services/AuthService';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { checkLoggedIn, login } from '../actions/actionTypes';
 
 export const TodoApp = React.createClass({
@@ -19,10 +19,13 @@ export const TodoApp = React.createClass({
   render: function() {
     // TODO: Use a router to handle this switch
     if (this.props.authentication && this.props.authentication.loggedIn) {
-      const data = this.props.data;
+      const store = this.props.store;
+      // const data = this.props.data;
       return (
         <div>
-          <TodoList data={data}/>
+          <Provider store={store}>
+            <TodoList/>
+          </Provider>
         </div>
       );
     } else {
@@ -34,6 +37,10 @@ export const TodoApp = React.createClass({
     }
   }
 });
+
+TodoApp.propTypes = {
+  store: PropTypes.object.isRequired
+};
 
 // Select state to inject given global state - just take it all for now
 function select(state) {

@@ -1,4 +1,5 @@
 const React = require('react');
+import { connect } from 'react-redux';
 const TodoTask = require('./TodoTask.react');
 const TodoNewTask = require('./TodoNewTask.react');
 const TaskService = require('../services/TaskService');
@@ -82,8 +83,8 @@ const TodoList = React.createClass({
   render: function() {
   	return (
       <div>
-        <TodoNewTask task={this.props.data.newTask} onNewTaskInput={this.handleNewTaskInput} />
-        <div><ul className='task-list'>{this.props.data.tasks.map((task) => {
+        <TodoNewTask task={this.props.newTask} onNewTaskInput={this.handleNewTaskInput} />
+        <div><ul className='task-list'>{this.props.tasks.map((task) => {
           return (
             <TodoTask key={'task-' + task.id} task={task} onCompleteTask={this.handleCompleteTask} onArchiveTask={this.handleArchiveTask}/>
           );
@@ -94,4 +95,9 @@ const TodoList = React.createClass({
   }
 });
 
-module.exports = TodoList;
+// Select state to inject given global state - just take it all for now
+function select(state) {
+  return state.data;
+}
+
+export default connect(state => state.data)(TodoList);
