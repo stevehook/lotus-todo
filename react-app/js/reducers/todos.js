@@ -16,7 +16,7 @@ function todos(state = INITIAL_STATE, action) {
       return state;
     case FETCH_TASKS_SUCCESS:
       return Object.assign({}, state, {
-        tasks: action.response.body
+        tasks: action.tasks
       });
     case FETCH_TASKS_FAILURE:
       // TODO: Set UI Error message
