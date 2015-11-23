@@ -30,7 +30,7 @@ describe('TodoList.react', () => {
   //   expect.restoreSpies();
   // });
 
-  it('renders a TodoTask component for each task', () => {
+  xit('renders a TodoTask component for each task', () => {
     // let tasks = TestUtils.scryRenderedComponentsWithType(todoList, TodoTask);
     // expect(tasks.length).toEqual(0);
     // handleDone({
@@ -44,7 +44,7 @@ describe('TodoList.react', () => {
     expect(tasks.length).toEqual(3);
   });
 
-  it('renders a TodoNewTask component for the new task', () => {
+  xit('renders a TodoNewTask component for the new task', () => {
     let newTask = TestUtils.findRenderedComponentWithType(todoList, TodoNewTask);
     expect(newTask).toExist();
   });
