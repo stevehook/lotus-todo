@@ -33,7 +33,7 @@ describe('todos FETCH_TASKS_SUCCESS', () => {
   it('adds a new task', () => {
     let newState = todoApp(undefined, {
       type: 'FETCH_TASKS_SUCCESS',
-      response: { body: tasks }
+      tasks: tasks
     });
     expect(newState.data).to.eql({
       tasks: tasks,
