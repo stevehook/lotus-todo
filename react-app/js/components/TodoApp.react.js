@@ -20,7 +20,6 @@ export const TodoApp = React.createClass({
     // TODO: Use a router to handle this switch
     if (this.props.authentication && this.props.authentication.loggedIn) {
       const store = this.props.store;
-      // const data = this.props.data;
       return (
         <div>
           <Provider store={store}>
