@@ -1,26 +1,14 @@
-const React = require('react');
+import React from 'react';
 import { connect } from 'react-redux';
-const TodoTask = require('./TodoTask.react');
-const TodoNewTask = require('./TodoNewTask.react');
-const TaskService = require('../services/TaskService');
+import TodoTask from './TodoTask.react';
+import TodoNewTask from './TodoNewTask.react';
+import TaskService from '../services/TaskService';
+import { fetchTasks } from '../actions/actionTypes';
 
 const TodoList = React.createClass({
-  // getInitialState: function() {
-  //   return {
-  //     tasks: [],
-  //     newTask: { id: 0, title: '', completed: false }
-  //   };
-  // },
-
   componentDidMount: function() {
-    // let taskService = new TaskService();
-    // taskService.getOutstanding().then((res) => {
-    //   if (this.isMounted()) {
-    //     this.setState({ tasks: res.body });
-    //   }
-    // }).catch(() => {
-    //   // TODO: Display a message
-    // });
+    const { dispatch } = this.props;
+    this.props.dispatch(fetchTasks());
   },
 
   handleNewTaskInput: function(taskTitle) {
