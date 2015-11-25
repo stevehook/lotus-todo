@@ -11,47 +11,16 @@ export const TodoList = React.createClass({
     this.props.dispatch(fetchTasks());
   },
 
-  handleNewTaskInput: function(taskTitle) {
-    this.props.dispatch(newTask());
+  handleNewTaskInput: function(title) {
+    this.props.dispatch(newTask(title));
   },
 
   handleCompleteTask: function(taskId) {
-    // TODO: callback to parent
-
-    // let taskService = new TaskService();
-    // taskService.complete(taskId).then((res) => {
-    //   this.updateTaskState(taskId, (task) => {
-    //     task.completed = true;
-    //   });
-    // }).catch(() => {
-    //   // TODO: Display a message
-    // });
+    this.props.dispatch(completeTask(taskId));
   },
 
   handleArchiveTask: function(taskId) {
-    // TODO: callback to parent
-
-    // let taskService = new TaskService();
-    // taskService.archive(taskId).then((res) => {
-    //   this.updateTaskState(taskId, (task) => {
-    //     task.archived = true;
-    //   });
-    // }).catch(() => {
-    //   // TODO: Display a message
-    // });
-  },
-
-  updateTaskState: function(taskId, process) {
-    // TODO: this is now in a reducer so not needed?
-
-    // let index = this.state.tasks.findIndex(t => t.id === taskId);
-    // if (index !== -1) {
-    //   let tasks = this.state.tasks;
-    //   let task = tasks.splice(index, 1)[0];
-    //   process(task)
-    //   tasks.splice(index, 0, task);
-    //   this.setState({ tasks: tasks });
-    // }
+    this.props.dispatch(archiveTask(taskId));
   },
 
   unarchivedTasks: function() {
