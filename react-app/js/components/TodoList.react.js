@@ -12,16 +12,7 @@ export const TodoList = React.createClass({
   },
 
   handleNewTaskInput: function(taskTitle) {
-    // TODO: callback to parent
-
-    // let taskService = new TaskService();
-    // taskService.create(taskTitle).then((res) => {
-    //   let tasks = this.state.tasks;
-    //   tasks.push(res.body);
-    //   this.setState({ tasks: tasks });
-    // }).catch(() => {
-    //   // TODO: Display a message
-    // });
+    this.props.dispatch(newTask());
   },
 
   handleCompleteTask: function(taskId) {
@@ -65,7 +56,6 @@ export const TodoList = React.createClass({
 
   unarchivedTasks: function() {
     return props.data.tasks;
-    // return this.state.tasks.filter((task) => !task.archived);
   },
 
   render: function() {
