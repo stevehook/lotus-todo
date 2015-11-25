@@ -5,7 +5,7 @@ import TodoNewTask from './TodoNewTask.react';
 import TaskService from '../services/TaskService';
 import { fetchTasks } from '../actions/actionTypes';
 
-const TodoList = React.createClass({
+export const TodoList = React.createClass({
   componentDidMount: function() {
     const { dispatch } = this.props;
     this.props.dispatch(fetchTasks());
