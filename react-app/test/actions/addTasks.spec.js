@@ -5,7 +5,7 @@ import nock from 'nock';
 import mockStore from '../mockStore';
 
 describe('actions', () => {
-  describe('fetchTasks', () => {
+  describe('addTask', () => {
     afterEach(() => { nock.cleanAll(); });
     const initialState = {
       data: {
@@ -18,39 +18,40 @@ describe('actions', () => {
     };
 
     describe('when /api/tasks succeeds', () => {
-      let responseBody = [{ id: 123, title: 'Walk the dog' }];
+      let responseBody = { id: 123, title: 'Walk the dog', completed: false };
 
       beforeEach(() => {
         nock('http://localhost')
-          .get('/api/tasks')
+          .post('/api/tasks')
           .reply(200, responseBody, {'Content-Type': 'application/json'});
       });
 
       it('it dispatches the correct actions', (done) => {
         const expectedActions = [
-          { type: actions.FETCH_TASKS_START },
-          { type: actions.FETCH_TASKS_SUCCESS, tasks: responseBody }
+          { type: actions.ADD_TASK_START },
+          { type: actions.ADD_TASK_SUCCESS, task: responseBody }
         ];
         const store = mockStore(initialState, expectedActions, done);
-        store.dispatch(actions.fetchTasks());
+        store.dispatch(actions.addTask('Walk the dog'));
       });
     });
 
     describe('when /api/tasks fails', () => {
       beforeEach(() => {
         nock('http://localhost')
-          .get('/api/tasks')
+          .post('/api/tasks')
           .reply(400, {}, {'Content-Type': 'application/json'});
       });
 
       it('it dispatches the correct actions', (done) => {
         const expectedActions = [
-          { type: actions.FETCH_TASKS_START },
-          { type: actions.FETCH_TASKS_FAILURE, error: 'API Failed' }
+          { type: actions.ADD_TASK_START },
+          { type: actions.ADD_TASK_FAILURE, error: 'API Failed' }
         ];
         const store = mockStore(initialState, expectedActions, done);
-        store.dispatch(actions.fetchTasks());
+        store.dispatch(actions.addTask('Walk the dog'));
       });
     });
   });
 });
+

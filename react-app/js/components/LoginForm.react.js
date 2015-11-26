@@ -25,13 +25,7 @@ const LoginForm = React.createClass({
 
     let email = ReactDOM.findDOMNode(this.refs.loginEmail).value.trim();
     let password = ReactDOM.findDOMNode(this.refs.loginPassword).value.trim();
-
-    let authService = new AuthService();
-    authService.login(email, password).then((data) => {
-      _this.props.onAuthenticationSucceeded(data);
-    }).catch(() => {
-      _this.props.onAuthenticationFailed();
-    });
+    _this.props.onLogin(email, password);
   }
 });
 
