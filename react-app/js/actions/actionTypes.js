@@ -16,8 +16,19 @@ export const FETCH_TASKS_FAILURE = 'FETCH_TASKS_FAILURE';
 export const LOGOUT = 'LOGOUT';
 
 export const ADD_TODO = 'ADD_TODO';
+export const ADD_TODO_START = 'ADD_TODO_START';
+export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
+export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
+
 export const COMPLETE_TODO = 'COMPLETE_TODO';
+export const COMPLETE_TODO_START = 'COMPLETE_TODO_START';
+export const COMPLETE_TODO_SUCCESS = 'COMPLETE_TODO_SUCCESS';
+export const COMPLETE_TODO_FAILURE = 'COMPLETE_TODO_FAILURE';
+
 export const ARCHIVE_TODO = 'ARCHIVE_TODO';
+export const ARCHIVE_TODO_START = 'ARCHIVE_TODO_START';
+export const ARCHIVE_TODO_SUCCESS = 'ARCHIVE_TODO_SUCCESS';
+export const ARCHIVE_TODO_FAILURE = 'ARCHIVE_TODO_FAILURE';
 
 export function checkLoggedIn() {
   return function (dispatch) {
@@ -77,15 +88,63 @@ export function fetchTasksFailure(error) {
   return { type: FETCH_TASKS_FAILURE, error };
 };
 
-
 export function addTodo(title) {
-  return { type: ADD_TODO, title };
+  return function (dispatch) {
+    dispatch(addTodoStart());
+    let taskService = new TaskService();
+    return taskService.create(title)
+      .then(res => dispatch(addTodoSuccess(res.body)))
+      .catch(err => dispatch(addTodoFailure('API Failed')));
+  }
 };
 
-export function completeTodo(index) {
-  return { type: COMPLETE_TODO, index };
+export function addTodoStart() {
+  return { type: ADD_TODO_START };
+};
+export function addTodoSuccess(task) {
+  return { type: ADD_TODO_SUCCESS, task };
+};
+export function addTodoFailure(error) {
+  return { type: ADD_TODO_FAILURE, error };
 };
 
-export function archiveTodo(index) {
-  return { type: ARCHIVE_TODO, index };
+export function completeTodo(title) {
+  return function (dispatch) {
+    dispatch(completeTodoStart());
+    let taskService = new TaskService();
+    return taskService.create(title)
+      .then(res => dispatch(completeTodoSuccess(res.body)))
+      .catch(err => dispatch(completeTodoFailure('API Failed')));
+  }
+};
+
+export function completeTodoStart() {
+  return { type: COMPLETE_TODO_START };
+};
+export function completeTodoSuccess(task) {
+  return { type: COMPLETE_TODO_SUCCESS, task };
+};
+export function completeTodoFailure(error) {
+  return { type: COMPLETE_TODO_FAILURE, error };
+};
+
+
+export function archiveTodo(title) {
+  return function (dispatch) {
+    dispatch(archiveTodoStart());
+    let taskService = new TaskService();
+    return taskService.create(title)
+      .then(res => dispatch(archiveTodoSuccess(res.body)))
+      .catch(err => dispatch(archiveTodoFailure('API Failed')));
+  }
+};
+
+export function archiveTodoStart() {
+  return { type: ARCHIVE_TODO_START };
+};
+export function archiveTodoSuccess(task) {
+  return { type: ARCHIVE_TODO_SUCCESS, task };
+};
+export function archiveTodoFailure(error) {
+  return { type: ARCHIVE_TODO_FAILURE, error };
 };
