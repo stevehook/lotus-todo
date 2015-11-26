@@ -6,6 +6,17 @@ const INITIAL_STATE = {
   newTask: { id: 0, title: '', completed: false }
 };
 
+function updateTask(state, taskId, updater) {
+  let index = state.tasks.findIndex(t => t.id === taskId);
+  return Object.assign({}, state, {
+    tasks: [
+      ...state.tasks.slice(0, index),
+      updater(state.tasks[index]),
+      ...state.tasks.slice(index + 1)
+    ]
+  });
+}
+
 function todos(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ADD_TASK_SUCCESS:
@@ -14,28 +25,10 @@ function todos(state = INITIAL_STATE, action) {
       });
 
     case COMPLETE_TASK_SUCCESS:
-      let index = state.tasks.findIndex(t => t.id === action.task.id);
-      return Object.assign({}, state, {
-        tasks: [
-          ...state.tasks.slice(0, index),
-          Object.assign({}, state.tasks[index], {
-            completed: true
-          }),
-          ...state.tasks.slice(index + 1)
-        ]
-      });
+      return updateTask(state, action.task.id, (task) => Object.assign({}, task, { completed: true }));
 
     case ARCHIVE_TASK_SUCCESS:
-      index = state.tasks.findIndex(t => t.id === action.task.id);
-      return Object.assign({}, state, {
-        tasks: [
-          ...state.tasks.slice(0, index),
-          Object.assign({}, state.tasks[index], {
-            archived: true
-          }),
-          ...state.tasks.slice(index + 1)
-        ]
-      });
+      return updateTask(state, action.task.id, (task) => Object.assign({}, task, { archived: true }));
 
     case FETCH_TASKS_START:
       // TASK: Set UI status?
