@@ -1,4 +1,5 @@
-import { ADD_TASK, ADD_TASK_START, ADD_TASK_SUCCESS, ADD_TASK_FAILURE, FETCH_TASKS_START, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE } from '../actions/actionTypes';
+import { ADD_TASK, ADD_TASK_START, ADD_TASK_SUCCESS, ADD_TASK_FAILURE, COMPLETE_TASK_SUCCESS,
+  FETCH_TASKS_START, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   tasks: [],
@@ -10,6 +11,18 @@ function todos(state = INITIAL_STATE, action) {
     case ADD_TASK_SUCCESS:
       return Object.assign({}, state, {
         tasks: state.tasks.concat([action.task]),
+      });
+
+    case COMPLETE_TASK_SUCCESS:
+      let index = state.tasks.findIndex(t => t.id === action.task.id);
+      return Object.assign({}, state, {
+        tasks: [
+          ...state.tasks.slice(0, index),
+          Object.assign({}, state.tasks[index], {
+            completed: true
+          }),
+          ...state.tasks.slice(index + 1)
+        ]
       });
 
     case FETCH_TASKS_START:
