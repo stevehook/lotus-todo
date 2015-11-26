@@ -15,20 +15,20 @@ export const FETCH_TASKS_FAILURE = 'FETCH_TASKS_FAILURE';
 
 export const LOGOUT = 'LOGOUT';
 
-export const ADD_TODO = 'ADD_TODO';
-export const ADD_TODO_START = 'ADD_TODO_START';
-export const ADD_TODO_SUCCESS = 'ADD_TODO_SUCCESS';
-export const ADD_TODO_FAILURE = 'ADD_TODO_FAILURE';
+export const ADD_TASK = 'ADD_TASK';
+export const ADD_TASK_START = 'ADD_TASK_START';
+export const ADD_TASK_SUCCESS = 'ADD_TASK_SUCCESS';
+export const ADD_TASK_FAILURE = 'ADD_TASK_FAILURE';
 
-export const COMPLETE_TODO = 'COMPLETE_TODO';
-export const COMPLETE_TODO_START = 'COMPLETE_TODO_START';
-export const COMPLETE_TODO_SUCCESS = 'COMPLETE_TODO_SUCCESS';
-export const COMPLETE_TODO_FAILURE = 'COMPLETE_TODO_FAILURE';
+export const COMPLETE_TASK = 'COMPLETE_TASK';
+export const COMPLETE_TASK_START = 'COMPLETE_TASK_START';
+export const COMPLETE_TASK_SUCCESS = 'COMPLETE_TASK_SUCCESS';
+export const COMPLETE_TASK_FAILURE = 'COMPLETE_TASK_FAILURE';
 
-export const ARCHIVE_TODO = 'ARCHIVE_TODO';
-export const ARCHIVE_TODO_START = 'ARCHIVE_TODO_START';
-export const ARCHIVE_TODO_SUCCESS = 'ARCHIVE_TODO_SUCCESS';
-export const ARCHIVE_TODO_FAILURE = 'ARCHIVE_TODO_FAILURE';
+export const ARCHIVE_TASK = 'ARCHIVE_TASK';
+export const ARCHIVE_TASK_START = 'ARCHIVE_TASK_START';
+export const ARCHIVE_TASK_SUCCESS = 'ARCHIVE_TASK_SUCCESS';
+export const ARCHIVE_TASK_FAILURE = 'ARCHIVE_TASK_FAILURE';
 
 export function checkLoggedIn() {
   return function (dispatch) {
@@ -88,63 +88,63 @@ export function fetchTasksFailure(error) {
   return { type: FETCH_TASKS_FAILURE, error };
 };
 
-export function addTodo(title) {
+export function addTask(title) {
   return function (dispatch) {
-    dispatch(addTodoStart());
+    dispatch(addTaskStart());
     let taskService = new TaskService();
     return taskService.create(title)
-      .then(res => dispatch(addTodoSuccess(res.body)))
-      .catch(err => dispatch(addTodoFailure('API Failed')));
+      .then(res => dispatch(addTaskSuccess(res.body)))
+      .catch(err => dispatch(addTaskFailure('API Failed')));
   }
 };
 
-export function addTodoStart() {
-  return { type: ADD_TODO_START };
+export function addTaskStart() {
+  return { type: ADD_TASK_START };
 };
-export function addTodoSuccess(task) {
-  return { type: ADD_TODO_SUCCESS, task };
+export function addTaskSuccess(task) {
+  return { type: ADD_TASK_SUCCESS, task };
 };
-export function addTodoFailure(error) {
-  return { type: ADD_TODO_FAILURE, error };
+export function addTaskFailure(error) {
+  return { type: ADD_TASK_FAILURE, error };
 };
 
-export function completeTodo(title) {
+export function completeTask(title) {
   return function (dispatch) {
-    dispatch(completeTodoStart());
+    dispatch(completeTaskStart());
     let taskService = new TaskService();
     return taskService.create(title)
-      .then(res => dispatch(completeTodoSuccess(res.body)))
-      .catch(err => dispatch(completeTodoFailure('API Failed')));
+      .then(res => dispatch(completeTaskSuccess(res.body)))
+      .catch(err => dispatch(completeTaskFailure('API Failed')));
   }
 };
 
-export function completeTodoStart() {
-  return { type: COMPLETE_TODO_START };
+export function completeTaskStart() {
+  return { type: COMPLETE_TASK_START };
 };
-export function completeTodoSuccess(task) {
-  return { type: COMPLETE_TODO_SUCCESS, task };
+export function completeTaskSuccess(task) {
+  return { type: COMPLETE_TASK_SUCCESS, task };
 };
-export function completeTodoFailure(error) {
-  return { type: COMPLETE_TODO_FAILURE, error };
+export function completeTaskFailure(error) {
+  return { type: COMPLETE_TASK_FAILURE, error };
 };
 
 
-export function archiveTodo(title) {
+export function archiveTask(title) {
   return function (dispatch) {
-    dispatch(archiveTodoStart());
+    dispatch(archiveTaskStart());
     let taskService = new TaskService();
     return taskService.create(title)
-      .then(res => dispatch(archiveTodoSuccess(res.body)))
-      .catch(err => dispatch(archiveTodoFailure('API Failed')));
+      .then(res => dispatch(archiveTaskSuccess(res.body)))
+      .catch(err => dispatch(archiveTaskFailure('API Failed')));
   }
 };
 
-export function archiveTodoStart() {
-  return { type: ARCHIVE_TODO_START };
+export function archiveTaskStart() {
+  return { type: ARCHIVE_TASK_START };
 };
-export function archiveTodoSuccess(task) {
-  return { type: ARCHIVE_TODO_SUCCESS, task };
+export function archiveTaskSuccess(task) {
+  return { type: ARCHIVE_TASK_SUCCESS, task };
 };
-export function archiveTodoFailure(error) {
-  return { type: ARCHIVE_TODO_FAILURE, error };
+export function archiveTaskFailure(error) {
+  return { type: ARCHIVE_TASK_FAILURE, error };
 };
