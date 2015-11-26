@@ -10,11 +10,11 @@ describe('todoApp UNKNOWN ACTION', () => {
   });
 });
 
-describe('todoApp ADD_TODO', () => {
+describe('todoApp ADD_TASK_SUCCESS', () => {
   it('adds a new task', () => {
     let newState = todoApp(undefined, {
-      type: 'ADD_TODO',
-      title: 'Walk the dog'
+      type: 'ADD_TASK_SUCCESS',
+      task: { id: 0, title: 'Walk the dog', completed: false }
     });
     expect(newState.data).to.eql({
       tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],

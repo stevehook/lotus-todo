@@ -1,4 +1,4 @@
-import { ADD_TODO, FETCH_TASKS_START, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE } from '../actions/actionTypes';
+import { ADD_TASK, ADD_TASK_START, ADD_TASK_SUCCESS, ADD_TASK_FAILURE, FETCH_TASKS_START, FETCH_TASKS_SUCCESS, FETCH_TASKS_FAILURE } from '../actions/actionTypes';
 
 const INITIAL_STATE = {
   tasks: [],
@@ -7,19 +7,20 @@ const INITIAL_STATE = {
 
 function todos(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case ADD_TODO:
+    case ADD_TASK_SUCCESS:
       return Object.assign({}, state, {
-        tasks: state.tasks.concat([{ id: 0, title: action.title, completed: false }]),
+        tasks: state.tasks.concat([action.task]),
       });
+
     case FETCH_TASKS_START:
-      // TODO: Set UI status?
+      // TASK: Set UI status?
       return state;
     case FETCH_TASKS_SUCCESS:
       return Object.assign({}, state, {
         tasks: action.tasks
       });
     case FETCH_TASKS_FAILURE:
-      // TODO: Set UI Error message
+      // TASK: Set UI Error message
       return state;
     default:
       return state;
