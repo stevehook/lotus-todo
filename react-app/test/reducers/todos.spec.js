@@ -10,18 +10,7 @@ describe('todoApp UNKNOWN ACTION', () => {
   });
 });
 
-describe('todoApp ADD_TASK_SUCCESS', () => {
-  it('adds a new task', () => {
-    let newState = todoApp(undefined, {
-      type: 'ADD_TASK_SUCCESS',
-      task: { id: 0, title: 'Walk the dog', completed: false }
-    });
-    expect(newState.data).to.eql({
-      tasks: [ { id: 0, title: 'Walk the dog', completed: false } ],
-      newTask: { id: 0, title: '', completed: false }
-    });
-  });
-
+describe('Adding tasks', () => {
   const initialState = {
     data: {
       tasks: [ { id: 123, title: 'Some existing chore', completed: false } ],
@@ -32,6 +21,21 @@ describe('todoApp ADD_TASK_SUCCESS', () => {
       user: { id: 123, name: 'Bob' }
     }
   };
+
+  describe('todoApp ADD_TASK_SUCCESS', () => {
+    it('adds a new task', () => {
+      let newState = todoApp(initialState, {
+        type: 'ADD_TASK_SUCCESS',
+        task: { id: 0, title: 'Walk the dog', completed: false }
+      });
+      expect(newState.data).to.eql({
+        tasks: [ { id: 123, title: 'Some existing chore', completed: false },
+          { id: 0, title: 'Walk the dog', completed: false } ],
+        newTask: { id: 0, title: '', completed: false }
+      });
+    });
+  });
+
   describe('todoApp ADD_TASK', () => {
     it('adding a task is asynchronous so does not add a task straight away', () => {
       let newState = todoApp(initialState, {
