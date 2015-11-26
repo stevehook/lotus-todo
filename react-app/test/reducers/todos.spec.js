@@ -23,6 +23,19 @@ describe('todoApp ADD_TASK_SUCCESS', () => {
   });
 });
 
+describe('todoApp ADD_TASK', () => {
+  it('adding a task is asynchronous so does not add a task straight away', () => {
+    let newState = todoApp(undefined, {
+      type: 'ADD_TASK',
+      title: 'Walk the dog'
+    });
+    expect(newState.data).to.eql({
+      tasks: [],
+      newTask: { id: 0, title: '', completed: false }
+    });
+  });
+});
+
 describe('todos FETCH_TASKS_SUCCESS', () => {
   let tasks = [
     { id: 123, title: 'Walk the dog', completed: true },
