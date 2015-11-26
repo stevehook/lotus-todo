@@ -143,3 +143,64 @@ describe('Completing tasks', () => {
     });
   });
 });
+
+describe('Archiving tasks', () => {
+  const initialState = {
+    data: {
+      tasks: [
+        { id: 123, title: 'Cook dinner', archived: false },
+        { id: 456, title: 'Feed the kids', archived: false },
+        { id: 789, title: 'Feed the wife', archived: false }
+      ],
+      newTask: { id: 0, title: '', archived: false }
+    },
+    authentication: {
+      loggedIn: true,
+      user: { id: 123, name: 'Bob' }
+    }
+  };
+
+  describe('todoApp ARCHIVE_TASK_SUCCESS', () => {
+    it('archives the given task', () => {
+      let newState = todoApp(initialState, {
+        type: 'ARCHIVE_TASK_SUCCESS',
+        task: { id: 456, title: 'Feed the kids', archived: true }
+      });
+      expect(newState.data).to.eql({
+        tasks: [
+          { id: 123, title: 'Cook dinner', archived: false },
+          { id: 456, title: 'Feed the kids', archived: true },
+          { id: 789, title: 'Feed the wife', archived: false }
+        ],
+        newTask: { id: 0, title: '', archived: false }
+      });
+    });
+  });
+
+  describe('todoApp ARCHIVE_TASK', () => {
+    it('completing a task is asynchronous so does not archive a task straight away', () => {
+      let newState = todoApp(initialState, {
+        type: 'ARCHIVE_TASK',
+        title: 'Walk the dog'
+      });
+      expect(newState.data).to.eql(initialState.data);
+    });
+  });
+  describe('todoApp ARCHIVE_TASK_FAILURE', () => {
+    it('does not change state', () => {
+      let newState = todoApp(initialState, {
+        type: 'ARCHIVE_TASK_FAILURE',
+        error: 'Server on fire'
+      });
+      expect(newState.data).to.eql(initialState.data);
+    });
+  });
+  describe('todoApp ARCHIVE_TASK_START', () => {
+    it('does not change state', () => {
+      let newState = todoApp(initialState, {
+        type: 'ARCHIVE_TASK_START'
+      });
+      expect(newState.data).to.eql(initialState.data);
+    });
+  });
+});
