@@ -108,11 +108,11 @@ export function addTaskFailure(error) {
   return { type: ADD_TASK_FAILURE, error };
 };
 
-export function completeTask(title) {
+export function completeTask(taskId) {
   return function (dispatch) {
     dispatch(completeTaskStart());
     let taskService = new TaskService();
-    return taskService.create(title)
+    return taskService.complete(taskId)
       .then(res => dispatch(completeTaskSuccess(res.body)))
       .catch(err => dispatch(completeTaskFailure('API Failed')));
   }
@@ -129,11 +129,11 @@ export function completeTaskFailure(error) {
 };
 
 
-export function archiveTask(title) {
+export function archiveTask(taskId) {
   return function (dispatch) {
     dispatch(archiveTaskStart());
     let taskService = new TaskService();
-    return taskService.create(title)
+    return taskService.create(taskId)
       .then(res => dispatch(archiveTaskSuccess(res.body)))
       .catch(err => dispatch(archiveTaskFailure('API Failed')));
   }
