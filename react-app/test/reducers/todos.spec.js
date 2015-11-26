@@ -21,17 +21,41 @@ describe('todoApp ADD_TASK_SUCCESS', () => {
       newTask: { id: 0, title: '', completed: false }
     });
   });
-});
 
-describe('todoApp ADD_TASK', () => {
-  it('adding a task is asynchronous so does not add a task straight away', () => {
-    let newState = todoApp(undefined, {
-      type: 'ADD_TASK',
-      title: 'Walk the dog'
-    });
-    expect(newState.data).to.eql({
-      tasks: [],
+  const initialState = {
+    data: {
+      tasks: [ { id: 123, title: 'Some existing chore', completed: false } ],
       newTask: { id: 0, title: '', completed: false }
+    },
+    authentication: {
+      loggedIn: true,
+      user: { id: 123, name: 'Bob' }
+    }
+  };
+  describe('todoApp ADD_TASK', () => {
+    it('adding a task is asynchronous so does not add a task straight away', () => {
+      let newState = todoApp(initialState, {
+        type: 'ADD_TASK',
+        title: 'Walk the dog'
+      });
+      expect(newState.data).to.eql(initialState.data);
+    });
+  });
+  describe('todoApp ADD_TASK_FAILURE', () => {
+    it('does not change state', () => {
+      let newState = todoApp(initialState, {
+        type: 'ADD_TASK_FAILURE',
+        error: 'Server on fire'
+      });
+      expect(newState.data).to.eql(initialState.data);
+    });
+  });
+  describe('todoApp ADD_TASK_START', () => {
+    it('does not change state', () => {
+      let newState = todoApp(initialState, {
+        type: 'ADD_TASK_START'
+      });
+      expect(newState.data).to.eql(initialState.data);
     });
   });
 });
