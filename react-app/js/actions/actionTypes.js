@@ -133,7 +133,7 @@ export function archiveTask(taskId) {
   return function (dispatch) {
     dispatch(archiveTaskStart());
     let taskService = new TaskService();
-    return taskService.create(taskId)
+    return taskService.archive(taskId)
       .then(res => dispatch(archiveTaskSuccess(res.body)))
       .catch(err => dispatch(archiveTaskFailure('API Failed')));
   }
