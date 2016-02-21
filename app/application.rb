@@ -50,6 +50,10 @@ module Todo
       configure :test do
         host 'test.host'
       end
+
+      default_request_format :json
+      body_parsers :json
+      sessions :cookie, secret: ENV['WEB_SESSIONS_SECRET']
     end
   end
 end
@@ -63,7 +67,6 @@ module Todo
     def self.included(base)
       base.class_eval do
         include Hanami::Action
-        include Hanami::Action::Session
         before :authenticate!
 
         def current_user
@@ -76,8 +79,13 @@ module Todo
         end
 
         private
+
         def authenticate!
           halt 401 unless user_signed_in
+        end
+
+        def verify_csrf_token?
+          false
         end
       end
     end

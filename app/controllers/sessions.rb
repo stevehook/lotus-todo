@@ -6,7 +6,6 @@ module Todo
       include Hanami::Controller
       class Create
         include Hanami::Action
-        include Hanami::Action::Session
         accept :json
 
         def call(params)
@@ -22,11 +21,16 @@ module Todo
             self.status = 401
           end
         end
+
+        private
+
+        def verify_csrf_token?
+          false
+        end
       end
 
       class Status
         include Hanami::Action
-        include Hanami::Action::Session
 
         def call(params)
           user = UserRepository.find_or_nil(session[:user_id])
@@ -43,12 +47,17 @@ module Todo
 
       class Delete
         include Hanami::Action
-        include Hanami::Action::Session
 
         def call(params)
           session[:user_id] = nil
           self.body = '{}'
           self.status = 200
+        end
+
+        private
+
+        def verify_csrf_token?
+          false
         end
       end
     end

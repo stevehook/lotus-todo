@@ -63,8 +63,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (2.11.2)
-      rack (>= 1.1, < 2.0)
     rack (1.6.4)
     rack-parser (0.6.1)
       rack
@@ -107,7 +105,6 @@ DEPENDENCIES
   hanami-model
   pg
   pry
-  puma
   rack-parser
   rack-session-sequel
   rspec

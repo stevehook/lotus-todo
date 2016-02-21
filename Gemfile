@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'puma'
+# gem 'puma'
 gem 'pry'
 gem 'dotenv'
 gem 'pg'
