@@ -103,7 +103,7 @@ Node.js connect server to run the front-end, as well as running the
 hanami back-end. So assuming you've started PostgreSQL and set up the database
 (see above) start the back-end with:
 
-    $ bundle exec rackup config.ru
+    $ bundle exec hanami server -p 9292
 
 or you can use the given Procfile and foreman/forego, e.g.
 

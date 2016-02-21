@@ -1,5 +1,5 @@
 # config.ru
-require 'hamami'
+require 'hamami/setup'
 require_relative 'app/application'
 require 'rack/parser'
 require 'rack-session-sequel'
