@@ -1,9 +1,9 @@
-require 'lotus/action/session'
+require 'hanami/action/session'
 
 module Todo
   module Controllers
     class Tasks
-      include Lotus::Controller
+      include Hanami::Controller
 
       class Index
         include Todo::Authenticable

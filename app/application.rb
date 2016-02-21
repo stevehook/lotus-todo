@@ -2,11 +2,11 @@ require 'dotenv'
 Dotenv.load
 
 require 'tilt/erb'
-require 'lotus'
-require 'lotus-model'
+require 'hanami'
+require 'hanami-model'
 
 module Todo
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       root File.dirname(__FILE__)
 
@@ -32,24 +32,33 @@ module Todo
         get '/api/sessions', to: 'sessions#status'
       end
 
-      # assets << ['public']
+      assets do
+        javascript_compressor :builtin
+        stylesheet_compressor :builtin
 
-      serve_assets true
+        sources << [
+          'assets'
+        ]
+
+        compile false
+      end
 
       configure :development do
         handle_exceptions false
-        serve_assets true
       end
 
       configure :test do
         host 'test.host'
-        serve_assets false
       end
+
+      default_request_format :json
+      body_parsers :json
+      sessions :cookie, secret: ENV['WEB_SESSIONS_SECRET']
     end
   end
 end
 
-Lotus::View.configure do
+Hanami::View.configure do
   root 'app/templates'
 end
 
@@ -57,8 +66,7 @@ module Todo
   module Authenticable
     def self.included(base)
       base.class_eval do
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
         before :authenticate!
 
         def current_user
@@ -71,8 +79,13 @@ module Todo
         end
 
         private
+
         def authenticate!
           halt 401 unless user_signed_in
+        end
+
+        def verify_csrf_token?
+          false
         end
       end
     end

@@ -1,18 +1,16 @@
-require 'lotus/action/session'
+require 'hanami/action/session'
 
 module Todo
   module Controllers
     class Sessions
-      include Lotus::Controller
+      include Hanami::Controller
       class Create
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
         accept :json
 
         def call(params)
           user_params = params[:credentials]
           user = UserRepository.find_by_email(user_params['email'])
-          puts user.inspect
           if user
             session[:user_id] = user.id
             self.body = '{}'
@@ -23,11 +21,16 @@ module Todo
             self.status = 401
           end
         end
+
+        private
+
+        def verify_csrf_token?
+          false
+        end
       end
 
       class Status
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
 
         def call(params)
           user = UserRepository.find_or_nil(session[:user_id])
@@ -43,13 +46,18 @@ module Todo
       end
 
       class Delete
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
 
         def call(params)
           session[:user_id] = nil
           self.body = '{}'
           self.status = 200
+        end
+
+        private
+
+        def verify_csrf_token?
+          false
         end
       end
     end

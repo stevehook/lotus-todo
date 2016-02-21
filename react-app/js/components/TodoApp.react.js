@@ -1,53 +1,49 @@
-const React = require('react');
-const TodoList = require('./TodoList.react');
-const LoginForm = require('./LoginForm.react');
-const AuthService = require('../services/AuthService');
+import React, { Component, PropTypes } from 'react';
+import TodoList from './TodoList.react';
+import LoginForm from './LoginForm.react';
+import AuthService from '../services/AuthService';
+import { connect, Provider } from 'react-redux';
+import { checkLoggedIn, login } from '../actions/actionTypes';
 
-const TodoApp = React.createClass({
-  getInitialState: function() {
-    return {
-      loggedIn: false,
-      user: null
-    };
-  },
-
+export const TodoApp = React.createClass({
   componentDidMount: function() {
-    let authService = new AuthService();
-    authService.checkLoggedIn().then((user) => {
-      if (this.isMounted()) {
-        this.setState({ loggedIn: true, user: user });
-      }
-    }).catch(() => {
-      if (this.isMounted()) {
-        this.setState({ loggedIn: false, user: null });
-      }
-    });
+    const { dispatch } = this.props;
+    dispatch(checkLoggedIn());
   },
 
-  handleAuthenticationFailed: function() {
-    this.setState({ loggedIn: false, user: null });
-  },
-
-  handleAuthenticationSucceeded: function(user) {
-    this.setState({ loggedIn: true, user: user });
+  handleLogin: function(email, password) {
+    const { dispatch } = this.props;
+    dispatch(login(email, password));
   },
 
   render: function() {
-    if (this.state.loggedIn) {
+    // TODO: Use a router to handle this switch
+    if (this.props.authentication && this.props.authentication.loggedIn) {
+      const store = this.props.store;
       return (
         <div>
-          <TodoList/>
+          <Provider store={store}>
+            <TodoList/>
+          </Provider>
         </div>
       );
     } else {
       return (
         <div>
-          <LoginForm onAuthenticationSucceeded={this.handleAuthenticationSucceeded}
-                     onAuthenticationFailed={this.handleAuthenticationFailed}/>
+          <LoginForm onLogin={this.handleLogin}/>
         </div>
       );
     }
   }
 });
 
-module.exports = TodoApp;
+TodoApp.propTypes = {
+  store: PropTypes.object.isRequired
+};
+
+// Select state to inject given global state - just take it all for now
+function select(state) {
+  return state;
+}
+
+export default connect(select)(TodoApp);

@@ -2,7 +2,7 @@ module Todo
   module Views
     module Tasks
       class Index
-        include Lotus::View
+        include Hanami::View
       end
     end
   end

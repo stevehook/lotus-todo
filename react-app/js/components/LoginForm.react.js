@@ -1,4 +1,5 @@
 const React = require('react');
+const ReactDOM = require('react-dom');
 const AuthService = require('../services/AuthService');
 
 const LoginForm = React.createClass({
@@ -22,15 +23,9 @@ const LoginForm = React.createClass({
     event.preventDefault();
     let _this = this;
 
-    let email = React.findDOMNode(this.refs.loginEmail).value.trim();
-    let password = React.findDOMNode(this.refs.loginPassword).value.trim();
-
-    let authService = new AuthService();
-    authService.login(email, password).then((data) => {
-      _this.props.onAuthenticationSucceeded(data);
-    }).catch(() => {
-      _this.props.onAuthenticationFailed();
-    });
+    let email = ReactDOM.findDOMNode(this.refs.loginEmail).value.trim();
+    let password = ReactDOM.findDOMNode(this.refs.loginPassword).value.trim();
+    _this.props.onLogin(email, password);
   }
 });
 
