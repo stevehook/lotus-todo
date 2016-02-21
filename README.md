@@ -1,6 +1,6 @@
 #lotus-todo
 
-A simple app to experiment with hanami and angular.js.
+A simple app to experiment with hanami and react.js.
 
 The back-end is implemented with a hanami server on a PostgreSQL
 database. The front-end is built with the Yeoman angular generator.
