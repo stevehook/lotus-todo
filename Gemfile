@@ -6,8 +6,8 @@ gem 'dotenv'
 gem 'pg'
 gem 'rack-parser'
 gem 'rack-session-sequel'
-gem 'lotusrb'
-gem 'lotus-model'
+gem 'hanami'
+gem 'hanami-model'
 
 group :test do
   gem 'rspec'

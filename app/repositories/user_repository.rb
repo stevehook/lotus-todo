@@ -1,7 +1,7 @@
-require 'lotus/model'
+require 'hanami/model'
 
 class UserRepository
-  include Lotus::Repository
+  include Hanami::Repository
 
   PAGE_SIZE = 20
 

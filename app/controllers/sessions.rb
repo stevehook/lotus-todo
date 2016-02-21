@@ -1,12 +1,12 @@
-require 'lotus/action/session'
+require 'hanami/action/session'
 
 module Todo
   module Controllers
     class Sessions
-      include Lotus::Controller
+      include Hanami::Controller
       class Create
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
+        include Hanami::Action::Session
         accept :json
 
         def call(params)
@@ -26,8 +26,8 @@ module Todo
       end
 
       class Status
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
+        include Hanami::Action::Session
 
         def call(params)
           user = UserRepository.find_or_nil(session[:user_id])
@@ -43,8 +43,8 @@ module Todo
       end
 
       class Delete
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
+        include Hanami::Action::Session
 
         def call(params)
           session[:user_id] = nil

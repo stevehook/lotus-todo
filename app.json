@@ -1,9 +1,9 @@
 {
   "name": "Todo",
-  "description": "This is a very simple TODO app using lotusrb and Angular.js",
+  "description": "This is a very simple TODO app using hanami and Angular.js",
   "keywords": [
     "todo",
-    "lotus",
+    "hanami",
     "angular"
   ],
   "website": "https://github.com/stevehook/lotus-todo",

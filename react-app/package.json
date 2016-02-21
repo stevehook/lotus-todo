@@ -1,7 +1,7 @@
 {
   "name": "todo-react-app",
   "version": "0.0.1",
-  "description": "React.js Todo app client using lotusrb as a backend. Originally based on flux-todoapp example, https://github.com/facebook/flux/tree/master/examples/flux-todomvc",
+  "description": "React.js Todo app client using hanami as a backend. Originally based on flux-todoapp example, https://github.com/facebook/flux/tree/master/examples/flux-todomvc",
   "repository": "https://github.com/stevehook/lotus-todo",
   "main": "js/app.js",
   "dependencies": {

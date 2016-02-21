@@ -6,7 +6,7 @@ require 'rspec'
 require 'capybara/rspec'
 
 ENV['RACK_ENV'] = 'test'
-ENV['DATABASE_URL'] = 'postgres://localhost/lotus_todo_test'
+ENV['DATABASE_URL'] = 'postgres://localhost/hanami_todo_test'
 
 require 'app/application'
 

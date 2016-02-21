@@ -1,14 +1,14 @@
 #lotus-todo
 
-A simple app to experiment with lotusrb and angular.js.
+A simple app to experiment with hanami and angular.js.
 
-The back-end is implemented with a lotusrb server on a PostgreSQL
+The back-end is implemented with a hanami server on a PostgreSQL
 database. The front-end is built with the Yeoman angular generator.
 
 ##Database setup
 
-`lotus-todo` uses `lotus-model` to interface to a PostgreSQL database.
-`lotus-model` uses the `sequel` gem which provides the database
+`lotus-todo` uses `hanami-model` to interface to a PostgreSQL database.
+`hanami-model` uses the `sequel` gem which provides the database
 management toolchain.
 
 `sequel` has migrations but doesn't have a tool equivalent to active
@@ -99,8 +99,8 @@ Run eslint:
 ##Running the development server
 
 The most convenient way to run a development server is to use the
-Node.js connect server to run the front-end, as well as running the lotusrb
-back-end. So assuming you've started PostgreSQL and set up the database
+Node.js connect server to run the front-end, as well as running the
+hanami back-end. So assuming you've started PostgreSQL and set up the database
 (see above) start the back-end with:
 
     $ bundle exec rackup config.ru
@@ -117,14 +117,14 @@ Then point your browser at `http://localhost:9000`.
 
 To get this working we use the [grunt-connect-proxy plugin](https://github.com/drewzboto/grunt-connect-proxy).
 This configures the connect server to forward all requests to `/api` to
-the lotusrb server.
+the hanami server.
 
 ##Deploying to a production server
 
 The application can be easily deployed to Heroku using the Ruby
 buildpack that Heroku automatically picks up. However you need to build
 the static assets (HTML/CSS/JS) before deployment so that they can be
-picked up from the lotusrb server running on the production server.
+picked up from the hanami server running on the production server.
 (The alternative would be to configure multiple buildpacks (Node.js as
 well as the Ruby one so that you could install and build using Grunt as
 part of the deployment).

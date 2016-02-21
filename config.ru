@@ -1,5 +1,5 @@
 # config.ru
-require 'lotus'
+require 'hamami'
 require_relative 'app/application'
 require 'rack/parser'
 require 'rack-session-sequel'
@@ -9,6 +9,6 @@ use Rack::Parser, :parsers => {
 }
 use Rack::Session::Sequel, :db_uri => ENV['DATABASE_URL'], :expire_after => 600
 
-run Lotus::Router.new {
+run Hanami::Router.new {
   mount Todo::Application, at: '/'
 }

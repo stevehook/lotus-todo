@@ -2,11 +2,11 @@ require 'dotenv'
 Dotenv.load
 
 require 'tilt/erb'
-require 'lotus'
-require 'lotus-model'
+require 'hanami'
+require 'hanami-model'
 
 module Todo
-  class Application < Lotus::Application
+  class Application < Hanami::Application
     configure do
       root File.dirname(__FILE__)
 
@@ -49,7 +49,7 @@ module Todo
   end
 end
 
-Lotus::View.configure do
+Hanami::View.configure do
   root 'app/templates'
 end
 
@@ -57,8 +57,8 @@ module Todo
   module Authenticable
     def self.included(base)
       base.class_eval do
-        include Lotus::Action
-        include Lotus::Action::Session
+        include Hanami::Action
+        include Hanami::Action::Session
         before :authenticate!
 
         def current_user

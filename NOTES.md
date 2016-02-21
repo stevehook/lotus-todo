@@ -1,6 +1,6 @@
-# Learning Lotus
+# Learning Hanami
 
-#Migrations with Lotus
+#Migrations with Hanami
 
 
 
