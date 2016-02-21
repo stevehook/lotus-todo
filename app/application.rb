@@ -32,7 +32,16 @@ module Todo
         get '/api/sessions', to: 'sessions#status'
       end
 
-      # assets << ['public']
+      assets do
+        javascript_compressor :builtin
+        stylesheet_compressor :builtin
+
+        sources << [
+          'assets'
+        ]
+
+        compile false
+      end
 
       configure :development do
         handle_exceptions false
