@@ -12,7 +12,6 @@ module Todo
         def call(params)
           user_params = params[:credentials]
           user = UserRepository.find_by_email(user_params['email'])
-          puts user.inspect
           if user
             session[:user_id] = user.id
             self.body = '{}'
