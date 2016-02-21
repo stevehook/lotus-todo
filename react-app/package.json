@@ -26,6 +26,7 @@
     "browserify-css": "^0.7.1",
     "envify": "^3.0.0",
     "eslint": "^1.6.0",
+    "eslint-plugin-react": "4.0.0",
     "expect": "1.13.0",
     "http-server": "",
     "jsdom": "7.0.2",
@@ -72,8 +73,14 @@
       "templateStrings": true,
       "defaultParams": true,
       "modules": true,
-      "objectLiteralShorthandProperties": true
+      "objectLiteralShorthandProperties": true,
+      "objectLiteralShorthandMethods": true,
+      "experimentalObjectRestSpread": true,
+      "destructuring": true
     },
-    "rules": {}
+    "rules": {},
+    "plugins": [
+      "react"
+    ]
   }
 }
