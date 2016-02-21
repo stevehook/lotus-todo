@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TodoTask from './TodoTask.react';
 import TodoNewTask from './TodoNewTask.react';
 import TaskService from '../services/TaskService';
-import { fetchTasks } from '../actions/actionTypes';
+import { fetchTasks, addTask, completeTask, archiveTask } from '../actions/actionTypes';
 
 export const TodoList = React.createClass({
   componentDidMount: function() {
@@ -12,7 +12,7 @@ export const TodoList = React.createClass({
   },
 
   handleNewTaskInput: function(title) {
-    this.props.dispatch(newTask(title));
+    this.props.dispatch(addTask(title));
   },
 
   handleCompleteTask: function(taskId) {
