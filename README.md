@@ -3,7 +3,7 @@
 A simple app to experiment with hanami and react.js.
 
 The back-end is implemented with a hanami server on a PostgreSQL
-database. The front-end is built with the Yeoman angular generator.
+database. The angular.js front-end was built with the Yeoman angular generator.
 
 ##Database setup
 
@@ -64,6 +64,8 @@ static assets that make up the front-end:
 
     $ npm run serve
 
+The server proxies unknown requests to the API server at localhost:9292.
+
 Tests:
 
     $ npm test
@@ -113,11 +115,10 @@ and in a separate shell start the front-end:
 
     $ cd react-app && npm run serve
 
-Then point your browser at `http://localhost:9000`.
+Then point your browser at `http://localhost:8080`.
 
-To get this working we use the [grunt-connect-proxy plugin](https://github.com/drewzboto/grunt-connect-proxy).
-This configures the connect server to forward all requests to `/api` to
-the hanami server.
+To get this working we use http-server's proxy option to forward unknown
+requests to localhost:9292.
 
 ##Deploying to a production server
 
@@ -126,14 +127,15 @@ buildpack that Heroku automatically picks up. However you need to build
 the static assets (HTML/CSS/JS) before deployment so that they can be
 picked up from the hanami server running on the production server.
 (The alternative would be to configure multiple buildpacks (Node.js as
-well as the Ruby one so that you could install and build using Grunt as
+well as the Ruby one so that you could install and build using npm as
 part of the deployment).
 
 You can do this in a separate git *build* branch to keep master clean.
 
     $ git co build
-    $ cd ng-app
-    $ grunt build --force
+    $ cd react-app
+    $ npm run build
+    $ npm run dist
     $ git add -A
     $ git commit -m 'new build'
 
