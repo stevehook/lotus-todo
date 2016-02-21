@@ -1,1 +1,1 @@
-web: bin/hanami server -p 9292
+web: bundle exec puma -C config/puma.rb
