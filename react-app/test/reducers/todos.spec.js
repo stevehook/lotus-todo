@@ -169,7 +169,6 @@ describe('Archiving tasks', () => {
       expect(newState.data).to.eql({
         tasks: [
           { id: 123, title: 'Cook dinner', archived: false },
-          { id: 456, title: 'Feed the kids', archived: true },
           { id: 789, title: 'Feed the wife', archived: false }
         ],
         newTask: { id: 0, title: '', archived: false }

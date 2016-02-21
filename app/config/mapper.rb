@@ -1,8 +1,8 @@
 require 'pg'
-require 'lotus/model'
-require 'lotus/model/adapters/sql_adapter'
+require 'hanami/model'
+require 'hanami/model/adapters/sql_adapter'
 
-mapper = Lotus::Model::Mapper.new do
+mapper = Hanami::Model::Mapper.new do
   collection :tasks do
     entity Task
 
@@ -28,7 +28,7 @@ mapper = Lotus::Model::Mapper.new do
   end
 end
 
-adapter = Lotus::Model::Adapters::SqlAdapter.new(mapper, ENV.fetch('DATABASE_URL'))
+adapter = Hanami::Model::Adapters::SqlAdapter.new(mapper, ENV.fetch('DATABASE_URL'))
 
 TaskRepository.adapter = adapter
 UserRepository.adapter = adapter

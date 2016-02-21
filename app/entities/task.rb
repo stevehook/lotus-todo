@@ -1,5 +1,5 @@
 class Task
-  include Lotus::Entity
+  include Hanami::Entity
   attributes :id, :title, :completed, :order, :created_at, :updated_at, :complete_by, :archived_at, :user_id
 
   def initialize(attributes = {})

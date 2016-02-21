@@ -17,6 +17,16 @@ function updateTask(state, taskId, updater) {
   });
 }
 
+function removeTask(state, taskId) {
+  let index = state.tasks.findIndex(t => t.id === taskId);
+  return Object.assign({}, state, {
+    tasks: [
+      ...state.tasks.slice(0, index),
+      ...state.tasks.slice(index + 1)
+    ]
+  });
+}
+
 function todos(state = INITIAL_STATE, action) {
   switch (action.type) {
     case ADD_TASK_SUCCESS:
@@ -28,7 +38,7 @@ function todos(state = INITIAL_STATE, action) {
       return updateTask(state, action.task.id, (task) => Object.assign({}, task, { completed: true }));
 
     case ARCHIVE_TASK_SUCCESS:
-      return updateTask(state, action.task.id, (task) => Object.assign({}, task, { archived: true }));
+      return removeTask(state, action.task.id);
 
     case FETCH_TASKS_START:
       // TASK: Set UI status?
